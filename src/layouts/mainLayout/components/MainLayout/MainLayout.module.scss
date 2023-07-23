@@ -1,0 +1,22 @@
+@import "src/core/styles/common";
+
+.wrapper{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.content{
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-grow: 1;
+  padding: 24px 16px;
+}
+
+.outlet{
+  height: 100%;
+  width: 100%;
+  //max-width: $appMaxWidth;
+}
+

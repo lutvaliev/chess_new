@@ -1,0 +1,55 @@
+@import "src/core/styles/common";
+
+%textDefault{
+  @include fontFamily(Rubik);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 308px;
+}
+
+.formWrapper {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 16px 0 12px 0;
+}
+
+.navigateForgotPassword{
+  @extend %textDefault;
+  color: $grey500;
+  align-self: end;
+  margin-top: 4px;
+}
+
+.text{
+  @extend %textDefault;
+  color: $grey500;
+  margin-top: 16px;
+}
+
+.navigateSignUp{
+  font-weight: 500;
+  color: $green300;
+  margin-left: 4px;
+}
+
+
+

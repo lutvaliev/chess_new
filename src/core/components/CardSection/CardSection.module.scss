@@ -1,0 +1,28 @@
+@import "src/core/styles/common";
+
+.sectionWrapper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-bottom: 1px solid #E3E6E8;
+}
+
+.text {
+  @include fontFamily(Ubuntu);
+  font-size: 12px;
+  font-style: normal;
+  color: #63707A;
+}
+
+.valueWrapper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.value {
+  @include fontFamily(Ubuntu);
+  font-size: 14px;
+  color: #1B272F;
+}

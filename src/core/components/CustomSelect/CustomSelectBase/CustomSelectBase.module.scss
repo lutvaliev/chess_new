@@ -1,0 +1,107 @@
+@import "src/core/styles/common";
+
+%textDefault{
+  @include fontFamily(Ubuntu);
+  color:  #0A0501;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.select{
+  &:global(.MuiInputBase-root){
+    padding: 8px 16px;
+    width: fit-content;
+    min-height: 36px;
+    border-radius: 4px;
+    background:  #F8F8F9;
+  }
+
+  &:global(.MuiInputBase-root .MuiSelect-select.MuiSelect-outlined.MuiInputBase-input.MuiOutlinedInput-input){
+    min-height:auto;
+    padding: 0 26px 0 0;
+  }
+
+  &:global(.MuiInputBase-root .MuiSelect-select.MuiSelect-outlined.MuiInputBase-input.Mui-disabled){
+    -webkit-text-fill-color:$black
+  }
+
+
+  &:global(.MuiInputBase-root .MuiSelect-select[aria-expanded='true'] ~ fieldset.MuiOutlinedInput-notchedOutline){
+    border:none;
+
+  }
+  &:global(.MuiInputBase-root.Mui-focused .MuiSelect-select ~ fieldset.MuiOutlinedInput-notchedOutline ){
+    border:none;
+  }
+
+  &:global(.MuiInputBase-root .MuiSelect-select ~ fieldset ){
+    border:none;
+  }
+}
+
+
+.error{
+  &:global(.MuiInputBase-root .MuiSelect-select ~ fieldset.MuiOutlinedInput-notchedOutline){
+    border:1px solid $red;
+  }
+}
+
+.placeholder{
+  @extend %textDefault;
+  @include fontFamily(Ubuntu);
+  color:  #0A0501;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.menu{
+  &:global(.MuiPaper-root){
+    border-radius: 3px;
+    box-shadow: none;
+    border: 1px solid $blue100;
+  }
+
+  &:global(.MuiPaper-root .MuiList-root){
+    padding: 0;
+  }
+}
+.menuItem{
+  &:global(.MuiButtonBase-root){
+    @extend %textDefault;
+    display: flex;
+    align-items: center;
+    padding: 6px 5px;
+    z-index: 9999999;
+
+    &:global(.MuiMenuItem-root.Mui-selected){
+      background: $blue100;
+    }
+
+    &:global(.MuiMenuItem-root:hover){
+      background: $grey300;
+    }
+
+  }
+}
+
+.iconWrapper{
+  position: absolute;
+  background: transparent;
+  border: none;
+  color: $grey500;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  right: 16px;
+}
+
+.cursorDefault{
+  cursor: auto;
+}
+
+
+.toggle{
+  transform: rotate(180deg);
+}

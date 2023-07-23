@@ -1,0 +1,62 @@
+@import "src/core/styles/common";
+
+.input{
+
+  &:global(.MuiFormControl-root) {
+    margin-top: 0;
+  }
+
+  &:global(.MuiFormControl-root .MuiInputBase-root) {
+    @include fontFamily(Rubik);
+    color: $black;
+    height: 40px;
+    border-radius: 8px;
+  }
+
+  &:global(.MuiFormControl-root .MuiInputBase-input.Mui-disabled){
+    -webkit-text-fill-color: $black;
+    background: $grey100;
+  }
+
+  &:global(.MuiFormControl-root .Mui-focused  .MuiOutlinedInput-notchedOutline ){
+    border-color: $green300;
+    border-width: 1px;
+  }
+  &:global(.MuiFormControl-root .Mui-error .MuiOutlinedInput-notchedOutline){
+    border-color: $red;
+    border-width: 1px;
+  }
+
+  &:global(.MuiFormControl-root .Mui-disabled .MuiOutlinedInput-notchedOutline){
+    border-color: $grey300;
+    border-width: 1px;
+  }
+
+  &:global(.MuiFormControl-root .MuiInputBase-root .MuiInputBase-input){
+    height: 40px;
+    padding: 0 9px;
+
+    &::placeholder {
+      @include fontFamily(Rubik);
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 22px !important;
+      color: $grey500;
+    }
+  }
+
+  &:global(.MuiFormControl-root .MuiInputBase-root .MuiInputBase-input::-webkit-input-placeholder){
+    opacity: 1;
+  }
+
+  &:global(.MuiFormControl-root .MuiFormHelperText-root) {
+    @include fontFamily(Rubik);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    color: $red;
+    margin: 2px 0 0 0;
+  }
+}

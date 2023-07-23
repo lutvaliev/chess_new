@@ -1,0 +1,16 @@
+@import "src/core/styles/common";
+
+.wrapper{
+  display: flex;
+  flex-direction: column;
+}
+
+.errorMessage{
+  @include fontFamily(Ubuntu);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: $red;
+  margin: 2px 0 0 0;
+}
