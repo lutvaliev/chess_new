@@ -1,0 +1,31 @@
+@import "src/core/styles/common";
+
+.wrapper{
+  @include fontFamily(Ubuntu);
+
+}
+
+.accordion{
+  &:global(.MuiPaper-root) {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+  }
+}
+
+.title{
+  &:global(.MuiButtonBase-root){
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.details{
+  &:global(.MuiAccordionDetails-root){
+    padding: 0;
+    margin: 0 0 16px;
+  }
+}

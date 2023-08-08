@@ -1,0 +1,33 @@
+@import 'src/core/styles/common';
+
+.wrapper{
+  @include fontFamily(Ubuntu);
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  gap: 24px;
+  margin-top: 8px;
+}
+
+.text{
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  padding-bottom: 2px;
+}
+
+.legend{
+  color: #63707A;
+  border-bottom: 1px solid #63707A;
+}
+
+.offerWrapper{
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.offer{
+  color:#127CCA;
+  border-bottom: 1px solid #127CCA;
+}

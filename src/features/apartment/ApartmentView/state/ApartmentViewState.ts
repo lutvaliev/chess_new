@@ -1,0 +1,102 @@
+import constate from 'constate'
+import { useEffect, useMemo, useState } from 'react'
+import { useForm, UseFormReturn } from 'react-hook-form'
+import { defaultFormValues, TBaseForm, useBuildingQuery, useDistrictQuery, useSectionQuery } from '../../BaseApartment'
+import { useObjectChessQuery } from '../../BaseApartment/querries'
+import { useFilteredData } from '../../BaseApartment/utils/useFilterData'
+import { prepareData } from '../../BaseApartment/utils/prepareData'
+import { TObject, TObjectParams } from '../../BaseApartment/types'
+
+const useFormInit = () => useForm<TBaseForm>({
+  defaultValues: { ...defaultFormValues, view: 'CHESS' }
+})
+
+function useResetForm(
+  { setValue }: UseFormReturn<TBaseForm>
+) {
+  const { data: districtData } = useDistrictQuery()
+  const { data: buildingData } = useBuildingQuery(districtData?.[1]?.id)
+  const { data: sectionData } = useSectionQuery('building', buildingData?.[0]?.id)
+
+  useEffect(() => {
+    if (!districtData || !buildingData || !sectionData) {
+      return
+    }
+    setValue('district', districtData[1].id)
+    setValue('building', buildingData[0].id)
+    setValue('section', sectionData[0].id)
+  }, [districtData, buildingData, sectionData])
+}
+
+function useApartmentFilter(data?: TObject[]) {
+  return useMemo(() => {
+    if (!data) return undefined
+
+    return data.reduce((acc, currentValue) => {
+      Object.entries(currentValue).forEach(([key, value]) => {
+        if (key in acc) {
+          acc[key].push(value)
+        }
+      })
+      return {
+        ...acc,
+        rooms: [...new Set(acc.rooms)]
+      }
+    }, {
+      rooms: [],
+      area: [],
+      cost: []
+    } as any)
+  }, [data])
+}
+function usePrepareData(data?: TObject[]) {
+  return useMemo(() => (data?.length
+    ? prepareData(data)
+    : []),
+  [data])
+}
+
+function useObjectParams(formReturn: UseFormReturn<TBaseForm>): TObjectParams {
+  const { building, section, view } = formReturn.watch()
+  const isShowAllSections = section === 'ALL_SECTIONS' && view === 'TILE'
+  return {
+    id: isShowAllSections ? building : section,
+    filter: isShowAllSections ? 'building' : 'section'
+  }
+}
+
+function usePageProps(formReturn: UseFormReturn<TBaseForm>) {
+  const [page, setPage] = useState(1)
+  const elemPerPage = 20
+  const { view } = formReturn.watch()
+  const pageParam = view === 'LIST' ? page : undefined
+  const elemPerPageParam = view === 'LIST' ? elemPerPage : undefined
+  return {
+    pageParam,
+    elemPerPageParam,
+    setPage
+  }
+}
+
+const ApartmentViewState = () => {
+  const formReturn = useFormInit()
+  useResetForm(formReturn)
+
+  const { pageParam, elemPerPageParam } = usePageProps(formReturn)
+  const objectParams = useObjectParams(formReturn)
+  const { data } = useObjectChessQuery(objectParams, pageParam, elemPerPageParam)
+
+  const filteredData = useFilteredData(formReturn, data)
+  const preparedApartmentData = usePrepareData(filteredData)
+  const apartmentFilterData = useApartmentFilter(data)
+
+  return {
+    formReturn,
+    objectQuery: useObjectChessQuery(objectParams),
+    preparedApartmentData,
+    apartmentFilterData,
+    filteredData
+  }
+}
+
+export const [ApartmentViewProvider, useApartmentViewContext] = constate(ApartmentViewState)

@@ -1,0 +1,11 @@
+@import "src/core/styles/common";
+.wrapper{
+  &:global(.MuiTooltip-tooltip){
+    @include fontFamily(Ubuntu);
+    padding: 0;
+    margin: 0;
+    background: $white;
+    color: $black;
+    box-shadow: 1px 1px 30px 0 rgba(27, 39, 47, 0.05), 1px 1px 2px 0 rgba(27, 39, 47, 0.05);
+  }
+}

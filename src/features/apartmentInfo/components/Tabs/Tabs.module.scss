@@ -1,0 +1,34 @@
+@import "src/core/styles/common";
+
+.tabsWrapper{
+  :global(.MuiTabs-flexContainer){
+    display: flex;
+    gap: 16px;
+  }
+
+  :global(.Mui-selected){
+    color: #63707A!important;
+  }
+
+  :global(.MuiButtonBase-root){
+    color: #127CCA;
+    padding: 0;
+    margin: 0;
+    min-width: auto;
+    text-transform: none;
+    &::after{
+      content:'';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background: #127CCA;
+      top: 34px;
+      z-index: -1;
+    }
+  }
+  :global(.MuiTabs-indicator){
+    bottom: 12px;
+    background: #63707A;
+    color: #63707A;
+  }
+}

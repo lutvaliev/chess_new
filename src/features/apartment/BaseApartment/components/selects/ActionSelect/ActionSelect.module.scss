@@ -1,0 +1,15 @@
+
+.select{
+  &:global(.MuiInputBase-root) {
+    background: #127CCA;
+  }
+
+  &:global(.MuiInputBase-root .MuiSelect-select.MuiSelect-outlined.MuiInputBase-input.MuiOutlinedInput-input > p) {
+    color: white;
+  }
+
+  &:global(.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-formControl > button> span> svg) {
+    stroke: white !important;
+    stroke-width: 1.4px;
+  }
+}

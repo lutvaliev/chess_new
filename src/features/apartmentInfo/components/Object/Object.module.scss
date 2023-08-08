@@ -1,0 +1,130 @@
+@import "src/core/styles/common";
+
+.titleWrapper {
+  color: #1B272F;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.generalInfo {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #D9D9D9;
+}
+
+.sectionTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 18px;
+}
+
+.generalInfoWrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-row-gap: 16px;
+  margin-top: 14px;
+}
+
+.description {
+  padding-bottom: 18px;
+  border-bottom: 1px solid #D9D9D9;
+}
+
+.summary {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 16px;
+}
+
+.flatModel {
+  color: #127CCA;
+  border-bottom: 1px solid #127CCA;
+  width: fit-content;
+  cursor: pointer;
+}
+
+.prices {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #D9D9D9;
+}
+
+.pricesInfo {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-row-gap: 16px;
+  margin-top: 16px;
+}
+
+.discount {
+  margin-top: 16px;
+}
+
+.discountValue {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1px;
+  margin-top: 16px;
+  background-color: #D7DBDF;
+  border: 1px solid #D7DBDF;
+}
+
+.discountText {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  color: #1B272F;
+  background: $white;
+  padding-left: 8px;
+}
+
+.discountHeader {
+  background: #F8F8F9;
+}
+
+.dealInfo {
+  display: flex;
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.dealGeneralInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contacts {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  color: white;
+}
+
+.phone {
+  color: #1B272F;
+}
+
+.document {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
+.dealAdditionalInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: -4px;
+}

@@ -1,0 +1,25 @@
+@import 'src/core/styles/common';
+
+.cardWrapper {
+  border-radius: 4px;
+  border: 1px solid #E3E6E8;
+  box-shadow: 1px 1px 30px 0 rgba(27, 39, 47, 0.05), 1px 1px 2px 0 rgba(27, 39, 47, 0.05);
+  position: relative;
+}
+
+.disabled{
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  z-index: 10;
+  top: 0;
+}
+
+.drawer{
+  :global(.MuiDrawer-paper){
+    top: 30px;
+    border-top-left-radius: 16px;
+  }
+}

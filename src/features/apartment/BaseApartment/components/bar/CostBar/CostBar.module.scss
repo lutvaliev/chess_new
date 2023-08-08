@@ -1,0 +1,11 @@
+@import "src/core/styles/common";
+
+.wrapper {
+  @include fontFamily(Ubuntu);
+  display: flex;
+  gap: 10px;
+  & label {
+    align-items: flex-end !important;
+    gap: 10px;
+  }
+}

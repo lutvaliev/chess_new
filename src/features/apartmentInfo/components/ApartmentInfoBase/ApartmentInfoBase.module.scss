@@ -1,0 +1,28 @@
+@import "src/core/styles/common";
+
+.wrapper {
+  @include fontFamily(Ubuntu);
+  padding: 23px 24px 89px;
+  width: 728px;
+  z-index: 10;
+  border-top-left-radius: 16px;
+  background: $white;
+  //box-shadow: 1px 1px 30px 0px rgba(27, 39, 47, 0.05), 1px 1px 2px 0px rgba(27, 39, 47, 0.05);
+}
+
+
+.titleWrapper {
+  color: #1B272F;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.statusLine {
+  width: 100%;
+  border-radius: 4px;
+  height: 4px;
+  background-color: #A51CEA;
+  margin: 16px 0 18px;
+}

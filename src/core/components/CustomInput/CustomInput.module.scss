@@ -7,7 +7,7 @@
   }
 
   &:global(.MuiFormControl-root .MuiInputBase-root) {
-    @include fontFamily(Rubik);
+    @include fontFamily(Ubuntu);
     color: $black;
     height: 40px;
     border-radius: 8px;
@@ -19,7 +19,7 @@
   }
 
   &:global(.MuiFormControl-root .Mui-focused  .MuiOutlinedInput-notchedOutline ){
-    border-color: $green300;
+    border-color: #127CCA;
     border-width: 1px;
   }
   &:global(.MuiFormControl-root .Mui-error .MuiOutlinedInput-notchedOutline){
@@ -51,7 +51,7 @@
   }
 
   &:global(.MuiFormControl-root .MuiFormHelperText-root) {
-    @include fontFamily(Rubik);
+    @include fontFamily(Ubuntu);
     font-style: normal;
     font-weight: 400;
     font-size: 12px;

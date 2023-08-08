@@ -1,0 +1,40 @@
+@import "src/core/styles/common";
+.wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+  width: 100%;
+}
+
+.selects{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.metrics{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.button{
+  min-width: 78px;
+  padding: 12px 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+}
+
+.bar{
+  @include fontFamily(Ubuntu);
+  display: flex;
+  flex-direction: column;
+  gap:10px;
+  min-width: 485px;
+  margin-left: 20px;
+}

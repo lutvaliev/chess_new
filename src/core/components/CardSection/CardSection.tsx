@@ -1,24 +1,44 @@
 import React, { FC, ReactNode } from 'react'
+import { TBalconies } from '../../../features/apartment/BaseApartment/types'
 import styles from './CardSection.module.scss'
-import RubleIcon from '../icons/SvgIcons/RubleIcon'
 
 type TProps = {
     title?: string | ReactNode,
     isMetrics?: boolean
-    value?: string | number
+    value: TBalconies[] | string | number
+    icon?: ReactNode | string
 }
 
-const CardSection: FC<TProps> = ({ title, isMetrics, value }) => (
-  <div className={styles.sectionWrapper}>
-    <div className={styles.text} >
-      {title}
-      {!isMetrics && ':'}
-    </div>
-    <div className={styles.valueWrapper} >
-      <div className={styles.value} >{value}</div>
-      <div className={styles.text} >{isMetrics ? 'м²' : <div><RubleIcon/></div> }</div>
-    </div>
-  </div>
-)
+function useBalconyArea(data: TBalconies[] | string | number) {
+  if (!Array.isArray(data)) {
+    return data
+  }
+  const balconyText = data?.reduce((acc, current) => (
+    `${acc + current?.square_meters} м² / `
+  ), '')
+  return balconyText.slice(0, balconyText.length - 2)
+}
 
+const CardSection: FC<TProps> = ({ title, isMetrics, value, icon }) => {
+  const balconyArea = useBalconyArea(value)
+
+  return (
+    <div className={styles.sectionWrapper}>
+      <div className={styles.text}>
+        {title}
+        {!isMetrics && ':'}
+      </div>
+      <div className={styles.valueWrapper}>
+        <div className={styles.value}>
+          {
+            (value && Array.isArray(value)
+              ? balconyArea
+              : value) || '-'
+          }
+        </div>
+        <div className={styles.text}>{!value ? '' : icon}</div>
+      </div>
+    </div>
+  )
+}
 export default CardSection

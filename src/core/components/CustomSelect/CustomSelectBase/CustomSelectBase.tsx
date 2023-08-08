@@ -17,6 +17,7 @@ const CustomSelectBase = ({
   selectClassName,
   multiple,
   disabled,
+  disabledOption,
   ...rest
 }: any) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -68,11 +69,13 @@ const CustomSelectBase = ({
         {...rest}
       >
         {
-          options.map(({ value, label }: any) => (
+          options.map(({ value, label, disabledOption }: any) => (
             <MenuItem
               className={styles.menuItem}
               key={value}
-              value={value}>
+              value={value}
+              disabled={disabledOption}
+            >
               {label}
             </MenuItem>
           ))

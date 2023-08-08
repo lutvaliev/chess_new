@@ -2,7 +2,7 @@
 
 .button {
   &:global(.MuiButton-root) {
-    @include fontFamily(Rubik);
+    @include fontFamily(Ubuntu);
     padding: 8px 20px;
     font-weight: 400;
     font-size: 16px;

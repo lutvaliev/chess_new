@@ -1,0 +1,82 @@
+.wrapper{
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  tr{
+    :first-child {
+      min-width: 60px!important;
+    }
+    :nth-child(2){
+      min-width: 60px!important;
+    }
+    :nth-child(3){
+      min-width: 78px!important;
+    }
+    :nth-child(4){
+      min-width: 120px!important;
+    }
+    :nth-child(5){
+      min-width: 100px!important;
+    }
+    :nth-child(6){
+      min-width: 60px!important;
+    }
+    :nth-child(7){
+      min-width: 100px!important;
+    }
+    :nth-child(8){
+      min-width: 100px!important;
+    }
+    :nth-child(9){
+      min-width: 120px!important;
+    }
+    :nth-child(10){
+      min-width: 120px!important;
+    }
+    :nth-child(11){
+      min-width: 120px!important;
+    }
+    :nth-child(12){
+      min-width: 120px!important;
+    }
+    :nth-child(13){
+      min-width: 120px!important;
+    }
+    :nth-child(14){
+      min-width: 120px!important;
+    }
+    :nth-child(15){
+      min-width: 120px!important;
+    }
+    :nth-child(16){
+      min-width: 130px!important;
+    }
+  }
+  th{
+    padding: 2px 8px!important;
+  }
+  td{
+    padding: 0!important;
+    height: 36px!important;
+    white-space: nowrap;
+  }
+}
+
+.row{
+  padding: 4px 8px!important;
+}
+
+.opacity{
+  background-color: rgba(0, 0, 0, 0.3);
+  opacity: 0.3;
+  height: 36px!important;
+}
+
+.drawer{
+  :global(.MuiDrawer-paper){
+    top: 30px;
+    border-top-left-radius: 16px;
+  }
+}

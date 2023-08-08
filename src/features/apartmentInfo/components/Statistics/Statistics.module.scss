@@ -1,0 +1,23 @@
+@import "src/core/styles/common";
+
+.info{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-row-gap: 16px;
+  margin-top: 14px;
+}
+
+.sectionTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 18px;
+}
+
+
+.analogues{
+  color: #127CCA;
+  border-bottom: 1px solid #127CCA;
+  width: fit-content;
+  cursor: pointer;
+}

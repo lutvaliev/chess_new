@@ -1,0 +1,36 @@
+@import "src/core/styles/common";
+
+.spinner{
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  background: conic-gradient(from 114.04deg at 50% 50%, #2989ff -3.75deg,
+          rgba(22, 93, 255, 0) 331.83deg, #3d8dee 339.88deg, #7ab5ff 356.25deg,
+          rgba(22, 93, 255, 0) 691.83deg);
+  animation: spin 1s linear infinite;
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+
+  }
+
+  &:after {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(60px * $spinnerRation);
+    height: calc(60px * $spinnerRation);
+    border-radius: 50%;
+    background: $white;
+  }
+
+}

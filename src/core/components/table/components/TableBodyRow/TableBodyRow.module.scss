@@ -1,0 +1,15 @@
+@import "src/core/styles/common";
+
+.tableCell{
+  &:global(.MuiTableCell-root){
+    @include fontFamily(Ubuntu);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    color: $black;
+    padding: 0;
+    min-height: 22px;
+    border: 1px solid #D7DBDF;
+  }
+}

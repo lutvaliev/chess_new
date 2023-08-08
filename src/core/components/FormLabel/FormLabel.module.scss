@@ -11,7 +11,7 @@
   }
 
   &:global(.MuiFormControlLabel-root .MuiTypography-root){
-    @include fontFamily(Rubik);
+    @include fontFamily(Ubuntu);
     font-style: normal;
     font-weight: 400;
     font-size: 14px;

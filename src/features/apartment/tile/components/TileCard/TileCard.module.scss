@@ -1,0 +1,37 @@
+@import "src/core/styles/common";
+
+.disabled{
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.3);
+  height: 60px;
+  width: 60px;
+  border-radius: 4px;
+  z-index: 10;
+  top: 0;
+}
+
+.drawer{
+  :global(.MuiDrawer-paper){
+    top: 30px;
+    border-top-left-radius: 16px;
+  }
+}
+
+.card {
+  @include fontFamily(Open Sans);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  padding: 10px 0;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  border-radius: 4px;
+  background: $white;
+  box-shadow: 1px 1px 30px 0 rgba(27, 39, 47, 0.05), 1px 1px 2px 0 rgba(27, 39, 47, 0.05);
+  cursor: pointer;
+  position: relative;
+}

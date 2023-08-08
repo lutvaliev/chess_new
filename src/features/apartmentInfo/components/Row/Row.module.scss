@@ -1,0 +1,24 @@
+@import "src/core/styles/common";
+
+.wrapper{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+}
+
+.title{
+  @include fontFamily(Ubuntu);
+  color: #63707A;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.value{
+  @include fontFamily(Ubuntu);
+  color: #0A0501;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+}
