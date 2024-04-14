@@ -12,6 +12,7 @@ const QueryKeys = {
 async function getDistrict(): Promise<TDistrict[]> {
   try {
     const response = await apiClient.get('https://gds.4dev.app/api/hs/restapi_v1/district')
+    console.log(response.data.data, 'datadistrict')
     return response.data.data
   } catch (e: any) {
     throw new Error(e)

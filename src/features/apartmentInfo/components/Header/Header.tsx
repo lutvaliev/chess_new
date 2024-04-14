@@ -7,10 +7,11 @@ import CloseIcon from '../../../../core/components/icons/SvgIcons/CloseIcon'
 import styles from './Header.module.scss'
 
 type TProp = {
+  info: any,
   drawerClose: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void
 }
 
-const Header: FC<TProp> = ({ drawerClose }) => (
+const Header: FC<TProp> = ({ info, drawerClose }) => (
   <div className={styles.header}>
     <div className={styles.headerInfo}>
       <div className={styles.images}>
@@ -18,48 +19,48 @@ const Header: FC<TProp> = ({ drawerClose }) => (
           <img
             className={styles.mainImage}
             src="https://static3.depositphotos.com/1009948/264/i/600/depositphotos_2648677-stock-photo-interior-of-the-stylish-apartment.jpg"
-            alt=""/>
+            alt="" />
         </div>
         <div className={styles.additionalImages}>
           <img
             className={styles.image}
             src="https://static3.depositphotos.com/1009948/264/i/600/depositphotos_2648677-stock-photo-interior-of-the-stylish-apartment.jpg"
-            alt=""/>
+            alt="" />
           <img
             className={styles.image}
             src="https://static3.depositphotos.com/1009948/264/i/600/depositphotos_2648677-stock-photo-interior-of-the-stylish-apartment.jpg"
-            alt=""/>
+            alt="" />
         </div>
       </div>
       <div className={styles.info}>
         <div className={styles.titleWrapper}>
-          <div className={styles.title}>ЖК Знаменский, ГП1,</div>
-          <div className={styles.title}>Подъезд 3, квартира №17</div>
+          {/* <div className={styles.title}>{`${info.district}`}</div> */}
+          <div className={styles.title}>{`${info.name}`}</div>
         </div>
         <div className={styles.status}>
-          <Row title="Статус" value="Забронировано"/>
+          <Row title="Статус" value={info.status} />
         </div>
         <div className={styles.buttonsWrapper}>
-          <PrimaryButton text="Бронь" className={styles.button}/>
-          <PrimaryButton text="Ипотека" className={styles.button}/>
-          <PrimaryButton text="Договор" className={styles.button}/>
+          <PrimaryButton text="Бронь" className={styles.button} />
+          <PrimaryButton text="Ипотека" className={styles.button} />
+          <PrimaryButton text="Договор" className={styles.button} />
           <div className={styles.offerWrapper}>
-            <RubleCircledIcon/>
+            <RubleCircledIcon />
             <div className={styles.offer}>КП</div>
           </div>
           <div className={styles.offerWrapper}>
-            <PlusOutlineIcon/>
+            <PlusOutlineIcon />
             <div className={styles.offer}>КП</div>
           </div>
         </div>
       </div>
     </div>
-    { /* eslint-disable-next-line */ }
+    { /* eslint-disable-next-line */}
     <div
       className={styles.close}
       onClick={drawerClose}
     >
-      <CloseIcon/>
+      <CloseIcon />
     </div>
   </div>
 )

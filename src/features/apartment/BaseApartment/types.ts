@@ -14,6 +14,7 @@ export type TObject = {
     discount_id: string
     amount: string
   }
+  color: any,
   area: number | string
   area_kitchen?: number
   available?: boolean

@@ -8,6 +8,8 @@ import styles from './RoomSelect.module.scss'
 function useOptions() {
   const { apartmentFilterData } = useApartmentViewContext()
 
+  console.log(apartmentFilterData, 'apartmentFilterData')
+
   return useMemo(() => (apartmentFilterData
     ? apartmentFilterData
       .rooms.map((room: number) => ({

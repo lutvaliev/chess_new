@@ -8,7 +8,7 @@ import Advertising from '../Advertising/Advertising'
 import Statistics from '../Statistics/Statistics'
 import styles from './Tabs.module.scss'
 
-const ObjectTabs = () => {
+const ObjectTabs = ({ info }: any) => {
   const [filterIndex, setFilterIndex] = useState('1')
 
   return (
@@ -25,7 +25,7 @@ const ObjectTabs = () => {
         <Tab disableRipple value="3" label="Статистика"/>
       </Tabs>
       <TabPanel value="1">
-        <Object/>
+        <Object info={info}/>
       </TabPanel>
       <TabPanel value="2">
         <Advertising/>

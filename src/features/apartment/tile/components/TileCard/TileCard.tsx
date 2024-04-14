@@ -7,6 +7,7 @@ import CustomDrawer from '../../../../../core/components/CustomDrawer/CustomDraw
 import styles from './TileCard.module.scss'
 
 type TProp = {
+  info: any,
     rooms: number | string
     cost: number | string
     flatNumber: number | string
@@ -17,6 +18,7 @@ type TProp = {
 
 const TileCard: FC<TProp> = (
   {
+    info,
     rooms,
     flatNumber,
     cost,
@@ -37,7 +39,7 @@ const TileCard: FC<TProp> = (
         onClose={handleClose}
         className={styles.drawer}
       >
-        {isDrawerOpen && <ApartmentInfoBase drawerClose={handleClose}/>}
+        {isDrawerOpen && <ApartmentInfoBase drawerClose={handleClose} info={info}/>}
       </CustomDrawer>
       <CustomTooltip title={(
         <Card

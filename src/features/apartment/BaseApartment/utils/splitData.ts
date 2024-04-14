@@ -23,6 +23,7 @@ export const splitData = (data: TObject[]) => {
     }
   }
   const resultArray = emptyArray.filter((item) => item.filter(Boolean).length).reverse()
+  console.log(resultArray, 'resultArray')
 
   return {
     resultArray,

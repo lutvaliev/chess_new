@@ -7,9 +7,9 @@
   height: 205px;
   padding: 10px 0;
   border-radius: 4px;
-  background-color: rgba(165, 28, 234, 0.30);
   position: relative;
   cursor: pointer;
+  box-shadow: 1px 1px 30px 0px #1B272F0D;
 }
 
 .disabled{
@@ -74,7 +74,6 @@
 .line{
   width: 100%;
   height: 4px;
-  background: #A51CEA;
   margin: 2px 0;
 }
 
@@ -82,4 +81,8 @@
   & div:last-child {
     border-bottom: none;
   }
+}
+
+.card{
+  border-radius: 4px;
 }

@@ -43,6 +43,7 @@ const TilePlus = () => {
                               </p>
                             )}
                             <TilePlusCard
+                              info={object}
                               key={object.id}
                               rooms={object.rooms}
                               flatNumber={object.number_of_object}

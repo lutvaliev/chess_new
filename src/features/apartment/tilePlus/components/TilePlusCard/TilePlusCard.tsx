@@ -6,6 +6,7 @@ import CustomDrawer from '../../../../../core/components/CustomDrawer/CustomDraw
 import styles from './TilePlusCard.module.scss'
 
 type TProp = {
+    info: any,
     rooms: number | string
     cost: number | string
     flatNumber: number | string
@@ -16,6 +17,7 @@ type TProp = {
 
 const TilePlusCard: FC<TProp> = (
   {
+    info,
     rooms,
     flatNumber,
     cost,
@@ -35,7 +37,7 @@ const TilePlusCard: FC<TProp> = (
         onClose={handleClose}
         className={styles.drawer}
       >
-        {isDrawerOpen && <ApartmentInfoBase drawerClose={handleClose}/>}
+        {isDrawerOpen && <ApartmentInfoBase drawerClose={handleClose} info={info}/>}
       </CustomDrawer>
       { /* eslint-disable-next-line */}
       <div

@@ -4,14 +4,15 @@ import ObjectTabs from '../Tabs/Tabs'
 import styles from './ApartmentInfoBase.module.scss'
 
 type TProp = {
+    info: any,
     drawerClose: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void
 }
 
-const ApartmentInfo: FC<TProp> = ({ drawerClose }) => (
+const ApartmentInfo: FC<TProp> = ({ info, drawerClose }) => (
   <div className={styles.wrapper}>
-    <Header drawerClose={drawerClose}/>
+    <Header drawerClose={drawerClose} info={info}/>
     <div className={styles.statusLine}/>
-    <ObjectTabs/>
+    <ObjectTabs info={info}/>
   </div>
 )
 

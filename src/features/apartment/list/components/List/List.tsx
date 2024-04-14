@@ -110,7 +110,7 @@ const List = () => {
         onClose={handleClose}
         className={styles.drawer}
       >
-        {isDrawerOpen && <ApartmentInfoBase drawerClose={handleClose}/>}
+        {/* {isDrawerOpen && <ApartmentInfoBase drawerClose={handleClose}/>} */}
       </CustomDrawer>
       <div className={styles.wrapper}>
         <Table

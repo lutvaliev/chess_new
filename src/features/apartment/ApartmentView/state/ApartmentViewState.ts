@@ -40,7 +40,8 @@ function useApartmentFilter(data?: TObject[]) {
       })
       return {
         ...acc,
-        rooms: [...new Set(acc.rooms)]
+        // rooms: [...new Set(acc.rooms)]
+        rooms: [acc.rooms]
       }
     }, {
       rooms: [],
@@ -85,6 +86,7 @@ const ApartmentViewState = () => {
   const { pageParam, elemPerPageParam } = usePageProps(formReturn)
   const objectParams = useObjectParams(formReturn)
   const { data } = useObjectChessQuery(objectParams, pageParam, elemPerPageParam)
+  console.log(data, 'data')
 
   const filteredData = useFilteredData(formReturn, data)
   const preparedApartmentData = usePrepareData(filteredData)

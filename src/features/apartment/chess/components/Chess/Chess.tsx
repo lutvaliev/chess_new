@@ -34,13 +34,15 @@ const Chess = () => {
                     {objects.map((object: TObject, objectIdx) => (
                       <>
                         {object && (
-                          <div key={object.id}>
+                          <div key={object.id} id={object.id}>
                             {!objectsIdx && (
                               <p className={classNames(styles.order, styles.columnNumber)}>
                                 {objectIdx}
                               </p>
                             )}
                             <Card
+                              info={object}
+                              color={object.color}
                               area={object.area}
                               flatNumber={object.number_of_object}
                               rooms={object.rooms}
