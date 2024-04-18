@@ -10,14 +10,14 @@ const HeaderMain = () => {
   const { formReturn: { control } } = useApartmentViewContext()
   return (
     <div className={styles.wrapper}>
-      <ActionSelect control={control}/>
+      {/* <ActionSelect control={control}/> */}
       <ViewSelect control={control} />
-      <FilterOffIcon/>
-      <div className={classNames(styles.text, styles.legend)} >Показать легенду</div>
+      {/* <FilterOffIcon/> */}
+      {/* <div className={classNames(styles.text, styles.legend)} >Показать легенду</div>
       <div className={styles.offerWrapper}>
         <RubleCircledIcon/>
         <div className={classNames(styles.text, styles.offer)}>КП</div>
-      </div>
+      </div> */}
     </div>
   )
 }

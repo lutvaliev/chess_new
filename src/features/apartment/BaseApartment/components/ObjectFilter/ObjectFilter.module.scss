@@ -1,6 +1,8 @@
 .wrapper{
-  display: flex;
+  display: inline-flex;
   justify-content: flex-start;
-  gap: 12px;
-  margin-top: 24px;
+  // gap: 12px;
+  background-color: #F8F8F9;
+  margin-bottom: 12px;
+  height: 40px;
 }

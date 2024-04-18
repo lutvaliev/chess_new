@@ -5,8 +5,8 @@ import ApartmentFilter from '../ApartmentFilter/ApartmentFilter'
 
 const BaseHeader = () => (
   <div className={styles.header}>
-    <HeaderMain/>
     <ObjectFilter/>
+    <HeaderMain/>
     <ApartmentFilter />
   </div>
 )

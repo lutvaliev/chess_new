@@ -1,5 +1,9 @@
 .wrapper{
   &:global(.MuiInputBase-root){
   width: 170px;
+  color: #0b4e7e;
+  border-left: none;
+  border-right: none;
+  border-radius: 0;
   }
 }

@@ -5,6 +5,7 @@ import CustomSelectBase from '../CustomSelectBase/CustomSelectBase'
 // import { useValidationRules } from '../../../../hooks/useValidationRules'
 
 const CustomSelectControl = ({
+  classname,
   label,
   labelPlacement,
   control,
@@ -30,7 +31,7 @@ const CustomSelectControl = ({
   const error = handleError?.(errors)
 
   return (
-    <div className={styles.wrapper}>
+    <div className={`${styles.wrapper} ${classname}`}>
       <CustomSelectBase
         multiple={multiple}
         isError={!!error}

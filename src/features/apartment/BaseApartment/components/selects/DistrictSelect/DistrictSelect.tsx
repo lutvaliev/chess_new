@@ -22,6 +22,7 @@ const DistrictSelect: FC<TBaseSelectProps> = ({ control }) => {
 
   return (
     <CustomSelectControl
+      classname="districtSelect"
       control={control}
       name="district"
       placeholder="Выбор ЖК"

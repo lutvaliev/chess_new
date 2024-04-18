@@ -70,7 +70,7 @@ const Card: FC<TProps> = (
         <div className={classNames({ [styles.disabled]: isDisabled })} />
         <div className={styles.header}>
           <div className={styles.info}>
-            <div className={styles.bordered}>99,9%</div>
+            <div className={styles.bordered}>99,%</div>
             <div className={styles.bordered}>ВН</div>
             <div className={styles.bordered}>
               {rooms === 0 ? 'C' : `${rooms}К`}

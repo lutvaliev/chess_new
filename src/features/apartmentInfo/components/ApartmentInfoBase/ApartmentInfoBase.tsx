@@ -11,7 +11,7 @@ type TProp = {
 const ApartmentInfo: FC<TProp> = ({ info, drawerClose }) => (
   <div className={styles.wrapper}>
     <Header drawerClose={drawerClose} info={info}/>
-    <div className={styles.statusLine}/>
+    <div className={styles.statusLine} style={{ backgroundColor: `#${info.color}` }}/>
     <ObjectTabs info={info}/>
   </div>
 )

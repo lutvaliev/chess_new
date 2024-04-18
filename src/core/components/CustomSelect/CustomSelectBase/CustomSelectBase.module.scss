@@ -10,13 +10,12 @@
 
 .select{
   &:global(.MuiInputBase-root){
-    padding: 8px 16px;
+    padding: 7px 16px;
+    border: 1px solid #c2c2c288;
     width: fit-content;
     min-height: 36px;
-    border-radius: 4px;
     background:  #F8F8F9;
   }
-
   &:global(.MuiInputBase-root .MuiSelect-select.MuiSelect-outlined.MuiInputBase-input.MuiOutlinedInput-input){
     min-height:auto;
     padding: 0 26px 0 0;

@@ -38,6 +38,7 @@ const BuildingSelect: FC<TBaseSelectProps> = ({ control }) => {
   const options = useOptions()
   return (
     <CustomSelectControl
+      classname="buildingSelect"
       control={control}
       name="building"
       placeholder="Выбор ГП"

@@ -17,17 +17,19 @@ const Object = ({ info }: any) => (
         </div>
         <div className={styles.generalInfoWrapper}>
           <Row title="Этаж" value={info.floor} />
-          <Row title="Количество уровней" value="1" />
+          <Row title="Количество уровней" value="no info" />
           <Row title="Количество комнат" value={info.rooms} />
-          <Row title="Планировка" value="3-2-1" />
+          <Row title="Планировка" value="no info" />
           <Row title="Жилая площадь, м²" value="32" />
           <Row title="Общая площадь, м²:" value="55" />
-          <Row title="Отделка" value="Чистовая" />
-          <Row title="Санузел" value="Совмещенный" />
+          <Row title="Отделка" value="no info" />
+          <Row title="Санузел" value="no info" />
           <div>{' '}</div>
-          <Row title="Балконы, м²:" value="—" />
-          <Row title="Лоджии, м²" value="2" />
-          <Row title="Террасы, м²:" value="4" />
+          {info.Balconies.map((balcon: any) => (
+            <Row key={balcon.type} title={balcon.type} value={`${balcon.square_meters} м²`} />
+          ))}
+          {/* <Row title="Лоджии, м²" value="no info" />
+          <Row title="Террасы, м²:" value="no info" /> */}
         </div>
       </div>
       <div className={styles.description}>
@@ -40,7 +42,7 @@ const Object = ({ info }: any) => (
           )}
           details="В частности, высокое качество позиционных исследований обеспечивает актуальность укрепления моральных ценностей. Являясь всего лишь частью общей картины, тщательные исследования конкурентов, инициированные исключительно синтетически, функционально разнесены на независимые элементы. " />
         <div className={styles.flatModel}>
-          3D-модель квартиры
+          <a href={info.tour_3d}>3D-модель квартиры</a>
         </div>
       </div>
       <div className={styles.prices}>
@@ -87,10 +89,10 @@ const Object = ({ info }: any) => (
         <div className={styles.dealInfo}>
           <div className={styles.dealGeneralInfo}>
             <Row
-              title="Клиент:"
+              title="Клиент"
               value={(
                 <div className={styles.client}>
-                  Пономарёва Лилия Витальевна
+                  no info
                 </div>
               )} />
             <Row
@@ -102,15 +104,15 @@ const Object = ({ info }: any) => (
                 </div>
               )} />
             <Row title="Дата оформления сделки" value="12.фев.2022" />
-            <Row title="Автор сделки" value="Третьяков Арсений Михайлович" />
-            <Row title="Ответственный" value="Третьяков Арсений Михайлович" />
+            <Row title="Автор сделки" value="no info" />
+            <Row title="Ответственный" value="no info" />
           </div>
           <div className={styles.dealAdditionalInfo}>
             <Row
               title="Телефон"
               value={(
                 <div className={styles.contacts}>
-                  <div className={styles.phone}>+7 999 343 33 33</div>
+                  <div className={styles.phone}>no info</div>
                   <PhoneIcon />
                   <EmailIcon />
                 </div>

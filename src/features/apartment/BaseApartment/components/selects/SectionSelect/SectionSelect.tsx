@@ -4,7 +4,7 @@ import CustomSelectControl
 import { TBaseSelectProps } from '../../../types'
 import { useSectionQuery } from '../../../querries'
 import { useApartmentViewContext } from '../../../../ApartmentView/state/ApartmentViewState'
-import styles from '../BuildingSelect/BuildingSelect.module.scss'
+import styles from './SectionSelect.module.scss'
 
 function useOptions() {
   const {
@@ -45,6 +45,7 @@ const SectionSelect: FC<TBaseSelectProps> = ({ control }: any) => {
 
   return (
     <CustomSelectControl
+      classname="sectionSelect"
       control={control}
       name="section"
       placeholder="Выбор Подъезда"
