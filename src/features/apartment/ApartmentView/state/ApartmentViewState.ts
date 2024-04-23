@@ -38,10 +38,11 @@ function useApartmentFilter(data?: TObject[]) {
           acc[key].push(value)
         }
       })
+      console.log(acc.rooms, 'rooms')
       return {
         ...acc,
-        // rooms: [...new Set(acc.rooms)]
-        rooms: [acc.rooms]
+        rooms: acc.rooms.filter((room: any, index: any, self: any) => self.indexOf(room) === index)
+        // rooms: [acc.rooms]
       }
     }, {
       rooms: [],

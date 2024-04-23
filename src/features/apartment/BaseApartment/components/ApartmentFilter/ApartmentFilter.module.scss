@@ -38,7 +38,7 @@
   display: flex;
   flex-direction: column;
   gap:10px;
-  width: 350px;
+  width: 420px;
   margin-left: 20px;
 }
 
@@ -48,13 +48,15 @@
 }
 
 .resetBtn{
+  cursor: pointer;
   display: flex;
   align-items: center;
-  padding: 4px 20px;
+  padding: 10px 22px;
   background: #f8f8f9;
   border: 1px solid #127cca;
   border-radius: 10px;
   color: #127cca;
+  font-size: 16px;
   svg{
     margin-left: 8px;
     path{

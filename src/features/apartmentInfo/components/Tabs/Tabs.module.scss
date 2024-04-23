@@ -1,5 +1,4 @@
 @import "src/core/styles/common";
-
 .tabsWrapper{
   :global(.MuiTabs-flexContainer){
     display: flex;
@@ -31,4 +30,8 @@
     background: #63707A;
     color: #63707A;
   }
+}
+
+.apartment_tabpanel{
+  padding: 0 !important;
 }

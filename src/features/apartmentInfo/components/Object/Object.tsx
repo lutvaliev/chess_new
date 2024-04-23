@@ -1,6 +1,9 @@
 import classNames from 'classnames'
+import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import Row from '../Row/Row'
 import CustomAccordion from '../../../../core/components/CustomAccordion/CustomAccordion'
+import PrimaryButton from '../../../../core/components/buttons/PrimaryButton/PrimaryButton'
 import DocumentIcon from '../../../../core/components/icons/SvgIcons/DocumentIcon'
 import EditIcon from '../../../../core/components/icons/SvgIcons/EditIcon'
 import PhoneIcon from '../../../../core/components/icons/SvgIcons/PhoneIcon'
@@ -9,7 +12,7 @@ import styles from './Object.module.scss'
 
 const Object = ({ info }: any) => (
   <div>
-    <div className={styles.body}>
+    <div className={`${styles.body} noPadding`}>
       <div className={styles.generalInfo}>
         <div className={styles.sectionTitle}>
           Основная информация
@@ -33,55 +36,76 @@ const Object = ({ info }: any) => (
         </div>
       </div>
       <div className={styles.description}>
-        <CustomAccordion
-          summary={(
-            <div className={styles.summary}>
-              Описание
-              <EditIcon />
-            </div>
-          )}
-          details="В частности, высокое качество позиционных исследований обеспечивает актуальность укрепления моральных ценностей. Являясь всего лишь частью общей картины, тщательные исследования конкурентов, инициированные исключительно синтетически, функционально разнесены на независимые элементы. " />
+        <Accordion defaultExpanded sx={{ boxShadow: 0 }}>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            id="panel-header"
+            aria-controls="panel-content"
+            sx={{ padding: 0 }}>
+            Описание
+          </AccordionSummary>
+          <AccordionDetails sx={{ padding: 0 }}>
+            В частности, высокое качество позиционных исследований обеспечивает актуальность...
+          </AccordionDetails>
+        </Accordion>
         <div className={styles.flatModel}>
           <a href={info.tour_3d}>3D-модель квартиры</a>
         </div>
       </div>
       <div className={styles.prices}>
-        <div className={styles.sectionTitle}>
-          Цены
-          <EditIcon />
-        </div>
-        <div className={styles.pricesInfo}>
-          <Row title="Вид цены" value="Продажная" />
-          <Row title="Текущая цена, м²" value="70 000" />
-          <Row title="Текущая стоимость" value="5 184 200" />
-          <Row title="Вид цены" value="Субсидированная" />
-          <Row title="Текущая цена, м2²" value="80 000" />
-          <Row title="Текущая стоимость" value="6 184 200" />
-          <Row title="Сумма продажи" value="5 184 200" />
-          <Row title="Оплачено" value="5 184 200" />
-          <Row title="Долг клиента" value="0" />
-        </div>
-        <div className={styles.discount}>
-          <Row title="Скидки" value="" />
-          <div className={styles.discountValue}>
-            <div
-              className={classNames(styles.discountText, styles.discountHeader)}
-            >
-              Название скидки
+
+        <Accordion defaultExpanded sx={{ boxShadow: 0 }}>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            id="panel-header"
+            aria-controls="panel-content"
+            sx={{ padding: 0 }}>
+            Цены
+          </AccordionSummary>
+          <AccordionDetails sx={{ padding: 0 }}>
+            <div className={styles.pricesInfo}>
+              <Row title="Вид цены" value="Продажная" />
+              <Row title="Текущая цена, м²" value="70 000" />
+              <Row title="Текущая стоимость" value="5 184 200" />
+              <Row title="Вид цены" value="Субсидированная" />
+              <Row title="Текущая цена, м2²" value="80 000" />
+              <Row title="Текущая стоимость" value="6 184 200" />
+              <Row title="Сумма продажи" value="5 184 200" />
+              <Row title="Оплачено" value="5 184 200" />
+              <Row title="Долг клиента" value="0" />
             </div>
-            <div
-              className={classNames(styles.discountText, styles.discountHeader)}
-            >
-              Размер скидки
+            <div className={styles.discount}>
+              <Row title="Скидки" value="" />
+              <div className={styles.discountValue}>
+                <div
+                  className={classNames(styles.discountText, styles.discountHeader)}
+                >
+                  Название скидки
+                </div>
+                <div
+                  className={classNames(styles.discountText, styles.discountHeader)}
+                >
+                  Размер скидки
+                </div>
+                <div className={styles.discountText}>Название скидки</div>
+                <div className={styles.discountText}>5%</div>
+                <div className={styles.discountText}>Название скидки</div>
+                <div className={styles.discountText}>5%</div>
+              </div>
             </div>
-            <div className={styles.discountText}>Название скидки</div>
-            <div className={styles.discountText}>5%</div>
-            <div className={styles.discountText}>Название скидки</div>
-            <div className={styles.discountText}>5%</div>
-          </div>
-        </div>
+          </AccordionDetails>
+        </Accordion>
       </div>
-      <div className={styles.deal}>
+      <div className={styles.stats}>
+        <Row title="Еще квартир такого типа" value="7" />
+        <div className={styles.analogues}>Квартиры аналоги</div>
+      </div>
+      <div className={styles.buttonsWrapper}>
+        <PrimaryButton text="Забронировать" className={styles.button} />
+        <PrimaryButton text="Рассчитать Ипотеку" className={styles.button} />
+        <PrimaryButton text="Задать вопрос" className={styles.button} />
+      </div>
+      {/* <div className={styles.deal}>
         <div className={styles.sectionTitle}>
           Сделка
           <DocumentIcon />
@@ -121,7 +145,7 @@ const Object = ({ info }: any) => (
             <Row title="Способ оплаты" value="Рассрочка" />
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   </div>
 )

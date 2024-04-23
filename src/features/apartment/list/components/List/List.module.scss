@@ -18,16 +18,16 @@
       min-width: 120px!important;
     }
     :nth-child(5){
-      min-width: 100px!important;
+      min-width: 120px!important;
     }
     :nth-child(6){
       min-width: 60px!important;
     }
     :nth-child(7){
-      min-width: 100px!important;
+      min-width: 120px!important;
     }
     :nth-child(8){
-      min-width: 100px!important;
+      min-width: 120px!important;
     }
     :nth-child(9){
       min-width: 120px!important;
@@ -79,4 +79,42 @@
     top: 30px;
     border-top-left-radius: 16px;
   }
+}
+
+.list{
+  font-family: Ubuntu, sans-serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.table_titles{
+  display: flex;
+  margin: 10px 0 20px 0;
+  font-family: Ubuntu, sans-serif;
+}
+
+.table_title{
+  text-align: center;
+  width: 100%;
+}
+
+.flat_view{
+  height: 100px;
+}
+
+.flat_view img{
+  width: 155px;
+  height: 100%;
+  object-fit: contain;
+}
+
+.flat_info{
+  opacity: 1;
+  width: 100%;
+  text-align: center;
 }

@@ -16,12 +16,14 @@ const Header: FC<TProp> = ({ info, drawerClose }) => (
     <div className={styles.headerInfo}>
       <div className={styles.images}>
         <div className={styles.mainImage}>
-          <img
-            className={styles.mainImage}
-            src="https://static3.depositphotos.com/1009948/264/i/600/depositphotos_2648677-stock-photo-interior-of-the-stylish-apartment.jpg"
-            alt="" />
+          <a href={info.object_planes[0]} target="_blank" rel="noreferrer">
+            <img
+              className={styles.mainImage}
+              src={info.object_planes[0]}
+              alt="" />
+          </a>
         </div>
-        <div className={styles.additionalImages}>
+        {/* <div className={styles.additionalImages}>
           <img
             className={styles.image}
             src="https://static3.depositphotos.com/1009948/264/i/600/depositphotos_2648677-stock-photo-interior-of-the-stylish-apartment.jpg"
@@ -30,7 +32,7 @@ const Header: FC<TProp> = ({ info, drawerClose }) => (
             className={styles.image}
             src="https://static3.depositphotos.com/1009948/264/i/600/depositphotos_2648677-stock-photo-interior-of-the-stylish-apartment.jpg"
             alt="" />
-        </div>
+        </div> */}
       </div>
       <div className={styles.info}>
         <div className={styles.titleWrapper}>
@@ -40,7 +42,7 @@ const Header: FC<TProp> = ({ info, drawerClose }) => (
         <div className={styles.status}>
           <Row title="Статус" value={info.status} />
         </div>
-        <div className={styles.buttonsWrapper}>
+        {/* <div className={styles.buttonsWrapper}>
           <PrimaryButton text="Бронь" className={styles.button} />
           <PrimaryButton text="Ипотека" className={styles.button} />
           <PrimaryButton text="Договор" className={styles.button} />
@@ -52,7 +54,7 @@ const Header: FC<TProp> = ({ info, drawerClose }) => (
             <PlusOutlineIcon />
             <div className={styles.offer}>КП</div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
     { /* eslint-disable-next-line */}

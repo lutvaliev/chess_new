@@ -10,7 +10,7 @@ type TAccordion = {
     details: string | ReactNode
 }
 const CustomAccordion: FC<TAccordion> = ({ summary, details }) => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(true)
 
   return (
     <div className={styles.wrapper}>

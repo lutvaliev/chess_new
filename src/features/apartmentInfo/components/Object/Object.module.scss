@@ -1,5 +1,4 @@
 @import "src/core/styles/common";
-
 .titleWrapper {
   color: #1B272F;
   font-size: 14px;
@@ -127,4 +126,36 @@
   flex-direction: column;
   gap: 14px;
   margin-top: -4px;
+}
+
+.stats{
+  padding-top: 20px;
+  display: flex;
+  gap: 20px
+}
+
+.analogues{
+  color: #127CCA;
+  border-bottom: 1px solid #127CCA;
+  width: fit-content;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.buttonsWrapper {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+  height: 28px;
+}
+
+.button {
+  border-radius: 4px !important;
+  background: #127CCA !important;
+  color: $white !important;
+  text-align: center !important;
+  font-size: 14px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 20px !important;
 }

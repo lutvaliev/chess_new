@@ -9,7 +9,7 @@ type TProp = {
 }
 
 const ApartmentInfo: FC<TProp> = ({ info, drawerClose }) => (
-  <div className={styles.wrapper}>
+  <div className={`${styles.wrapper} apartmentinfo`}>
     <Header drawerClose={drawerClose} info={info}/>
     <div className={styles.statusLine} style={{ backgroundColor: `#${info.color}` }}/>
     <ObjectTabs info={info}/>

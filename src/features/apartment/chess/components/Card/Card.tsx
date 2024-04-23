@@ -8,6 +8,7 @@ import ApartmentInfoBase from '../../../../apartmentInfo/components/ApartmentInf
 import { TBalconies } from '../../../BaseApartment/types'
 import styles from './Card.module.scss'
 import CustomDrawer from '../../../../../core/components/CustomDrawer/CustomDrawer'
+import { Discount } from '../../../../../img'
 
 type TProps = {
   info: any,
@@ -70,7 +71,9 @@ const Card: FC<TProps> = (
         <div className={classNames({ [styles.disabled]: isDisabled })} />
         <div className={styles.header}>
           <div className={styles.info}>
-            <div className={styles.bordered}>99,%</div>
+            <div>
+              <img src={Discount} alt="" width={40} style={{ marginTop: '5px' }}/>
+            </div>
             <div className={styles.bordered}>ВН</div>
             <div className={styles.bordered}>
               {rooms === 0 ? 'C' : `${rooms}К`}

@@ -42,6 +42,7 @@ export type TObject = {
     price?: number
     price_type_id: string
   }[]
+  object_planes: any
 }
 
 export type TBaseSelectProps = {

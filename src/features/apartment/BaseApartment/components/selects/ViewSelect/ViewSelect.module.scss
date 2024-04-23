@@ -1,5 +1,7 @@
 .wrapper{
   &:global(.MuiInputBase-root){
-  width: 134px;
+  width: 190px;
+  border: none;
+  padding: 14px 20px;
   }
 }
