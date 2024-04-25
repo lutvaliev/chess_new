@@ -10,6 +10,7 @@ const CustomSelectBase = ({
   options,
   currentValue,
   handleChange,
+  name,
   placeholder,
   type,
   isError,
@@ -20,7 +21,15 @@ const CustomSelectBase = ({
   disabledOption,
   ...rest
 }: any) => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(name === 'view')
+
+  console.log(options, 'options')
+
+  const menuElement = document.getElementById('menu-')
+  if (menuElement) {
+    menuElement.style.zIndex = '-1'
+    menuElement.style.opacity = '0'
+  }
 
   return (
     <FormControl fullWidth>
@@ -57,13 +66,14 @@ const CustomSelectBase = ({
             className={classNames(
               styles.iconWrapper,
 
-              { [styles.cursorDefault]: disabled,
+              {
+                [styles.cursorDefault]: disabled,
                 [styles.toggle]: isOpen
               }
             )}
             onClick={!disabled ? () => setIsOpen(true) : undefined}
           >
-            <ChevronBottomIcon/>
+            <ChevronBottomIcon />
           </button>
         )}
         {...rest}
@@ -71,7 +81,7 @@ const CustomSelectBase = ({
         {
           options.map(({ value, label, disabledOption }: any) => (
             <MenuItem
-              className={styles.menuItem}
+              className={`${styles.menuItem}`}
               key={value}
               value={value}
               disabled={disabledOption}

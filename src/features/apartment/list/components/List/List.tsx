@@ -101,8 +101,6 @@ const List = () => {
     // }
   ], [watch()])
 
-  console.log(filteredData, 'filteredData')
-
   return (
     <>
       <BaseApartment>

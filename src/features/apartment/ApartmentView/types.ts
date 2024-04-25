@@ -1,1 +1,1 @@
-export type TView = 'CHESS' | 'TILE' | 'TILE_PLUS' | 'LIST'
+export type TView = 'CHESS' | 'TILE' | 'TILE_PLUS' | 'LIST' | 'PLAN'

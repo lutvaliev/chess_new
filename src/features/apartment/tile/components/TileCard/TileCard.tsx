@@ -56,6 +56,7 @@ const TileCard: FC<TProp> = (
           onClick={() => setIsDrawerOpen(true)}
         >
           <div className={classNames({ [styles.disabled]: isDisabled })}/>
+          <div className={styles.red_dot}/>
           <p className={styles.text}>{rooms}</p>
         </div>
       </CustomTooltip>

@@ -23,9 +23,12 @@
 }
 
 .drawer{
+  position: relative !important;
+  z-index: 1200 !important;
   :global(.MuiDrawer-paper){
     top: 30px;
     border-top-left-radius: 16px;
+    z-index: -1;
   }
 }
 

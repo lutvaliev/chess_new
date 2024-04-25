@@ -35,3 +35,13 @@
   cursor: pointer;
   position: relative;
 }
+
+.red_dot{
+  width: 5px;
+  height: 5px;
+  border-radius: 20px;
+  position: absolute;
+  left: 10%;
+  top: 10%;
+  background-color: #da0000;
+}

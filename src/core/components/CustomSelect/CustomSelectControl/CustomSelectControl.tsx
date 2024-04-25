@@ -41,6 +41,7 @@ const CustomSelectControl = ({
         options={options}
         currentValue={currentValue}
         handleChange={onChange}
+        name={name}
         {...rest}
       />
       {error && <p className={styles.errorMessage}>{error.message}</p>}

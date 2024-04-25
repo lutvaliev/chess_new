@@ -1,13 +1,14 @@
 import React, { ReactNode } from 'react'
 import { ApartmentViewProvider, useApartmentViewContext } from '../state/ApartmentViewState'
 import { TView } from '../types'
-import { Chess, Tile, TilePlus, List } from '../../index'
+import { Chess, Tile, TilePlus, List, Plan } from '../../index'
 
 const viewMap: {[key in TView]: ReactNode} = {
   CHESS: <Chess/>,
   TILE: <Tile/>,
   TILE_PLUS: <TilePlus/>,
-  LIST: <List/>
+  LIST: <List/>,
+  PLAN: <Plan/>
 }
 
 const ApartmentView = () => {

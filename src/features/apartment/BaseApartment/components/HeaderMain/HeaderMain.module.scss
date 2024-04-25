@@ -2,7 +2,7 @@
 
 .wrapper{
   @include fontFamily(Ubuntu);
-  display: flex;
+  display: none;
   justify-content: flex-start;
   align-items: flex-end;
   gap: 24px;

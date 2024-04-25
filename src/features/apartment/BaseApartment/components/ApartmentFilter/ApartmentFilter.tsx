@@ -1,3 +1,4 @@
+import { Box, Slider, Typography } from '@mui/material'
 import { useApartmentViewContext } from '../../../ApartmentView/state/ApartmentViewState'
 import StatusSelect from '../selects/StatusSelect/StatusSelect'
 import RoomSelect from '../selects/RoomSelect/RoomSelect'
@@ -7,6 +8,7 @@ import styles from './ApartmentFilter.module.scss'
 
 const ApartmentFilter = () => {
   const { formReturn: { control, watch } } = useApartmentViewContext()
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.selects}>
@@ -17,11 +19,61 @@ const ApartmentFilter = () => {
       <div className={styles.metrics}>
         <div className={styles.bar}>
           <div>Площадь:</div>
-          <TotalAreaBar control={control} />
+          {/* <TotalAreaBar control={control} /> */}
+          <Box sx={{ width: 250, background: '#f5f5f5', borderRadius: '20px', padding: '5px 30px' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+              <Typography
+                variant="body2"
+                // onClick={() => setVal(MIN)}
+                sx={{ cursor: 'pointer' }}
+              >
+                от 0
+              </Typography>
+              <Typography
+                variant="body2"
+                // onClick={() => setVal(MAX)}
+                sx={{ cursor: 'pointer' }}
+              >
+                до 100
+              </Typography>
+            </Box>
+            <Slider
+              value={0}
+              valueLabelDisplay="auto"
+              min={0}
+              max={100}
+            // onChange={handleChange}
+            />
+          </Box>
         </div>
         <div className={styles.bar}>
           <div>Стоимость:</div>
-          <CostBar control={control} />
+          <Box sx={{ width: 250, background: '#f5f5f5', borderRadius: '20px', padding: '5px 30px' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+              <Typography
+                variant="body2"
+                // onClick={() => setVal(MIN)}
+                sx={{ cursor: 'pointer' }}
+              >
+                от 0
+              </Typography>
+              <Typography
+                variant="body2"
+                // onClick={() => setVal(MAX)}
+                sx={{ cursor: 'pointer' }}
+              >
+                до 100
+              </Typography>
+            </Box>
+            <Slider
+              value={0}
+              valueLabelDisplay="auto"
+              min={0}
+              max={100}
+            // onChange={handleChange}
+            />
+          </Box>
+          {/* <CostBar control={control} /> */}
         </div>
         <div className={styles.buttons}>
           <button type="button" className={styles.resetBtn} onClick={() => window.location.reload()}>

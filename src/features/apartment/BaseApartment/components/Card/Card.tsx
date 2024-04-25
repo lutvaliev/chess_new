@@ -1,13 +1,14 @@
 import React, { FC } from 'react'
 import RubleIcon from '../../../../../core/components/icons/SvgIcons/RubleIcon'
+import { Discount } from '../../../../../img'
 import styles from './Card.module.scss'
 
 type TCard = {
-    rooms: number | string
-    flatNumber: number | string
-    cost: number | string
-    pricePerMeter: number | string
-    area: number | string
+  rooms: number | string
+  flatNumber: number | string
+  cost: number | string
+  pricePerMeter: number | string
+  area: number | string
 }
 
 const Card: FC<TCard> = (
@@ -22,7 +23,9 @@ const Card: FC<TCard> = (
   <div className={styles.wrapper}>
     <div className={styles.header} >
       <div className={styles.info}>
-        <div className={styles.bordered} >99,%</div>
+        <div>
+          <img src={Discount} alt="" width={40} style={{ marginTop: '5px' }} />
+        </div>
         <div className={styles.bordered} >ВН</div>
         <div className={styles.bordered} >
           {rooms}
@@ -35,22 +38,22 @@ const Card: FC<TCard> = (
       </div>
       <div className={styles.owner} >-</div>
     </div>
-    <div className={styles.line}/>
+    <div className={styles.line} />
     <div className={styles.cost}>
       {cost}
-      <RubleIcon/>
+      <RubleIcon />
     </div>
     <div className={styles.areaInfo} >
       <div className={styles.totalArea} >
         {area}
         {' '}
         м²
-        <RubleIcon/>
+        <RubleIcon />
       </div>
       <div className={styles.verticalLine} />
       <div className={styles.pricePerMeter} >
         {pricePerMeter || '-'}
-        <RubleIcon/>
+        <RubleIcon />
       </div>
     </div>
   </div>

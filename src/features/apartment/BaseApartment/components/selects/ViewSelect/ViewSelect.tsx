@@ -21,6 +21,10 @@ const ViewSelect: FC<TBaseSelectProps> = ({ control }) => {
     {
       label: 'Список',
       value: 'LIST'
+    },
+    {
+      label: 'Планировка',
+      value: 'PLANIROVKA'
     }
   ]
   return (

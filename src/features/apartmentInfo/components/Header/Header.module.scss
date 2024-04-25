@@ -21,6 +21,25 @@
   border-radius: 4px;
 }
 
+.modal{
+  display: flex;
+  justify-content: center;
+}
+
+.buttonImg{
+  border: none;
+  outline: none;
+  background-color: #fff;
+}
+
+.modalImage{
+  width: 506px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .additionalImages {
   display: flex;
   flex-direction: column;

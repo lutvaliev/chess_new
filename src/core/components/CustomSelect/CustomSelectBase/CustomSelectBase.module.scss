@@ -8,6 +8,10 @@
   font-weight: 500;
 }
 
+.view_select{
+  display: none !important;
+}
+
 .select{
   &:global(.MuiInputBase-root){
     padding: 7px 16px;

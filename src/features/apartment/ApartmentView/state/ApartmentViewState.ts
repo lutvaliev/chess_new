@@ -38,7 +38,6 @@ function useApartmentFilter(data?: TObject[]) {
           acc[key].push(value)
         }
       })
-      console.log(acc.rooms, 'rooms')
       return {
         ...acc,
         rooms: acc.rooms.filter((room: any, index: any, self: any) => self.indexOf(room) === index)
@@ -51,6 +50,7 @@ function useApartmentFilter(data?: TObject[]) {
     } as any)
   }, [data])
 }
+
 function usePrepareData(data?: TObject[]) {
   return useMemo(() => (data?.length
     ? prepareData(data)
@@ -71,6 +71,7 @@ function usePageProps(formReturn: UseFormReturn<TBaseForm>) {
   const [page, setPage] = useState(1)
   const elemPerPage = 20
   const { view } = formReturn.watch()
+  console.log(view, 'view')
   const pageParam = view === 'LIST' ? page : undefined
   const elemPerPageParam = view === 'LIST' ? elemPerPage : undefined
   return {
@@ -87,7 +88,6 @@ const ApartmentViewState = () => {
   const { pageParam, elemPerPageParam } = usePageProps(formReturn)
   const objectParams = useObjectParams(formReturn)
   const { data } = useObjectChessQuery(objectParams, pageParam, elemPerPageParam)
-  console.log(data, 'data')
 
   const filteredData = useFilteredData(formReturn, data)
   const preparedApartmentData = usePrepareData(filteredData)
