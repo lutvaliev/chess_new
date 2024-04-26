@@ -23,8 +23,6 @@ const CustomSelectBase = ({
 }: any) => {
   const [isOpen, setIsOpen] = useState(name === 'view')
 
-  console.log(options, 'options')
-
   const menuElement = document.getElementById('menu-')
   if (menuElement) {
     menuElement.style.zIndex = '-1'
@@ -48,13 +46,14 @@ const CustomSelectBase = ({
           event.stopPropagation()
           event.preventDefault()
           handleChange(event.target.value)
+          setIsOpen(true)
         }}
         renderValue={(selected) => {
           const defaultPlaceholder = <p className={classNames(styles.placeholder)}>{placeholder}</p>
           const label = options.find((elem: any) => elem.value === selected)?.label
           return label || defaultPlaceholder
         }}
-        open={isOpen}
+        open={name === 'view' ? true : isOpen}
         onOpen={() => setIsOpen(true)}
         onClose={() => {
           setIsOpen(false)
