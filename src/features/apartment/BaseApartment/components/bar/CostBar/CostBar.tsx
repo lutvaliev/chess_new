@@ -9,16 +9,25 @@ type TProps = {
   control: Control<any>
 }
 
+type TRange = {
+  min: number
+  max: number
+}
+
 const CostBar: FC<TProps> = ({ control }) => {
-  const { field } = useController({ name: 'Cost', control })
+  const { field } = useController({ name: 'cost', control })
 
-  // Initial range values
-  const [range, setRange] = useState([0, 100]) // Adjust these values as needed
+  // Initial range value
+  // eslint-disable-next-line max-len
+  const [range, setRange] = useState<{ min: number, max: number }>({ min: 0, max: 100 }) // Adjust these values as needed
 
-  // Handle slider range change
   const handleSliderChange = (event: Event, newValue: number | number[]) => {
-    setRange(newValue as [number, number])
-    field.onChange(newValue) // Update the form value
+    const newRange: TRange = typeof newValue === 'number'
+      ? { min: newValue, max: newValue }
+      // eslint-disable-next-line max-len
+      : { min: newValue[0], max: newValue[1] } // Ensure newValue is an object with 'min' and 'max' properties
+    setRange(newRange)
+    field.onChange(newRange)
   }
 
   console.log(range, 'range')
@@ -27,16 +36,16 @@ const CostBar: FC<TProps> = ({ control }) => {
     <div className={styles.wrapper}>
       <Typography variant="body2" gutterBottom className={styles.rangeNumbers}>
         <p>
-          от&nbsp;
-          {range[0]}
+          от &nbsp;
+          {range.min}
         </p>
         <p>
-          до&nbsp;
-          {range[1]}
+          до &nbsp;
+          {range.max}
         </p>
       </Typography>
       <Slider
-        value={range}
+        value={[range.min, range.max]}
         onChange={handleSliderChange}
         valueLabelDisplay="auto"
         aria-labelledby="range-slider"

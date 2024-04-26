@@ -8,9 +8,16 @@
     align-items: flex-end!important;
     gap: 10px;
   }
+  span{
+    padding: 0 !important;
+  }
 }
 
 .rangeNumbers{
+  background: #F6F8F9;
   display: flex;
+  padding: 8px 10px !important;
+  border-radius: 6px;
   justify-content: space-between;
+  margin-bottom: -1px !important;
 }
