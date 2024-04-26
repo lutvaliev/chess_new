@@ -3,9 +3,14 @@
 .wrapper {
   @include fontFamily(Ubuntu);
   display: flex;
-  gap: 10px;
+  flex-direction: column;
   & label {
     align-items: flex-end !important;
     gap: 10px;
   }
+}
+
+.rangeNumbers{
+  display: flex;
+  justify-content: space-between;
 }

@@ -5,6 +5,7 @@ import RoomSelect from '../selects/RoomSelect/RoomSelect'
 import TotalAreaBar from '../bar/TotalAreaBar/TotalAreaBar'
 import CostBar from '../bar/CostBar/CostBar'
 import styles from './ApartmentFilter.module.scss'
+import { floatFormat } from '../../../../../core/utils/formFormat'
 
 const ApartmentFilter = () => {
   const { formReturn: { control, watch } } = useApartmentViewContext()
@@ -22,32 +23,8 @@ const ApartmentFilter = () => {
         </div>
         <div className={styles.bar}>
           <div>Стоимость:</div>
-          <Box sx={{ width: 250, background: '#f5f5f5', borderRadius: '20px', padding: '5px 30px' }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Typography
-                variant="body2"
-                // onClick={() => setVal(MIN)}
-                sx={{ cursor: 'pointer' }}
-              >
-                от 0
-              </Typography>
-              <Typography
-                variant="body2"
-                // onClick={() => setVal(MAX)}
-                sx={{ cursor: 'pointer' }}
-              >
-                до 100
-              </Typography>
-            </Box>
-            <Slider
-              value={0}
-              valueLabelDisplay="auto"
-              min={0}
-              max={100}
-            // onChange={handleChange}
-            />
-          </Box>
-          {/* <CostBar control={control} /> */}
+          {/* <TotalAreaBar control={control} /> */}
+          <CostBar control={control} />
         </div>
         <div className={styles.buttons}>
           <button type="button" className={styles.resetBtn} onClick={() => window.location.reload()}>
