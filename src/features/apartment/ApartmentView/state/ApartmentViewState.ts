@@ -71,7 +71,6 @@ function usePageProps(formReturn: UseFormReturn<TBaseForm>) {
   const [page, setPage] = useState(1)
   const elemPerPage = 20
   const { view } = formReturn.watch()
-  console.log(view, 'view')
   const pageParam = view === 'LIST' ? page : undefined
   const elemPerPageParam = view === 'LIST' ? elemPerPage : undefined
   return {

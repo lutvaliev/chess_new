@@ -1,6 +1,7 @@
-import { FC, useState } from 'react'
+import { FC, useState, useEffect } from 'react'
 import { Slider, Typography } from '@mui/material'
 import { useController, Control } from 'react-hook-form'
+import { useApartmentViewContext } from '../../../../ApartmentView/state/ApartmentViewState'
 import { floatFormat } from '../../../../../../core/utils/formFormat'
 import CustomInput from '../../../../../../core/components/CustomInput/CustomInput'
 import styles from './CostBar.module.scss'
@@ -16,10 +17,43 @@ type TRange = {
 
 const CostBar: FC<TProps> = ({ control }) => {
   const { field } = useController({ name: 'cost', control })
+  // eslint-disable-next-line max-len
+  const [minCostObject, setMinCostObject] = useState<string | number>(0 ?? undefined)
+  const [maxCostObject, setMaxCostObject] = useState<string | number>(0 ?? undefined)
+  const { objectQuery: { data, isFetching },
+    preparedApartmentData: preparedChessData
+  } = useApartmentViewContext()
+
+  useEffect(() => {
+    if (!data || data.length === 0) {
+      setMinCostObject(0)
+      setMaxCostObject(0)
+      return
+    }
+
+    let minCostObj = data[0]
+    let minCost = data[0].cost
+    let maxCostObj = data[0]
+    let maxCost = data[0].cost
+
+    data.forEach((obj) => {
+      if (obj.cost > maxCost) {
+        maxCost = obj.cost
+        maxCostObj = obj
+      } else if (obj.cost < minCost) {
+        minCost = obj.cost
+        minCostObj = obj
+      }
+    })
+
+    setMinCostObject(Number(minCostObj.cost))
+    setMaxCostObject(Number(maxCostObj.cost))
+    setRange({ min: Number(minCostObj.cost), max: Number(maxCostObj.cost) })
+  }, [data])
 
   // Initial range value
   // eslint-disable-next-line max-len
-  const [range, setRange] = useState<{ min: number, max: number }>({ min: 0, max: 100 }) // Adjust these values as needed
+  const [range, setRange] = useState<{ min: number, max: number }>({ min: Number(minCostObject) || 0, max: Number(maxCostObject) || 0 })
 
   const handleSliderChange = (event: Event, newValue: number | number[]) => {
     const newRange: TRange = typeof newValue === 'number'
@@ -50,8 +84,8 @@ const CostBar: FC<TProps> = ({ control }) => {
         valueLabelDisplay="auto"
         aria-labelledby="range-slider"
         getAriaLabel={(index) => (index === 0 ? 'Minimum' : 'Maximum')}
-        min={0}
-        max={100} // Adjust the range as needed
+        min={Number(minCostObject)}
+        max={Number(minCostObject)} // Adjust the range as needed
       />
     </div>
   )

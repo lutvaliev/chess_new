@@ -4,7 +4,6 @@ import { TBaseForm, TObject } from '../types'
 
 export function useFilteredData(formReturn: UseFormReturn<TBaseForm>, data?: TObject[]) {
   const { cost, room, totalArea } = formReturn.watch()
-  console.log(totalArea, 'totalArea')
   const { setValue } = formReturn
 
   return useMemo(() => {

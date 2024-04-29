@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import classNames from 'classnames'
 import { useApartmentViewContext } from '../../../ApartmentView/state/ApartmentViewState'
 import { BaseApartment } from '../../../BaseApartment'
@@ -11,6 +12,7 @@ const Chess = () => {
   const { objectQuery: { data, isFetching },
     preparedApartmentData: preparedChessData
   } = useApartmentViewContext()
+
   return (
     <BaseApartment>
       {data && !isFetching
@@ -29,7 +31,7 @@ const Chess = () => {
                     style={{ gridTemplateColumns: `126px repeat(${flats}, 170px)` }}
                   >
                     <div className={classNames(styles.order, styles.rowNumber)}>
-                      <RowDescription floor={Number(floors) - objectsIdx}/>
+                      <RowDescription floor={Number(floors) - objectsIdx} />
                     </div>
                     {objects.map((object: TObject, objectIdx) => (
                       <>
@@ -63,7 +65,7 @@ const Chess = () => {
         )
         : (
           <div className={styles.spinnerWrapper}>
-            <Spinner/>
+            <Spinner />
           </div>
         )}
     </BaseApartment>

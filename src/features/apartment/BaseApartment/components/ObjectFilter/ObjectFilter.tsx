@@ -15,6 +15,7 @@ const ObjectFilter = ({ handleChange }: any) => {
     const list = document.querySelector('[data-value="LIST"]') as HTMLButtonElement
     const plitka = document.querySelector('[data-value="TILE"]') as HTMLButtonElement
     const plitkaplus = document.querySelector('[data-value="TILE_PLUS"]') as HTMLButtonElement
+    const plan = document.querySelector('[data-value="PLANIROVKA"]') as HTMLButtonElement
     if (e === 'CHESS') {
       chess.click()
     }
@@ -26,8 +27,9 @@ const ObjectFilter = ({ handleChange }: any) => {
     }
     if (e === 'TILE_PLUS') {
       plitkaplus.click()
-    } else {
-      console.log('Element with data-value="CHESS" not found')
+    }
+    if (e === 'PLAN') {
+      plan.click()
     }
   }
   function toggleAdditionalButtons() {

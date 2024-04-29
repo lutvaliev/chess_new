@@ -1,6 +1,7 @@
-import { FC, useState } from 'react'
+import { FC, useState, useEffect } from 'react'
 import { Slider, Typography } from '@mui/material'
 import { useController, Control } from 'react-hook-form'
+import { useApartmentViewContext } from '../../../../ApartmentView/state/ApartmentViewState'
 import { floatFormat } from '../../../../../../core/utils/formFormat'
 import CustomInput from '../../../../../../core/components/CustomInput/CustomInput'
 import styles from './TotalAreaBar.module.scss'
@@ -16,10 +17,46 @@ type TRange = {
 
 const TotalAreaBar: FC<TProps> = ({ control }) => {
   const { field } = useController({ name: 'totalArea', control })
+  // eslint-disable-next-line max-len
+  const [minAreaObject, setMinAreaObject] = useState<string | number>(0 ?? undefined)
+  const [maxAreaObject, setMaxAreaObject] = useState<string | number>(0 ?? undefined)
+  const { objectQuery: { data, isFetching },
+    preparedApartmentData: preparedChessData
+  } = useApartmentViewContext()
+
+  // Function to find the object with the maximum area
+  useEffect(() => {
+    if (!data || data.length === 0) {
+      setMinAreaObject(0)
+      setMaxAreaObject(0)
+      return
+    }
+
+    let minAreaObj = data[0]
+    let minArea = data[0].area
+    let maxAreaObj = data[0]
+    let maxArea = data[0].area
+
+    data.forEach((obj) => {
+      if (obj.area > maxArea) {
+        maxArea = obj.area
+        maxAreaObj = obj
+      } else if (obj.area < minArea) {
+        minArea = obj.area
+        minAreaObj = obj
+      }
+    })
+
+    setMinAreaObject(Number(minAreaObj.area))
+    setMaxAreaObject(Number(maxAreaObj.area))
+    setRange({ min: Number(minAreaObj.area), max: Number(maxAreaObj.area) })
+  }, [data])
+
+  console.log(data, 'datas')
 
   // Initial range value
   // eslint-disable-next-line max-len
-  const [range, setRange] = useState<{ min: number, max: number }>({ min: 0, max: 100 }) // Adjust these values as needed
+  const [range, setRange] = useState<{ min: number, max: number }>({ min: Number(minAreaObject) || 0, max: Number(maxAreaObject) || 0 })
 
   const handleSliderChange = (event: Event, newValue: number | number[]) => {
     const newRange: TRange = typeof newValue === 'number'
@@ -29,8 +66,6 @@ const TotalAreaBar: FC<TProps> = ({ control }) => {
     setRange(newRange)
     field.onChange(newRange)
   }
-
-  console.log(range, 'range')
 
   return (
     <div className={styles.wrapper}>
@@ -50,8 +85,8 @@ const TotalAreaBar: FC<TProps> = ({ control }) => {
         valueLabelDisplay="auto"
         aria-labelledby="range-slider"
         getAriaLabel={(index) => (index === 0 ? 'Minimum' : 'Maximum')}
-        min={0}
-        max={100} // Adjust the range as needed
+        min={Number(minAreaObject)}
+        max={Number(maxAreaObject)} // Adjust the range as needed
       />
     </div>
   )

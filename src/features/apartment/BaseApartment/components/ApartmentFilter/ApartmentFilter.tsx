@@ -18,11 +18,11 @@ const ApartmentFilter = () => {
       </div>
       <div className={styles.metrics}>
         <div className={styles.bar}>
-          <div>Площадь:</div>
+          <div className={styles.text}>Площадь:</div>
           <TotalAreaBar control={control} />
         </div>
         <div className={styles.bar}>
-          <div>Стоимость:</div>
+          <div className={styles.text}>Стоимость:</div>
           {/* <TotalAreaBar control={control} /> */}
           <CostBar control={control} />
         </div>
