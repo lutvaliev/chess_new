@@ -82,6 +82,7 @@
 }
 
 .list{
+  width: 75%;
   font-family: Ubuntu, sans-serif;
   display: flex;
   justify-content: space-between;
@@ -93,6 +94,7 @@
 }
 
 .table_titles{
+  width: 75%;
   display: flex;
   margin: 10px 0 20px 0;
   font-family: Ubuntu, sans-serif;
@@ -101,6 +103,9 @@
 .table_title{
   text-align: center;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .flat_view{
@@ -108,7 +113,7 @@
 }
 
 .flat_view img{
-  width: 155px;
+  width: 130px;
   height: 100%;
   object-fit: contain;
 }

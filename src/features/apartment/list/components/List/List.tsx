@@ -45,7 +45,7 @@ const List = () => {
       Cell: ({ value, row }) => <TableCell value={value} row={row} />
     },
     {
-      Header: 'Номер / Наименование',
+      Header: 'Номер',
       accessor: 'number_of_object',
       Cell: ({ value, row }) => <TableCell value={value} row={row} />
     },
