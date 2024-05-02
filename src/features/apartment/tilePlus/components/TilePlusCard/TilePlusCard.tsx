@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useState, useRef } from 'react'
 import classNames from 'classnames'
 import Card from '../../../BaseApartment/components/Card/Card'
 import ApartmentInfoBase from '../../../../apartmentInfo/components/ApartmentInfoBase/ApartmentInfoBase'
@@ -27,9 +27,24 @@ const TilePlusCard: FC<TProp> = (
   }
 ) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+  const drawerRef = useRef<HTMLDivElement>(null)
   const handleClose = () => setIsDrawerOpen(false)
+  const handleClickOutside = (event: MouseEvent) => {
+    if (drawerRef.current && !drawerRef.current.contains(event.target as Node)) {
+      setIsDrawerOpen(false)
+    }
+  }
   return (
-    <>
+    <div
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          console.log('dd')
+        }
+      }}
+      onClick={(e: any) => handleClickOutside(e)}
+    >
       <CustomDrawer
         anchor="right"
         hideBackdrop
@@ -41,6 +56,7 @@ const TilePlusCard: FC<TProp> = (
       </CustomDrawer>
       { /* eslint-disable-next-line */}
       <div
+        ref={drawerRef}
         className={styles.cardWrapper}
         onClick={() => setIsDrawerOpen(true)}
       >
@@ -53,7 +69,7 @@ const TilePlusCard: FC<TProp> = (
           pricePerMeter={pricePerMeter}
         />
       </div>
-    </>
+    </div>
   )
 }
 

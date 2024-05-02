@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useState, useRef } from 'react'
 import classNames from 'classnames'
 import CustomTooltip from '../../../../../core/components/CustomTooltip/CustomTooltip'
 import Card from '../../../BaseApartment/components/Card/Card'
@@ -28,10 +28,24 @@ const TileCard: FC<TProp> = (
   }
 ) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+  const drawerRef = useRef<HTMLDivElement>(null)
+  const handleClickOutside = (event: MouseEvent) => {
+    if (drawerRef.current && !drawerRef.current.contains(event.target as Node)) {
+      setIsDrawerOpen(false)
+    }
+  }
   // TODO usecallback
   const handleClose = () => setIsDrawerOpen(false)
   return (
-    <>
+    <div
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          console.log('dd')
+        }
+      }}
+      onClick={(e: any) => handleClickOutside(e)}>
       <CustomDrawer
         anchor="right"
         hideBackdrop
@@ -52,6 +66,7 @@ const TileCard: FC<TProp> = (
       )}>
         { /* eslint-disable-next-line */}
         <div
+          ref={drawerRef}
           className={styles.card}
           onClick={() => setIsDrawerOpen(true)}
         >
@@ -60,7 +75,7 @@ const TileCard: FC<TProp> = (
           <p className={styles.text}>{rooms}</p>
         </div>
       </CustomTooltip>
-    </>
+    </div>
   )
 }
 
