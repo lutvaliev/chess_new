@@ -13,7 +13,7 @@ const ObjectTabs = ({ info }: any) => {
 
   return (
     <TabContext value={filterIndex}>
-      <Tabs
+      {/* <Tabs
         disableRipple
         className={styles.tabsWrapper}
         value={filterIndex}
@@ -21,9 +21,9 @@ const ObjectTabs = ({ info }: any) => {
           (_, newValue) => setFilterIndex(newValue.toString())
         }>
         <Tab disableRipple value="1" label="Объект"/>
-        {/* <Tab disableRipple value="2" label="Реклама"/>
-        <Tab disableRipple value="3" label="Статистика"/> */}
-      </Tabs>
+        <Tab disableRipple value="2" label="Реклама"/>
+        <Tab disableRipple value="3" label="Статистика"/>
+      </Tabs> */}
       <TabPanel value="1" className={styles.apartment_tabpanel}>
         <Object info={info}/>
       </TabPanel>

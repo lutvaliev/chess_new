@@ -1,4 +1,5 @@
 .wrapper{
+  display: none !important;
   &:global(.MuiInputBase-root){
   width: 180px;
   border: none;
@@ -6,5 +7,18 @@
   p{
     font-size: 14px;
   }
+  }
+}
+.rooms{
+  display: flex;
+  gap: 10px;
+  .room{
+    border: none;
+    font-size: 14px;
+    font-family: Ubuntu, sans-serif;
+    cursor: pointer;
+    padding: 10px 16px;
+    border-radius: 6px;
+    background-color: #F6F8F9;
   }
 }

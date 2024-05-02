@@ -1,6 +1,7 @@
 @import 'src/core/styles/common';
 
 .cardWrapper {
+  cursor: pointer;
   border-radius: 4px;
   border: 1px solid #E3E6E8;
   box-shadow: 1px 1px 30px 0 rgba(27, 39, 47, 0.05), 1px 1px 2px 0 rgba(27, 39, 47, 0.05);

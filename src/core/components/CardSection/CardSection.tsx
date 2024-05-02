@@ -33,10 +33,11 @@ const CardSection: FC<TProps> = ({ title, isMetrics, value, icon }) => {
           {
             (value && Array.isArray(value)
               ? balconyArea
-              : value) || '-'
+              : value)
           }
         </div>
-        <div className={styles.text}>{!value ? '' : icon}</div>
+        {/* <div className={styles.text}>{!value ? '' : icon}</div> */}
+        <div className={styles.text}>{icon}</div>
       </div>
     </div>
   )

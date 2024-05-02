@@ -11,12 +11,12 @@ import EmailIcon from '../../../../core/components/icons/SvgIcons/EmailIcon'
 import styles from './Object.module.scss'
 
 const Object = ({ info }: any) => (
-  <div>
+  <div className="aueshka">
     <div className={`${styles.body} noPadding`}>
       <div className={styles.generalInfo}>
         <div className={styles.sectionTitle}>
           Основная информация
-          <DocumentIcon />
+          {/* <DocumentIcon /> */}
         </div>
         <div className={styles.generalInfoWrapper}>
           <Row title="Этаж" value={info.floor} />
@@ -70,9 +70,9 @@ const Object = ({ info }: any) => (
               <Row title="Вид цены" value="Субсидированная" />
               <Row title="Текущая цена, м2²" value="80 000" />
               <Row title="Текущая стоимость" value="6 184 200" />
-              <Row title="Сумма продажи" value="5 184 200" />
+              {/* <Row title="Сумма продажи" value="5 184 200" />
               <Row title="Оплачено" value="5 184 200" />
-              <Row title="Долг клиента" value="0" />
+              <Row title="Долг клиента" value="0" /> */}
             </div>
             <div className={styles.discount}>
               <Row title="Скидки" value="" />

@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useState } from 'react'
+import React, { FC, useCallback, useEffect, useState, useRef } from 'react'
 import classNames from 'classnames'
 import CardSection from '../../../../../core/components/CardSection/CardSection'
 import TotalAreaIcon from '../../../../../core/components/icons/SvgIcons/TotalAreaIcon'
@@ -22,26 +22,24 @@ type TProps = {
   balconies: TBalconies[] | string | number
 }
 
-const Card: FC<TProps> = (
-  {
-    info,
-    color,
-    area,
-    flatNumber,
-    rooms,
-    pricePerSquare,
-    isDisabled,
-    cost,
-    balconies
-  }
-) => {
+const Card: FC<TProps> = ({
+  info,
+  color,
+  area,
+  flatNumber,
+  rooms,
+  pricePerSquare,
+  isDisabled,
+  cost,
+  balconies
+}) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
-  const handleClose = useCallback(
-    () => setIsDrawerOpen(false),
-    []
-  )
-
   const [bgColor, setBgColor] = useState<string | undefined>(undefined)
+  const drawerRef = useRef<HTMLDivElement>(null)
+
+  const handleClose = useCallback(() => {
+    setIsDrawerOpen(false)
+  }, [])
 
   useEffect(() => {
     const hexValue = color.replace('#', '')
@@ -52,8 +50,25 @@ const Card: FC<TProps> = (
     setBgColor(formattedColor)
   }, [color])
 
+  // Event listener to detect clicks outside of the drawer
+  const handleClickOutside = (event: MouseEvent) => {
+    if (drawerRef.current && !drawerRef.current.contains(event.target as Node)) {
+      setIsDrawerOpen(false)
+    }
+  }
+
   return (
-    <div style={{ backgroundColor: bgColor }} className={styles.card}>
+    <div
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          console.log('dd')
+        }
+      }}
+      style={{ backgroundColor: bgColor }}
+      className={styles.card}
+      onClick={(e: any) => handleClickOutside(e)}>
       <CustomDrawer
         anchor="right"
         hideBackdrop
@@ -61,41 +76,49 @@ const Card: FC<TProps> = (
         onClose={handleClose}
         className={styles.drawer}
       >
-        {isDrawerOpen && <ApartmentInfoBase drawerClose={handleClose} info={info}/>}
+        {isDrawerOpen && <ApartmentInfoBase drawerClose={handleClose} info={info} />}
       </CustomDrawer>
-      { /* eslint-disable-next-line */}
-      <div
-        className={styles.wrapper}
-        onClick={() => setIsDrawerOpen(true)}
-      >
-        <div className={classNames({ [styles.disabled]: isDisabled })} />
-        <div className={styles.header}>
-          <div className={styles.info}>
-            <div>
-              <img src={Discount} alt="" width={40} style={{ marginTop: '5px' }}/>
+      <div ref={drawerRef}>
+        <div
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              console.log('dd')
+            }
+          }}
+          className={styles.wrapper}
+          onClick={() => setIsDrawerOpen(true)}
+        >
+          <div className={classNames({ [styles.disabled]: isDisabled })} />
+          <div className={styles.header}>
+            <div className={styles.info}>
+              <div>
+                <img src={Discount} alt="" width={40} style={{ marginTop: '5px' }} />
+              </div>
+              <div className={styles.bordered}>ВН</div>
+              <div className={styles.bordered}>
+                {rooms === 0 ? 'C' : `${rooms}К`}
+              </div>
+              <div className={styles.flatNumber}>
+                №
+                {flatNumber}
+              </div>
             </div>
-            <div className={styles.bordered}>ВН</div>
-            <div className={styles.bordered}>
-              {rooms === 0 ? 'C' : `${rooms}К`}
-            </div>
-            <div className={styles.flatNumber}>
-              №
-              {flatNumber}
-            </div>
+            <div className={styles.owner}> -</div>
           </div>
-          <div className={styles.owner}> -</div>
-        </div>
-        <div style={{ backgroundColor: `#${color}` }} className={styles.line}/>
-        <div className={styles.additionalInfo}>
-          <CardSection title={<TotalAreaIcon />} value={area} icon="м²" />
-          <CardSection title={<BalconyAreaIcon />} value={balconies} />
-          <CardSection title="За м²" value={pricePerSquare} icon={<div><RubleIcon /></div>} />
-          <CardSection title="Всего" value={cost} icon={<div><RubleIcon /></div>} />
-          <CardSection title="Продано" value="3 450 500" icon={<div><RubleIcon /></div>} />
+          <div style={{ backgroundColor: `#${color}` }} className={styles.line} />
+          <div className={styles.additionalInfo}>
+            <CardSection title={<TotalAreaIcon />} value={area} icon="м²" />
+            <CardSection title={<BalconyAreaIcon />} value={balconies} />
+            <CardSection title="За м²" value={pricePerSquare} icon={<div><RubleIcon /></div>} />
+            <CardSection title="Всего" value={cost} icon={<div><RubleIcon /></div>} />
+            <CardSection title="Продано" value="3 450 500" icon={<div><RubleIcon /></div>} />
+          </div>
         </div>
       </div>
     </div>
   )
 }
-// TODO memo
+
 export default Card

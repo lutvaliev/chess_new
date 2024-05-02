@@ -21,13 +21,12 @@ const CustomSelectBase = ({
   disabledOption,
   ...rest
 }: any) => {
-  const [isOpen, setIsOpen] = useState(name === 'view')
+  const [isOpen, setIsOpen] = useState(name === 'view' || name === 'room')
 
-  const menuElement = document.getElementById('menu-')
-  if (menuElement) {
-    menuElement.style.zIndex = '-1'
-    menuElement.style.opacity = '0'
-  }
+  const menuElements: NodeListOf<Element> = document.querySelectorAll('#menu-')
+  menuElements.forEach((element) => {
+    element.setAttribute('style', 'z-index: -1; opacity: 0;')
+  })
 
   return (
     <FormControl fullWidth>
@@ -53,7 +52,7 @@ const CustomSelectBase = ({
           const label = options.find((elem: any) => elem.value === selected)?.label
           return label || defaultPlaceholder
         }}
-        open={name === 'view' ? true : isOpen}
+        open={name === 'view' || name === 'room' ? true : isOpen}
         onOpen={() => setIsOpen(true)}
         onClose={() => {
           setIsOpen(false)
