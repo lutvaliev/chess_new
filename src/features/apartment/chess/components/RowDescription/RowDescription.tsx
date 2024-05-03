@@ -16,7 +16,7 @@ const RowDescription: FC<TProp> = ({ floor }) => (
     <div className={styles.section}>Площадь балкона, м2</div>
     <div className={styles.section}>Цена за м2, руб.</div>
     <div className={styles.section}>Стоимость, руб.</div>
-    <div className={styles.section}>Сумма продажи, руб.</div>
+    {/* <div className={styles.section}>Сумма продажи, руб.</div> */}
   </div>
 )
 

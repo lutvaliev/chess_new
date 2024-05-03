@@ -113,10 +113,10 @@ const Card: FC<TProps> = ({
             <CardSection title={<BalconyAreaIcon />} value={balconies} />
             <CardSection title="За м²" value={pricePerSquare} icon={<div><RubleIcon /></div>} />
             <CardSection title="Всего" value={cost} icon={<div><RubleIcon /></div>} />
-            <CardSection title="Продано" value="3 450 500" icon={<div><RubleIcon /></div>} />
           </div>
         </div>
       </div>
+      {/* <CardSection title="Продано" value="3 450 500" icon={<div><RubleIcon /></div>} /> */}
     </div>
   )
 }
