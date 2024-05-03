@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react'
+import { FC, useMemo, useState } from 'react'
 import CustomSelectControl from '../../../../../../core/components/CustomSelect/CustomSelectControl/CustomSelectControl'
 import { TBaseSelectProps } from '../../../types'
 import { useApartmentViewContext } from '../../../../ApartmentView/state/ApartmentViewState'
@@ -30,6 +30,7 @@ function clickElementByDataValue(dataValue: string | number) {
 }
 
 const RoomSelect: FC<TBaseSelectProps> = ({ control }) => {
+  const [activeIndex, setActiveIndex] = useState<number | null>(0)
   const options = useOptions()
 
   console.log(options, 'options')
@@ -46,15 +47,20 @@ const RoomSelect: FC<TBaseSelectProps> = ({ control }) => {
     clickElementByDataValue(value)
   }
 
+  const handleActive = (index: number) => {
+    setActiveIndex(index)
+  }
+
   return (
-    <>
+    <div className={styles.rooms_filter}>
+      <div className={styles.text}>Количество комнат:</div>
       <div className={styles.rooms}>
         {tempOptions?.map((option, index) => (
           <button
             type="button"
-            className={styles.room}
+            className={`${styles.room} ${activeIndex === index ? styles.active : ''}`}
             key={index}
-            onClick={() => handleClick(option.value)}
+            onClick={() => { handleClick(option.value); handleActive(index) }}
           >
             {option?.label}
           </button>
@@ -68,7 +74,7 @@ const RoomSelect: FC<TBaseSelectProps> = ({ control }) => {
         handleError={(error: any) => error?.room}
         selectClassName={styles.wrapper}
       />
-    </>
+    </div>
   )
 }
 
