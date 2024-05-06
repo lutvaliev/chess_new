@@ -30,39 +30,39 @@ function clickElementByDataValue(dataValue: string | number) {
 }
 
 const RoomSelect: FC<TBaseSelectProps> = ({ control }) => {
-  const [activeIndex, setActiveIndex] = useState<number | null>(0)
+  const [activeIndices, setActiveIndices] = useState<number[]>([])
   const options = useOptions()
 
-  console.log(options, 'options')
-
   const tempOptions = [
-    {
-      label: 'Все комнаты',
-      value: 'allRooms'
-    },
+    // {
+    //   label: 'Все комнаты',
+    //   value: 'allRooms'
+    // },
     ...options
   ]
 
-  const handleClick = (value: any) => {
+  const handleClick = (value: any, index: number) => {
+    const currentIndex = activeIndices.indexOf(index)
+    if (currentIndex === -1) {
+      setActiveIndices([...activeIndices, index]) // Add to active indices if not present
+    } else {
+      setActiveIndices(activeIndices.filter((i) => i !== index))
+    }
     clickElementByDataValue(value)
-  }
-
-  const handleActive = (index: number) => {
-    setActiveIndex(index)
   }
 
   return (
     <div className={styles.rooms_filter}>
       <div className={styles.text}>Количество комнат:</div>
       <div className={styles.rooms}>
-        {tempOptions?.map((option, index) => (
+        {tempOptions.map((option, index) => (
           <button
             type="button"
-            className={`${styles.room} ${activeIndex === index ? styles.active : ''}`}
+            className={`${styles.room} ${activeIndices.includes(index) ? styles.active : ''}`}
             key={index}
-            onClick={() => { handleClick(option.value); handleActive(index) }}
+            onClick={() => handleClick(option.value, index)}
           >
-            {option?.label}
+            {option.label}
           </button>
         ))}
       </div>

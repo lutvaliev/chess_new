@@ -7,6 +7,7 @@ import styles from './TilePlusCard.module.scss'
 
 type TProp = {
     info: any,
+    discounts: any,
     rooms: number | string
     cost: number | string
     flatNumber: number | string
@@ -18,6 +19,7 @@ type TProp = {
 const TilePlusCard: FC<TProp> = (
   {
     info,
+    discounts,
     rooms,
     flatNumber,
     cost,
@@ -62,6 +64,7 @@ const TilePlusCard: FC<TProp> = (
       >
         <div className={classNames({ [styles.disabled]: isDisabled })}/>
         <Card
+          discounts={discounts}
           rooms={rooms}
           flatNumber={flatNumber}
           cost={cost}

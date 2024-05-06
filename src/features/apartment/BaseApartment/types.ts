@@ -58,7 +58,7 @@ export type TBaseForm = {
     min: string,
     max: string
   },
-  room: string,
+  room: string | number,
   status: string,
   actions: string
   totalArea: {

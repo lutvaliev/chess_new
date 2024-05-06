@@ -73,10 +73,14 @@ const TotalAreaBar: FC<TProps> = ({ control }) => {
         <p>
           от &nbsp;
           {range.min}
+          м
+          <sup>2</sup>
         </p>
         <p>
           до &nbsp;
           {range.max}
+          м
+          <sup>2</sup>
         </p>
       </Typography>
       <Slider

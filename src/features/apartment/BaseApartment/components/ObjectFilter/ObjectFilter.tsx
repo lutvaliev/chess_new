@@ -7,18 +7,14 @@ import SectionSelect from '../selects/SectionSelect/SectionSelect'
 import styles from './ObjectFilter.module.scss'
 import { Planirovka, PlitkaPlus, Spisok } from '../../../../../img'
 
-const ObjectFilter = ({ handleChange }: any) => {
+const ObjectFilter = () => {
   const [show, setShow] = useState(true)
   const { formReturn: { control } } = useApartmentViewContext()
   const handleChessClick = (e: string) => {
-    const chess = document.querySelector('[data-value="CHESS"]') as HTMLButtonElement
     const list = document.querySelector('[data-value="LIST"]') as HTMLButtonElement
     const plitka = document.querySelector('[data-value="TILE"]') as HTMLButtonElement
     const plitkaplus = document.querySelector('[data-value="TILE_PLUS"]') as HTMLButtonElement
     const plan = document.querySelector('[data-value="PLAN"]') as HTMLButtonElement
-    if (e === 'CHESS') {
-      chess.click()
-    }
     if (e === 'LIST') {
       list.click()
     }
@@ -78,15 +74,8 @@ const ObjectFilter = ({ handleChange }: any) => {
       </span>
       <SectionSelect control={control} />
       <div className={styles.view_buttons} style={{ display: 'flex', flexDirection: 'row' }}>
-        <Button onClick={() => handleChessClick('CHESS')}>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" user-select="none" focusable="false" className="HeaderMain_button__O0eV8">
-            <path fillRule="evenodd" clipRule="evenodd" d="M3.25 5.5C3.25 4.25736 4.25736 3.25 5.5 3.25H9.5C10.7426 3.25 11.75 4.25736 11.75 5.5V6.5C11.75 7.74264 10.7426 8.75 9.5 8.75H5.5C4.25736 8.75 3.25 7.74264 3.25 6.5V5.5ZM5.5 4.75C5.08579 4.75 4.75 5.08579 4.75 5.5V6.5C4.75 6.91421 5.08579 7.25 5.5 7.25H9.5C9.91421 7.25 10.25 6.91421 10.25 6.5V5.5C10.25 5.08579 9.91421 4.75 9.5 4.75H5.5Z" fill="#127CCA" />
-            <path fillRule="evenodd" clipRule="evenodd" d="M3.25 11.5C3.25 10.2574 4.25736 9.25 5.5 9.25H9.5C10.7426 9.25 11.75 10.2574 11.75 11.5V12.5C11.75 13.7426 10.7426 14.75 9.5 14.75H5.5C4.25736 14.75 3.25 13.7426 3.25 12.5V11.5ZM5.5 10.75C5.08579 10.75 4.75 11.0858 4.75 11.5V12.5C4.75 12.9142 5.08579 13.25 5.5 13.25H9.5C9.91421 13.25 10.25 12.9142 10.25 12.5V11.5C10.25 11.0858 9.91421 10.75 9.5 10.75H5.5Z" fill="#127CCA" />
-            <path fillRule="evenodd" clipRule="evenodd" d="M3.25 17.5C3.25 16.2574 4.25736 15.25 5.5 15.25H9.5C10.7426 15.25 11.75 16.2574 11.75 17.5V18.5C11.75 19.7426 10.7426 20.75 9.5 20.75H5.5C4.25736 20.75 3.25 19.7426 3.25 18.5V17.5ZM5.5 16.75C5.08579 16.75 4.75 17.0858 4.75 17.5V18.5C4.75 18.9142 5.08579 19.25 5.5 19.25H9.5C9.91421 19.25 10.25 18.9142 10.25 18.5V17.5C10.25 17.0858 9.91421 16.75 9.5 16.75H5.5Z" fill="#127CCA" />
-            <path fillRule="evenodd" clipRule="evenodd" d="M12.25 5.5C12.25 4.25736 13.2574 3.25 14.5 3.25H18.5C19.7426 3.25 20.75 4.25736 20.75 5.5V6.5C20.75 7.74264 19.7426 8.75 18.5 8.75H14.5C13.2574 8.75 12.25 7.74264 12.25 6.5V5.5ZM14.5 4.75C14.0858 4.75 13.75 5.08579 13.75 5.5V6.5C13.75 6.91421 14.0858 7.25 14.5 7.25H18.5C18.9142 7.25 19.25 6.91421 19.25 6.5V5.5C19.25 5.08579 18.9142 4.75 18.5 4.75H14.5Z" fill="#127CCA" />
-            <path fillRule="evenodd" clipRule="evenodd" d="M12.25 11.5C12.25 10.2574 13.2574 9.25 14.5 9.25H18.5C19.7426 9.25 20.75 10.2574 20.75 11.5V12.5C20.75 13.7426 19.7426 14.75 18.5 14.75H14.5C13.2574 14.75 12.25 13.7426 12.25 12.5V11.5ZM14.5 10.75C14.0858 10.75 13.75 11.0858 13.75 11.5V12.5C13.75 12.9142 14.0858 13.25 14.5 13.25H18.5C18.9142 13.25 19.25 12.9142 19.25 12.5V11.5C19.25 11.0858 18.9142 10.75 18.5 10.75H14.5Z" fill="#127CCA" />
-            <path fillRule="evenodd" clipRule="evenodd" d="M12.25 17.5C12.25 16.2574 13.2574 15.25 14.5 15.25H18.5C19.7426 15.25 20.75 16.2574 20.75 17.5V18.5C20.75 19.7426 19.7426 20.75 18.5 20.75H14.5C13.2574 20.75 12.25 19.7426 12.25 18.5V17.5ZM14.5 16.75C14.0858 16.75 13.75 17.0858 13.75 17.5V18.5C13.75 18.9142 14.0858 19.25 14.5 19.25H18.5C18.9142 19.25 19.25 18.9142 19.25 18.5V17.5C19.25 17.0858 18.9142 16.75 18.5 16.75H14.5Z" fill="#127CCA" />
-          </svg>
+        <Button onClick={() => handleChessClick('TILE_PLUS')}>
+          <img src={PlitkaPlus} alt="" />
         </Button>
         <Button onClick={() => handleChessClick('TILE')}>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" user-select="none" focusable="false" className="HeaderMain_button__O0eV8">
@@ -97,9 +86,6 @@ const ObjectFilter = ({ handleChange }: any) => {
           </svg>
         </Button>
         <div id="additionalButtons" style={{ display: 'none' }}>
-          <Button onClick={() => handleChessClick('TILE_PLUS')}>
-            <img src={PlitkaPlus} alt="" />
-          </Button>
           <Button onClick={() => handleChessClick('LIST')}><img src={Spisok} alt="" /></Button>
           <Button onClick={() => handleChessClick('PLAN')}><img src={Planirovka} alt="" /></Button>
         </div>

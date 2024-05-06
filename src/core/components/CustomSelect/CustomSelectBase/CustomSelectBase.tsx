@@ -38,8 +38,8 @@ const CustomSelectBase = ({
           inputMode: 'none'
         }}
         disabled={disabled}
-        multiple={multiple}
-        value={currentValue}
+        multiple={name === 'room' ? true : multiple}
+        value={Array.isArray(currentValue) ? currentValue : []}
         displayEmpty
         onChange={(event) => {
           event.stopPropagation()

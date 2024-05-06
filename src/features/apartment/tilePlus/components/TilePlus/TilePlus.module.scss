@@ -1,6 +1,7 @@
 @import "src/core/styles/common";
 
 .container {
+  padding: 0 16px;
   @include fontFamily(Ubunty);
   display: flex;
   align-items: flex-end;

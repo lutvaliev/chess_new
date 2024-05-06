@@ -44,6 +44,7 @@ const Tile = () => {
                             <TileCard
                               info={object}
                               key={object.id}
+                              discounts={object.discounts}
                               rooms={object.rooms}
                               flatNumber={object.number_of_object}
                               cost={object.cost}

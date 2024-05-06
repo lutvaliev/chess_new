@@ -5,6 +5,7 @@ import { useApartmentViewContext } from '../../../../ApartmentView/state/Apartme
 import { floatFormat } from '../../../../../../core/utils/formFormat'
 import CustomInput from '../../../../../../core/components/CustomInput/CustomInput'
 import styles from './CostBar.module.scss'
+import RubleIcon from '../../../../../../core/components/icons/SvgIcons/RubleIcon'
 
 type TProps = {
   control: Control<any>
@@ -69,13 +70,15 @@ const CostBar: FC<TProps> = ({ control }) => {
   return (
     <div className={styles.wrapper}>
       <Typography variant="body2" gutterBottom className={styles.rangeNumbers}>
-        <p>
+        <p style={{ display: 'flex' }}>
           от &nbsp;
           {range.min}
+          <RubleIcon/>
         </p>
-        <p>
+        <p style={{ display: 'flex' }}>
           до &nbsp;
           {range.max}
+          <RubleIcon/>
         </p>
       </Typography>
       <Slider
@@ -85,7 +88,7 @@ const CostBar: FC<TProps> = ({ control }) => {
         aria-labelledby="range-slider"
         getAriaLabel={(index) => (index === 0 ? 'Minimum' : 'Maximum')}
         min={Number(minCostObject)}
-        max={Number(minCostObject)} // Adjust the range as needed
+        max={Number(maxCostObject)} // Adjust the range as needed
       />
     </div>
   )

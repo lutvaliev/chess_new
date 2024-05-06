@@ -7,7 +7,8 @@ import CustomDrawer from '../../../../../core/components/CustomDrawer/CustomDraw
 import styles from './TileCard.module.scss'
 
 type TProp = {
-  info: any,
+    info: any,
+    discounts: any,
     rooms: number | string
     cost: number | string
     flatNumber: number | string
@@ -19,6 +20,7 @@ type TProp = {
 const TileCard: FC<TProp> = (
   {
     info,
+    discounts,
     rooms,
     flatNumber,
     cost,
@@ -57,6 +59,7 @@ const TileCard: FC<TProp> = (
       </CustomDrawer>
       <CustomTooltip title={(
         <Card
+          discounts={discounts}
           rooms={rooms}
           flatNumber={flatNumber}
           cost={cost}

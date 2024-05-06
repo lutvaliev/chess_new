@@ -16,8 +16,26 @@ export function useFilteredData(formReturn: UseFormReturn<TBaseForm>, data?: TOb
         setValue('room', '')
         return tempData
       }
-      tempData = tempData
-        .map((data: TObject) => (data.rooms !== room ? { ...data, opacity: true } : data))
+      if (Array.isArray(room) && room.length === 0) {
+        setValue('room', '')
+        tempData = tempData.map((data: TObject) => {
+          if (Array.isArray(room)) {
+            return room.includes(data.rooms)
+              ? { ...data, opacity: false }
+              : { ...data, opacity: false }
+          }
+          return data
+        })
+      } // Add the closing parenthesis here
+      console.log(room, 'rooms')
+      tempData = tempData.map((data: TObject) => {
+        if (Array.isArray(room)) {
+          return room.includes(data.rooms)
+            ? { ...data, opacity: false }
+            : { ...data, opacity: true }
+        }
+        return data
+      })
     }
     if (totalArea.min || totalArea.max) {
       if (totalArea.min) {

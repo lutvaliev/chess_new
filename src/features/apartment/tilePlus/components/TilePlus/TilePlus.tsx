@@ -28,7 +28,7 @@ const TilePlus = () => {
                   <div
                     key={objects[objectsIdx]?.id}
                     className={styles.row}
-                    style={{ gridTemplateColumns: `36px repeat(${flats}, 165px)` }}
+                    style={{ gridTemplateColumns: `36px repeat(${flats}, 176px)` }}
                   >
                     <div className={classNames(styles.order, styles.rowNumber)}>
                       {Number(floors) - objectsIdx}
@@ -45,6 +45,7 @@ const TilePlus = () => {
                             <TilePlusCard
                               info={object}
                               key={object.id}
+                              discounts={object.discounts}
                               rooms={object.rooms}
                               flatNumber={object.number_of_object}
                               cost={object.cost}

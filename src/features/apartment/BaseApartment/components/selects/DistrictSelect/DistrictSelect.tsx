@@ -7,6 +7,7 @@ import styles from './DistrictSelect.module.scss'
 
 function useOptions() {
   const { data } = useDistrictQuery()
+  console.log(data, 'district')
 
   return useMemo(() => {
     if (!data) {

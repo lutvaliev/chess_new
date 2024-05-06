@@ -23,8 +23,8 @@ const Object = ({ info }: any) => (
           <Row title="Количество уровней" value="no info" />
           <Row title="Количество комнат" value={info.rooms} />
           <Row title="Планировка" value="no info" />
-          <Row title="Жилая площадь, м²" value="32" />
-          <Row title="Общая площадь, м²:" value="55" />
+          <Row title="Жилая площадь, м²" value={info.area} />
+          <Row title="Общая площадь, м²" value="55" />
           <Row title="Отделка" value="no info" />
           <Row title="Санузел" value="no info" />
           <div>{' '}</div>

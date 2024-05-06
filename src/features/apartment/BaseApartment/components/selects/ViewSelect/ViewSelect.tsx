@@ -6,10 +6,10 @@ import styles from './ViewSelect.module.scss'
 
 const ViewSelect: FC<TBaseSelectProps> = ({ control }) => {
   const options = [
-    {
-      label: 'Шахматка',
-      value: 'CHESS'
-    },
+    // {
+    //   label: 'Шахматка',
+    //   value: 'CHESS'
+    // },
     {
       label: 'Плитка',
       value: 'TILE'

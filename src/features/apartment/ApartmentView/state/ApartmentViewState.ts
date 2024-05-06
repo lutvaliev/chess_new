@@ -8,7 +8,7 @@ import { prepareData } from '../../BaseApartment/utils/prepareData'
 import { TObject, TObjectParams } from '../../BaseApartment/types'
 
 const useFormInit = () => useForm<TBaseForm>({
-  defaultValues: { ...defaultFormValues, view: 'CHESS' }
+  defaultValues: { ...defaultFormValues, view: 'TILE_PLUS' }
 })
 
 function useResetForm(
