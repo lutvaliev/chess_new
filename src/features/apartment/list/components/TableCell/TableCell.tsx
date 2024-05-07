@@ -7,9 +7,10 @@ const TableCell: FC<TTableCell> = ({ value, row }) => {
   const rowOriginal = row.original
   return (
     <div className={classNames(styles.row, {
-      [styles.opacity]: rowOriginal.opacity })}
+      [styles.opacity]: rowOriginal.opacity
+    })}
     >
-      {value}
+      {Array.isArray(value) ? <img src={value[0]} alt="" /> : value}
     </div>
   )
 }

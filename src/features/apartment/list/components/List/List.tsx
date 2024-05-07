@@ -22,7 +22,7 @@ const List = () => {
     {
       Header: 'Схема',
       accessor: 'object_planes',
-      Cell: ({ value, row }: any) => <div><img src={value} alt="" /></div>
+      Cell: ({ value, row }: any) => <TableCell value={value} row={row} />
     },
     {
       Header: 'Статус',
@@ -83,6 +83,13 @@ const List = () => {
       Header: 'Площадь кухни, м2:',
       accessor: 'area_kitchen',
       Cell: ({ value, row }) => <TableCell value={value} row={row} />
+    },
+    {
+      Header: 'Скидка:',
+      accessor: 'discounts',
+      Cell: ({ value, row }) => (
+        <TableCell value={Array.isArray(value) && value.length > 0 ? 'Да' : 'Нет'} row={row} />
+      )
     }
     // {
     //   Header: 'Общая пл.(БТИ), м2:',
@@ -113,7 +120,7 @@ const List = () => {
         >
           {/* {isDrawerOpen && <ApartmentInfoBase drawerClose={handleClose}/>} */}
         </CustomDrawer>
-        {/* <div className={styles.wrapper}>
+        <div className={styles.wrapper}>
           <Table
             data={filteredData || []}
             // @ts-ignore
@@ -129,13 +136,13 @@ const List = () => {
           //   onPageChange: (page) => setCurrentPage(page)
           // }}
           />
-        </div> */}
+        </div>
       </BaseApartment>
-      <div className={styles.table_titles}>
+      {/* <div className={styles.table_titles}>
         {columns.map((column: any) =>
           <div key={column.Header} className={styles.table_title}>{column.Header}</div>)}
-      </div>
-      {filteredData.map((data) => (
+      </div> */}
+      {/* {filteredData.map((data) => (
         <div key={data.id} className={styles.list}>
           <div className={styles.flat_view}>
             <img src={data.object_planes[0]} alt="" />
@@ -165,7 +172,7 @@ const List = () => {
             <p>{data.area_kitchen}</p>
           </div>
         </div>
-      ))}
+      ))} */}
     </>
 
   )
