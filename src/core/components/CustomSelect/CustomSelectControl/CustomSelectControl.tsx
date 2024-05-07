@@ -2,6 +2,7 @@ import { useController } from 'react-hook-form'
 import { memo, FC } from 'react'
 import styles from './CustomSelectControl.module.scss'
 import CustomSelectBase from '../CustomSelectBase/CustomSelectBase'
+import CustomSelectRoom from '../CustomSelectBase/CustomSelectRoom'
 // import { useValidationRules } from '../../../../hooks/useValidationRules'
 
 const CustomSelectControl = ({
@@ -33,19 +34,35 @@ const CustomSelectControl = ({
 
   return (
     <div className={`${styles.wrapper} ${classname}`}>
-      <CustomSelectBase
-        multiple={multiple}
-        resetFlag={resetFlag}
-        isError={!!error}
-        label={label}
-        labelPlacement={labelPlacement}
-        placeholder={placeholder}
-        options={options}
-        currentValue={currentValue}
-        handleChange={onChange}
-        name={name}
-        {...rest}
-      />
+      {name === 'room' ? (
+        <CustomSelectRoom
+          multiple={multiple}
+          resetFlag={resetFlag}
+          isError={!!error}
+          label={label}
+          labelPlacement={labelPlacement}
+          placeholder={placeholder}
+          options={options}
+          currentValue={currentValue}
+          handleChange={onChange}
+          name={name}
+          {...rest}
+        />
+      ) : (
+        <CustomSelectBase
+          multiple={multiple}
+          resetFlag={resetFlag}
+          isError={!!error}
+          label={label}
+          labelPlacement={labelPlacement}
+          placeholder={placeholder}
+          options={options}
+          currentValue={currentValue}
+          handleChange={onChange}
+          name={name}
+          {...rest}
+        />
+      )}
       {error && <p className={styles.errorMessage}>{error.message}</p>}
     </div>
   )

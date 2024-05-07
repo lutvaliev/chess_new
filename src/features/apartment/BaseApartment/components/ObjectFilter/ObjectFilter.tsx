@@ -85,24 +85,8 @@ const ObjectFilter = () => {
             <path fillRule="evenodd" clipRule="evenodd" d="M12.5293 15.0294C12.5293 13.6487 13.6486 12.5294 15.0293 12.5294H18.4999C19.8806 12.5294 20.9999 13.6487 20.9999 15.0294V18.5C20.9999 19.8807 19.8806 21 18.4999 21H15.0293C13.6486 21 12.5293 19.8807 12.5293 18.5V15.0294ZM15.0293 14.1294H18.4999C18.9969 14.1294 19.3999 14.5324 19.3999 15.0294V18.5C19.3999 18.9971 18.9969 19.4 18.4999 19.4H15.0293C14.5322 19.4 14.1293 18.9971 14.1293 18.5V15.0294C14.1293 14.5324 14.5322 14.1294 15.0293 14.1294Z" fill="#127CCA" />
           </svg>
         </Button>
-        <div id="additionalButtons" style={{ display: 'none' }}>
-          <Button onClick={() => handleChessClick('LIST')}><img src={Spisok} alt="" /></Button>
-          <Button onClick={() => handleChessClick('PLAN')}><img src={Planirovka} alt="" /></Button>
-        </div>
-        {show ? (
-          <Button onClick={() => { toggleAdditionalButtons(); setShow(false) }} style={{ flexDirection: 'row', width: '20px' }}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-              <path d="M7.33 24l-2.83-2.829 9.339-9.175-9.339-9.167 2.83-2.829 12.17 11.996z" />
-            </svg>
-          </Button>
-        )
-          : (
-            <Button onClick={() => { toggleAdditionalButtons(); setShow(true) }} style={{ flexDirection: 'row', width: '20px' }}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z" />
-              </svg>
-            </Button>
-          )}
+        <Button onClick={() => handleChessClick('LIST')}><img src={Spisok} alt="" /></Button>
+        <Button onClick={() => handleChessClick('PLAN')}><img src={Planirovka} alt="" /></Button>
       </div>
     </div>
   )

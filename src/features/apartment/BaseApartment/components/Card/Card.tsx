@@ -32,8 +32,7 @@ const Card: FC<TCard> = ({
         ) : null}
         {secondestate ? <div className={styles.bordered}>ВН</div> : null}
         <div className={styles.bordered}>
-          {rooms}
-          К
+          {rooms === 0 ? 'C' : `${rooms}К`}
         </div>
         <div className={styles.flatNumber}>
           №

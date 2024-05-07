@@ -6,7 +6,7 @@ import classNames from 'classnames'
 import ChevronBottomIcon from '../../icons/SvgIcons/ChevromBottonIcon'
 import styles from './CustomSelectBase.module.scss'
 
-const CustomSelectBase = ({
+const CustomSelectRoom = ({
   options,
   currentValue,
   handleChange,
@@ -47,7 +47,7 @@ const CustomSelectBase = ({
         }}
         disabled={disabled}
         multiple={name === 'room' ? true : multiple}
-        value={currentValue}
+        value={Array.isArray(currentValue) ? currentValue : []}
         displayEmpty
         onChange={(event) => {
           event.stopPropagation()
@@ -100,4 +100,4 @@ const CustomSelectBase = ({
   )
 }
 
-export default CustomSelectBase
+export default CustomSelectRoom
