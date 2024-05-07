@@ -45,6 +45,7 @@ const Tile = () => {
                               info={object}
                               key={object.id}
                               discounts={object.discounts}
+                              secondestate={object.secondestate}
                               rooms={object.rooms}
                               flatNumber={object.number_of_object}
                               cost={object.cost}

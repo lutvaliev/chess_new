@@ -8,6 +8,8 @@ import styles from './TotalAreaBar.module.scss'
 
 type TProps = {
   control: Control<any>
+  resetFilters: any,
+  resetFlag: any
 }
 
 type TRange = {
@@ -15,11 +17,11 @@ type TRange = {
   max: number
 }
 
-const TotalAreaBar: FC<TProps> = ({ control }) => {
+const TotalAreaBar: FC<TProps> = ({ control, resetFilters, resetFlag }) => {
   const { field } = useController({ name: 'totalArea', control })
   // eslint-disable-next-line max-len
-  const [minAreaObject, setMinAreaObject] = useState<string | number>(0 ?? undefined)
-  const [maxAreaObject, setMaxAreaObject] = useState<string | number>(0 ?? undefined)
+  const [minAreaObject, setMinAreaObject] = useState<number>(0 ?? undefined)
+  const [maxAreaObject, setMaxAreaObject] = useState<number>(0 ?? undefined)
   const { objectQuery: { data, isFetching },
     preparedApartmentData: preparedChessData
   } = useApartmentViewContext()
@@ -51,6 +53,15 @@ const TotalAreaBar: FC<TProps> = ({ control }) => {
     setMaxAreaObject(Number(maxAreaObj.area))
     setRange({ min: Number(minAreaObj.area), max: Number(maxAreaObj.area) })
   }, [data])
+
+  useEffect(() => {
+    setRange({ min: minAreaObject, max: maxAreaObject })
+    field.onChange({ min: Number(minAreaObject), max: Number(maxAreaObject) })
+  }, [resetFlag])
+
+  const resetRange = () => {
+    setRange({ min: Number(minAreaObject), max: Number(maxAreaObject) })
+  }
 
   console.log(data, 'datas')
 

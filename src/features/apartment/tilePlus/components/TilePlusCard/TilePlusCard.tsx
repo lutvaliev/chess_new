@@ -6,8 +6,9 @@ import CustomDrawer from '../../../../../core/components/CustomDrawer/CustomDraw
 import styles from './TilePlusCard.module.scss'
 
 type TProp = {
-    info: any,
-    discounts: any,
+    info: any
+    discounts: any
+    secondestate: boolean
     rooms: number | string
     cost: number | string
     flatNumber: number | string
@@ -20,6 +21,7 @@ const TilePlusCard: FC<TProp> = (
   {
     info,
     discounts,
+    secondestate,
     rooms,
     flatNumber,
     cost,
@@ -65,6 +67,7 @@ const TilePlusCard: FC<TProp> = (
         <div className={classNames({ [styles.disabled]: isDisabled })}/>
         <Card
           discounts={discounts}
+          secondestate={secondestate}
           rooms={rooms}
           flatNumber={flatNumber}
           cost={cost}

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Box, Slider, Typography } from '@mui/material'
 import { useApartmentViewContext } from '../../../ApartmentView/state/ApartmentViewState'
 import StatusSelect from '../selects/StatusSelect/StatusSelect'
@@ -9,25 +10,34 @@ import { floatFormat } from '../../../../../core/utils/formFormat'
 
 const ApartmentFilter = () => {
   const { formReturn: { control, watch } } = useApartmentViewContext()
+  const [resetFlag, setResetFlag] = useState(false)
+  const resetRange = () => {
+    setResetFlag(!resetFlag)
+  }
   return (
     <div className={styles.wrapper}>
       <div className={styles.selects}>
         {/* <StatusSelect control={control}/> */}
-        <RoomSelect control={control} />
+        <RoomSelect
+          control={control}
+          resetFilters={resetRange}
+          resetFlag={resetFlag}
+          setResetFlag={setResetFlag}
+        />
         {/* <button type="button" className={styles.button}>Без ВП</button> */}
       </div>
       <div className={styles.metrics}>
         <div className={styles.bar}>
           <div className={styles.text}>Площадь:</div>
-          <TotalAreaBar control={control} />
+          <TotalAreaBar control={control} resetFilters={resetRange} resetFlag={resetFlag} />
         </div>
         <div className={styles.bar}>
           <div className={styles.text}>Стоимость:</div>
           {/* <TotalAreaBar control={control} /> */}
-          <CostBar control={control} />
+          <CostBar control={control} resetFilters={resetRange} resetFlag={resetFlag} />
         </div>
         <div className={styles.buttons}>
-          <button type="button" className={styles.resetBtn} onClick={() => window.location.reload()}>
+          <button type="button" className={styles.resetBtn} onClick={resetRange}>
             <span>Сбросить фильры</span>
             <span role="presentation">
               <svg width="25" height="25" viewBox="0 0 25 25" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" user-select="none" focusable="false">

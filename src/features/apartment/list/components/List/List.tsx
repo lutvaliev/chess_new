@@ -21,8 +21,8 @@ const List = () => {
   const columns = useMemo<Column<TObject>[]>(() => [
     {
       Header: 'Схема',
-      accessor: 'available',
-      Cell: ({ value, row }) => <TableCell value={value} row={row} />
+      accessor: 'object_planes',
+      Cell: ({ value, row }: any) => <div><img src={value} alt="" /></div>
     },
     {
       Header: 'Статус',

@@ -14,6 +14,7 @@ export type TObject = {
     discount_id: string
     amount: string
   }
+  secondestate: boolean
   color: any,
   area: number | string
   area_kitchen?: number
@@ -46,7 +47,7 @@ export type TObject = {
 }
 
 export type TBaseSelectProps = {
-  control: Control<any>
+  control: Control<any>,
 }
 
 export type TBaseForm = {

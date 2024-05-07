@@ -20,13 +20,13 @@ const Object = ({ info }: any) => (
         </div>
         <div className={styles.generalInfoWrapper}>
           <Row title="Этаж" value={info.floor} />
-          <Row title="Количество уровней" value="no info" />
+          <Row title="Количество уровней" value={info.Levels} />
           <Row title="Количество комнат" value={info.rooms} />
-          <Row title="Планировка" value="no info" />
-          <Row title="Жилая площадь, м²" value={info.area} />
-          <Row title="Общая площадь, м²" value="55" />
-          <Row title="Отделка" value="no info" />
-          <Row title="Санузел" value="no info" />
+          <Row title="Планировка" value={info.Levels} />
+          <Row title="Жилая площадь, м²" value={info.livingarea} />
+          <Row title="Общая площадь, м²" value={info.area} />
+          <Row title="Отделка" value={info.finishing} />
+          <Row title="Санузел" value={info.EnsuiteBathroom} />
           <div>{' '}</div>
           {info.Balconies.map((balcon: any) => (
             <Row key={balcon.type} title={balcon.type} value={`${balcon.square_meters} м²`} />
@@ -45,7 +45,7 @@ const Object = ({ info }: any) => (
             Описание
           </AccordionSummary>
           <AccordionDetails sx={{ padding: 0 }}>
-            В частности, высокое качество позиционных исследований обеспечивает актуальность...
+            {info.description}
           </AccordionDetails>
         </Accordion>
         <div className={styles.flatModel}>
@@ -64,12 +64,16 @@ const Object = ({ info }: any) => (
           </AccordionSummary>
           <AccordionDetails sx={{ padding: 0 }}>
             <div className={styles.pricesInfo}>
-              <Row title="Вид цены" value="Продажная" />
-              <Row title="Текущая цена, м²" value="70 000" />
-              <Row title="Текущая стоимость" value="5 184 200" />
-              <Row title="Вид цены" value="Субсидированная" />
+              {info.prices.map((price: any) => (
+                <div key={price.id} className={styles.row}>
+                  <Row title="Вид цены" value={price.price_name} />
+                  <Row title="Текущая цена, м²" value={price.price.toLocaleString()} />
+                  <Row title="Текущая стоимость" value={price.cost.toLocaleString()} />
+                </div>
+              ))}
+              {/* <Row title="Вид цены" value="Субсидированная" />
               <Row title="Текущая цена, м2²" value="80 000" />
-              <Row title="Текущая стоимость" value="6 184 200" />
+              <Row title="Текущая стоимость" value="6 184 200" /> */}
               {/* <Row title="Сумма продажи" value="5 184 200" />
               <Row title="Оплачено" value="5 184 200" />
               <Row title="Долг клиента" value="0" /> */}
@@ -87,10 +91,12 @@ const Object = ({ info }: any) => (
                 >
                   Размер скидки
                 </div>
-                <div className={styles.discountText}>Название скидки</div>
-                <div className={styles.discountText}>5%</div>
-                <div className={styles.discountText}>Название скидки</div>
-                <div className={styles.discountText}>5%</div>
+                {info.discounts.map((discount: any) => (
+                  <div key={discount.discount_id}>
+                    <div className={styles.discountText}>{discount.discount_name ? discount.discount_name : ''}</div>
+                    <div className={styles.discountText}>{discount.amount.toLocaleString()}</div>
+                  </div>
+                ))}
               </div>
             </div>
           </AccordionDetails>

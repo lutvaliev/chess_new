@@ -1,7 +1,7 @@
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import { Select } from '@mui/material'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import classNames from 'classnames'
 import ChevronBottomIcon from '../../icons/SvgIcons/ChevromBottonIcon'
 import styles from './CustomSelectBase.module.scss'
@@ -10,6 +10,7 @@ const CustomSelectBase = ({
   options,
   currentValue,
   handleChange,
+  resetFlag,
   name,
   placeholder,
   type,
@@ -27,6 +28,13 @@ const CustomSelectBase = ({
   menuElements.forEach((element) => {
     element.setAttribute('style', 'z-index: -1; opacity: 0;')
   })
+
+  // useEffect(() => {
+  //   console.log('sssss')
+  //   if (name === 'view') {
+  //     handleChange([])
+  //   }
+  // }, [resetFlag])
 
   return (
     <FormControl fullWidth>

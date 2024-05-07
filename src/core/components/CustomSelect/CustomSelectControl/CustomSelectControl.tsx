@@ -8,6 +8,7 @@ const CustomSelectControl = ({
   classname,
   label,
   labelPlacement,
+  resetFlag,
   control,
   options,
   multiple,
@@ -34,6 +35,7 @@ const CustomSelectControl = ({
     <div className={`${styles.wrapper} ${classname}`}>
       <CustomSelectBase
         multiple={multiple}
+        resetFlag={resetFlag}
         isError={!!error}
         label={label}
         labelPlacement={labelPlacement}

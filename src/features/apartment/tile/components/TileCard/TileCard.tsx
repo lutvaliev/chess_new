@@ -7,8 +7,9 @@ import CustomDrawer from '../../../../../core/components/CustomDrawer/CustomDraw
 import styles from './TileCard.module.scss'
 
 type TProp = {
-    info: any,
-    discounts: any,
+    info: any
+    discounts: any
+    secondestate: boolean
     rooms: number | string
     cost: number | string
     flatNumber: number | string
@@ -21,6 +22,7 @@ const TileCard: FC<TProp> = (
   {
     info,
     discounts,
+    secondestate,
     rooms,
     flatNumber,
     cost,
@@ -60,6 +62,7 @@ const TileCard: FC<TProp> = (
       <CustomTooltip title={(
         <Card
           discounts={discounts}
+          secondestate={secondestate}
           rooms={rooms}
           flatNumber={flatNumber}
           cost={cost}
@@ -74,7 +77,7 @@ const TileCard: FC<TProp> = (
           onClick={() => setIsDrawerOpen(true)}
         >
           <div className={classNames({ [styles.disabled]: isDisabled })}/>
-          <div className={styles.red_dot}/>
+          {discounts.length > 0 ? <div className={styles.red_dot}/> : null}
           <p className={styles.text}>{rooms}</p>
         </div>
       </CustomTooltip>

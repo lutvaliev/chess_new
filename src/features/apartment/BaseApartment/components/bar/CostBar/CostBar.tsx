@@ -9,6 +9,8 @@ import RubleIcon from '../../../../../../core/components/icons/SvgIcons/RubleIco
 
 type TProps = {
   control: Control<any>
+  resetFilters: any,
+  resetFlag: any
 }
 
 type TRange = {
@@ -16,11 +18,11 @@ type TRange = {
   max: number
 }
 
-const CostBar: FC<TProps> = ({ control }) => {
+const CostBar: FC<TProps> = ({ control, resetFilters, resetFlag }) => {
   const { field } = useController({ name: 'cost', control })
   // eslint-disable-next-line max-len
-  const [minCostObject, setMinCostObject] = useState<string | number>(0 ?? undefined)
-  const [maxCostObject, setMaxCostObject] = useState<string | number>(0 ?? undefined)
+  const [minCostObject, setMinCostObject] = useState<number>(0 ?? undefined)
+  const [maxCostObject, setMaxCostObject] = useState<number>(0 ?? undefined)
   const { objectQuery: { data, isFetching },
     preparedApartmentData: preparedChessData
   } = useApartmentViewContext()
@@ -65,7 +67,10 @@ const CostBar: FC<TProps> = ({ control }) => {
     field.onChange(newRange)
   }
 
-  console.log(range, 'range')
+  useEffect(() => {
+    setRange({ min: minCostObject, max: maxCostObject })
+    field.onChange({ min: Number(minCostObject), max: Number(maxCostObject) })
+  }, [resetFlag])
 
   return (
     <div className={styles.wrapper}>

@@ -5,6 +5,7 @@ import styles from './Card.module.scss'
 
 type TCard = {
   discounts: any
+  secondestate: boolean
   rooms: number | string
   flatNumber: number | string
   cost: number | string
@@ -14,6 +15,7 @@ type TCard = {
 
 const Card: FC<TCard> = ({
   discounts,
+  secondestate,
   rooms,
   flatNumber,
   cost,
@@ -25,10 +27,10 @@ const Card: FC<TCard> = ({
       <div className={styles.info}>
         {discounts.length > 0 ? (
           <div>
-            <img src={Discount} alt="" width={40} style={{ marginTop: '5px' }} />
+            <img className={styles.discount} src={Discount} alt="" width={40} />
           </div>
         ) : null}
-        <div className={styles.bordered}>ВН</div>
+        {secondestate ? <div className={styles.bordered}>ВН</div> : null}
         <div className={styles.bordered}>
           {rooms}
           К

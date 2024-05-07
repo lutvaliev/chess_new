@@ -28,8 +28,8 @@ function clickElementByDataValue(dataValue: string | number) {
     console.error(`Element with data-value "${dataValue}" not found.`)
   }
 }
-
-const RoomSelect: FC<TBaseSelectProps> = ({ control }) => {
+// FC<TBaseSelectProps>
+const RoomSelect = ({ control, resetFilters, resetFlag }: any) => {
   const [activeIndices, setActiveIndices] = useState<number[]>([])
   const options = useOptions()
 
@@ -68,6 +68,7 @@ const RoomSelect: FC<TBaseSelectProps> = ({ control }) => {
       </div>
       <CustomSelectControl
         control={control}
+        resetFlag={resetFlag}
         name="room"
         placeholder="Количество комнат"
         options={tempOptions}
