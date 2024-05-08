@@ -6,10 +6,7 @@ import { TTableCell } from '../../types'
 const TableCell: FC<TTableCell> = ({ value, row }) => {
   const rowOriginal = row.original
   return (
-    <div className={classNames(styles.row, {
-      [styles.opacity]: rowOriginal.opacity
-    })}
-    >
+    <div className={styles.row}>
       {Array.isArray(value) ? <img src={value[0]} alt="" /> : value}
     </div>
   )
