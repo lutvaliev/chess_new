@@ -83,11 +83,9 @@ function usePageProps(formReturn: UseFormReturn<TBaseForm>) {
 const ApartmentViewState = () => {
   const formReturn = useFormInit()
   useResetForm(formReturn)
-
   const { pageParam, elemPerPageParam } = usePageProps(formReturn)
   const objectParams = useObjectParams(formReturn)
   const { data } = useObjectChessQuery(objectParams, pageParam, elemPerPageParam)
-
   const filteredData = useFilteredData(formReturn, data)
   const preparedApartmentData = usePrepareData(filteredData)
   const apartmentFilterData = useApartmentFilter(data)

@@ -1,4 +1,4 @@
-import { FC, useMemo, useState } from 'react'
+import { FC, useMemo, useState, useEffect } from 'react'
 import CustomSelectControl from '../../../../../../core/components/CustomSelect/CustomSelectControl/CustomSelectControl'
 import { TBaseSelectProps } from '../../../types'
 import { useApartmentViewContext } from '../../../../ApartmentView/state/ApartmentViewState'
@@ -50,6 +50,10 @@ const RoomSelect = ({ control, resetFilters, resetFlag }: any) => {
     }
     clickElementByDataValue(value)
   }
+
+  useEffect(() => {
+    setActiveIndices([])
+  }, [resetFlag])
 
   return (
     <div className={styles.rooms_filter}>

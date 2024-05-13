@@ -22,7 +22,7 @@ const TotalAreaBar: FC<TProps> = ({ control, resetFilters, resetFlag }) => {
   // eslint-disable-next-line max-len
   const [minAreaObject, setMinAreaObject] = useState<number>(0 ?? undefined)
   const [maxAreaObject, setMaxAreaObject] = useState<number>(0 ?? undefined)
-  const { objectQuery: { data, isFetching },
+  const { objectQuery: { data, isFetching }, filteredData,
     preparedApartmentData: preparedChessData
   } = useApartmentViewContext()
 

@@ -8,17 +8,19 @@ import CostBar from '../bar/CostBar/CostBar'
 import styles from './ApartmentFilter.module.scss'
 import { floatFormat } from '../../../../../core/utils/formFormat'
 
-const ApartmentFilter = () => {
+const ApartmentFilter = ({ name }: any) => {
   const { formReturn: { control, watch } } = useApartmentViewContext()
   const [resetFlag, setResetFlag] = useState(false)
   const resetRange = () => {
     setResetFlag(!resetFlag)
+    console.log('change')
   }
   return (
     <div className={styles.wrapper}>
       <div className={styles.selects}>
         {/* <StatusSelect control={control}/> */}
         <RoomSelect
+          name={name}
           control={control}
           resetFilters={resetRange}
           resetFlag={resetFlag}
@@ -37,8 +39,8 @@ const ApartmentFilter = () => {
           <CostBar control={control} resetFilters={resetRange} resetFlag={resetFlag} />
         </div>
         <div className={styles.buttons}>
-          <button type="button" className={styles.resetBtn} onClick={resetRange}>
-            <span>Сбросить фильры</span>
+          <button type="button" className={styles.resetBtn} onClick={resetRange} id="reset_btn">
+            Сбросить фильры
             <span role="presentation">
               <svg width="25" height="25" viewBox="0 0 25 25" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" user-select="none" focusable="false">
                 <rect x="4.3" y="4.3" width="16.4" height="16.4" rx="8.2" stroke="#127CCA" strokeWidth="1.6" />

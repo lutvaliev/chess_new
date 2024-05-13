@@ -18,7 +18,7 @@ const BaseHeader: FC = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
-  }, []) // Add view to the dependency array
+  }, [])
 
   return (
     <div className={`${styles.header} ${isFixed ? styles.fixed : ''}`}>

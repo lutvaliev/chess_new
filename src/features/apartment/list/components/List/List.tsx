@@ -6,6 +6,7 @@ import { BaseApartment } from '../../../BaseApartment'
 import TableCell from '../TableCell/TableCell'
 import ApartmentInfoBase from '../../../../apartmentInfo/components/ApartmentInfoBase/ApartmentInfoBase'
 import CustomDrawer from '../../../../../core/components/CustomDrawer/CustomDrawer'
+import Spinner from '../../../../../core/components/Spinner/Spinner'
 import { TObject } from '../../../BaseApartment/types'
 import styles from './List.module.scss'
 
@@ -88,7 +89,7 @@ const List = () => {
       Header: 'Скидка:',
       accessor: 'discounts',
       Cell: ({ value, row }) => (
-        <TableCell value={Array.isArray(value) && value.length > 0 ? 'Да' : 'Нет'} row={row} />
+        <TableCell value={Array.isArray(value) && value.length > 0 ? 'Да' : ''} row={row} />
       )
     }
     // {
@@ -109,17 +110,8 @@ const List = () => {
   ], [watch()])
 
   return (
-    <>
-      <BaseApartment>
-        <CustomDrawer
-          anchor="right"
-          hideBackdrop
-          isOpen={isDrawerOpen}
-          onClose={handleClose}
-          className={styles.drawer}
-        >
-          {/* {isDrawerOpen && <ApartmentInfoBase drawerClose={handleClose}/>} */}
-        </CustomDrawer>
+    <BaseApartment>
+      {filteredData ? (
         <div className={styles.wrapper}>
           <Table
             data={filteredData || []}
@@ -137,44 +129,12 @@ const List = () => {
           // }}
           />
         </div>
-      </BaseApartment>
-      {/* <div className={styles.table_titles}>
-        {columns.map((column: any) =>
-          <div key={column.Header} className={styles.table_title}>{column.Header}</div>)}
-      </div> */}
-      {/* {filteredData.map((data) => (
-        <div key={data.id} className={styles.list}>
-          <div className={styles.flat_view}>
-            <img src={data.object_planes[0]} alt="" />
-          </div>
-          <div className={styles.flat_info}>
-            <p>{data.status}</p>
-          </div>
-          <div className={styles.flat_info}>
-            <p>{data.rooms === 0 ? 'Студия' : data.rooms}</p>
-          </div>
-          <div className={styles.flat_info}>
-            <p>{data.floor}</p>
-          </div>
-          <div className={styles.flat_info}>
-            <p>{data.floor_number}</p>
-          </div>
-          <div className={styles.flat_info}>
-            <p>{data.number_of_object}</p>
-          </div>
-          <div className={styles.flat_info}>
-            <p>{data.cost}</p>
-          </div>
-          <div className={styles.flat_info}>
-            <p>{data.area}</p>
-          </div>
-          <div className={styles.flat_info}>
-            <p>{data.area_kitchen}</p>
-          </div>
+      ) : (
+        <div className={styles.spinnerWrapper}>
+          <Spinner />
         </div>
-      ))} */}
-    </>
-
+      )}
+    </BaseApartment>
   )
 }
 
