@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { FC, useState, useEffect } from 'react'
 import { Slider, Typography } from '@mui/material'
 import { useController, Control } from 'react-hook-form'
@@ -23,9 +24,14 @@ const CostBar: FC<TProps> = ({ control, resetFilters, resetFlag }) => {
   // eslint-disable-next-line max-len
   const [minCostObject, setMinCostObject] = useState<number>(0 ?? undefined)
   const [maxCostObject, setMaxCostObject] = useState<number>(0 ?? undefined)
+  const [view, setView] = useState()
   const { objectQuery: { data, isFetching },
     preparedApartmentData: preparedChessData
   } = useApartmentViewContext()
+
+  useEffect(() => {
+    setView(control?._fields?.view?._f.value)
+  },[control?._fields?.view?._f.value])
 
   useEffect(() => {
     if (!data || data.length === 0) {
@@ -52,7 +58,7 @@ const CostBar: FC<TProps> = ({ control, resetFilters, resetFlag }) => {
     setMinCostObject(Number(minCostObj.cost))
     setMaxCostObject(Number(maxCostObj.cost))
     setRange({ min: Number(minCostObj.cost), max: Number(maxCostObj.cost) })
-  }, [data])
+  }, [data,view])
 
   // Initial range value
   // eslint-disable-next-line max-len

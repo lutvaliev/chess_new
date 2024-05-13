@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { FC, useState, useEffect } from 'react'
 import { Slider, Typography } from '@mui/material'
 import { useController, Control } from 'react-hook-form'
@@ -7,7 +8,7 @@ import CustomInput from '../../../../../../core/components/CustomInput/CustomInp
 import styles from './TotalAreaBar.module.scss'
 
 type TProps = {
-  control: Control<any>
+  control: any
   resetFilters: any,
   resetFlag: any
 }
@@ -19,40 +20,47 @@ type TRange = {
 
 const TotalAreaBar: FC<TProps> = ({ control, resetFilters, resetFlag }) => {
   const { field } = useController({ name: 'totalArea', control })
-  // eslint-disable-next-line max-len
   const [minAreaObject, setMinAreaObject] = useState<number>(0 ?? undefined)
   const [maxAreaObject, setMaxAreaObject] = useState<number>(0 ?? undefined)
+  const [view, setView] = useState()
   const { objectQuery: { data, isFetching }, filteredData,
     preparedApartmentData: preparedChessData
   } = useApartmentViewContext()
 
-  // Function to find the object with the maximum area
+
   useEffect(() => {
-    if (!data || data.length === 0) {
-      setMinAreaObject(0)
-      setMaxAreaObject(0)
-      return
-    }
+    setView(control._fields.view._f.value)
+  },[control._fields.view._f.value])
+  // Function to find the object with the maximum area
 
-    let minAreaObj = data[0]
-    let minArea = data[0].area
-    let maxAreaObj = data[0]
-    let maxArea = data[0].area
-
-    data.forEach((obj) => {
-      if (obj.area > maxArea) {
-        maxArea = obj.area
-        maxAreaObj = obj
-      } else if (obj.area < minArea) {
-        minArea = obj.area
-        minAreaObj = obj
+  useEffect(() => {
+    let minAreaObj;
+    let minArea:any;
+    let maxAreaObj;
+    let maxArea:any;
+      console.log("no list")
+      if (!data || data.length === 0) {
+        setMinAreaObject(0)
+        setMaxAreaObject(0)
+        return
       }
-    })
-
-    setMinAreaObject(Number(minAreaObj.area))
-    setMaxAreaObject(Number(maxAreaObj.area))
-    setRange({ min: Number(minAreaObj.area), max: Number(maxAreaObj.area) })
-  }, [data])
+      minAreaObj = data[0]
+      minArea = data[0].area
+      maxAreaObj = data[0]
+      maxArea = data[0].area
+      data.forEach((obj) => {
+        if (obj.area > maxArea) {
+            maxArea = obj.area
+            maxAreaObj = obj
+          } else if (obj.area < minArea) {
+            minArea = obj.area
+            minAreaObj = obj
+          }
+      })
+      setMinAreaObject(Number(minAreaObj.area))
+      setMaxAreaObject(Number(maxAreaObj.area))
+      setRange({ min: Number(minAreaObj.area), max: Number(maxAreaObj.area) })
+  }, [data,view])
 
   useEffect(() => {
     setRange({ min: minAreaObject, max: maxAreaObject })
