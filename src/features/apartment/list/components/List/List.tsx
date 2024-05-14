@@ -59,7 +59,7 @@ const List = () => {
       Header: 'Скидка:',
       accessor: 'discounts',
       Cell: ({ value, row }) => (
-        <TableCell value={Array.isArray(value) && value.length > 0 ? 'Да' : ''} row={row} />
+        <TableCell value={Array.isArray(value) && value.length > 0 ? 'Да' : '-'} row={row} />
       )
     },
     {
