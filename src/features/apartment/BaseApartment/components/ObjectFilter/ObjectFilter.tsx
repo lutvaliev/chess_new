@@ -10,7 +10,6 @@ import { Planirovka, PlitkaPlus, Spisok } from '../../../../../img'
 const ObjectFilter = () => {
   const [show, setShow] = useState(true)
   const { formReturn: { control } } = useApartmentViewContext()
-  // console.log(formReturn)
   const handleChessClick = (e: string) => {
     const list = document.querySelector('[data-value="LIST"]') as HTMLButtonElement
     const plitka = document.querySelector('[data-value="TILE"]') as HTMLButtonElement

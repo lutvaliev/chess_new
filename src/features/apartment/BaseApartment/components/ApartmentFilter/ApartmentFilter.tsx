@@ -13,7 +13,6 @@ const ApartmentFilter = ({ name }: any) => {
   const [resetFlag, setResetFlag] = useState(false)
   const resetRange = () => {
     setResetFlag(!resetFlag)
-    console.log('change')
   }
   return (
     <div className={styles.wrapper}>

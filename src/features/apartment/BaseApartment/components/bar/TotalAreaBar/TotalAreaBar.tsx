@@ -38,7 +38,6 @@ const TotalAreaBar: FC<TProps> = ({ control, resetFilters, resetFlag }) => {
     let minArea:any;
     let maxAreaObj;
     let maxArea:any;
-      console.log("no list")
       if (!data || data.length === 0) {
         setMinAreaObject(0)
         setMaxAreaObject(0)
@@ -70,8 +69,6 @@ const TotalAreaBar: FC<TProps> = ({ control, resetFilters, resetFlag }) => {
   const resetRange = () => {
     setRange({ min: Number(minAreaObject), max: Number(maxAreaObject) })
   }
-
-  console.log(data, 'datas')
 
   // Initial range value
   // eslint-disable-next-line max-len

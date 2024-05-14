@@ -43,6 +43,7 @@ const TilePlus = () => {
                               </p>
                             )}
                             <TilePlusCard
+                              color={object.color}
                               info={object}
                               key={object.id}
                               discounts={object.discounts}

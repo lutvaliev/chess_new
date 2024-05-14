@@ -27,7 +27,6 @@ export function useFilteredData(formReturn: UseFormReturn<TBaseForm>, data?: TOb
           return data
         })
       } // Add the closing parenthesis here
-      console.log(room, 'rooms')
       tempData = tempData.map((data: TObject) => {
         if (Array.isArray(room)) {
           return room.includes(data.rooms)

@@ -7,15 +7,15 @@ import CustomDrawer from '../../../../../core/components/CustomDrawer/CustomDraw
 import styles from './TileCard.module.scss'
 
 type TProp = {
-    info: any
-    discounts: any
-    secondestate: boolean
-    rooms: number | string
-    cost: number | string
-    flatNumber: number | string
-    pricePerMeter: number | string
-    area: number | string
-    isDisabled?: boolean
+  info: any
+  discounts: any
+  secondestate: boolean
+  rooms: number | string
+  cost: number | string
+  flatNumber: number | string
+  pricePerMeter: number | string
+  area: number | string
+  isDisabled?: boolean
 }
 
 const TileCard: FC<TProp> = (
@@ -57,10 +57,11 @@ const TileCard: FC<TProp> = (
         onClose={handleClose}
         className={styles.drawer}
       >
-        {isDrawerOpen && <ApartmentInfoBase drawerClose={handleClose} info={info}/>}
+        {isDrawerOpen && <ApartmentInfoBase drawerClose={handleClose} info={info} />}
       </CustomDrawer>
       <CustomTooltip title={(
         <Card
+          color={info.color}
           discounts={discounts}
           secondestate={secondestate}
           rooms={rooms}
@@ -76,8 +77,8 @@ const TileCard: FC<TProp> = (
           className={styles.card}
           onClick={() => setIsDrawerOpen(true)}
         >
-          <div className={classNames({ [styles.disabled]: isDisabled })}/>
-          {discounts.length > 0 ? <div className={styles.red_dot}/> : null}
+          <div className={classNames({ [styles.disabled]: isDisabled })} />
+          {discounts.length > 0 ? <div className={styles.red_dot} /> : null}
           <p className={styles.text}>{rooms}</p>
         </div>
       </CustomTooltip>

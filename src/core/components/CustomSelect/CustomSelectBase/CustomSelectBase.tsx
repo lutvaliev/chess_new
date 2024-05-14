@@ -29,13 +29,6 @@ const CustomSelectBase = ({
     element.setAttribute('style', 'z-index: -1; opacity: 0;')
   })
 
-  // useEffect(() => {
-  //   console.log('sssss')
-  //   if (name === 'view') {
-  //     handleChange([])
-  //   }
-  // }, [resetFlag])
-
   return (
     <FormControl fullWidth>
       <Select

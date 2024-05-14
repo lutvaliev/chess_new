@@ -74,8 +74,6 @@ async function getObjectChess(
           pagesize: pagesize || undefined
         }
       })
-    console.log(response.data.data, 'response data')
-    console.log(response, 'response')
     return response.data?.data
   } catch (e: any) {
     throw new Error(e)

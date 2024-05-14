@@ -4,6 +4,7 @@ import { Discount } from '../../../../../img'
 import styles from './Card.module.scss'
 
 type TCard = {
+  color: any
   discounts: any
   secondestate: boolean
   rooms: number | string
@@ -14,6 +15,7 @@ type TCard = {
 }
 
 const Card: FC<TCard> = ({
+  color,
   discounts,
   secondestate,
   rooms,
@@ -41,7 +43,7 @@ const Card: FC<TCard> = ({
       </div>
       <div className={styles.owner}>-</div>
     </div>
-    <div className={styles.line} />
+    <div style={{ backgroundColor: `#${color}` }} className={styles.line} />
     <div className={styles.cost}>
       {cost.toLocaleString()}
       <RubleIcon />
