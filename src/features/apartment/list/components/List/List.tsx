@@ -51,7 +51,7 @@ const List = () => {
       Cell: ({ value, row }) => <TableCell value={value} row={row} />
     },
     {
-      Header: 'Стоимость, руб.',
+      Header: 'Стоимость',
       accessor: 'priceM2',
       Cell: ({ value, row }) => <TableCell value={value} row={row} />
     },
