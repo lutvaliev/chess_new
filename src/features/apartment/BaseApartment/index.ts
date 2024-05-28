@@ -1,4 +1,4 @@
-export { useBuildingQuery, useSectionQuery, useDistrictQuery } from './querries'
+export { useBuildingQuery, useSectionQuery, useDistrictQuery, useLayoutsQuery } from './querries'
 export { type TBaseForm } from './types'
 export { default as BaseApartment } from './components/BaseApartment/BaseApartment'
 export { defaultFormValues } from './utils/defaultFormValues'

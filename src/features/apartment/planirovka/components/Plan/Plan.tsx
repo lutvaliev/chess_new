@@ -1,70 +1,41 @@
 import classNames from 'classnames'
 import { useApartmentViewContext } from '../../../ApartmentView/state/ApartmentViewState'
-import { BaseApartment } from '../../../BaseApartment'
+import { BaseApartment, useLayoutsQuery } from '../../../BaseApartment'
 import { TObject } from '../../../BaseApartment/types'
 import PlanCard from '../PlanCard/PlanCard'
 import Spinner from '../../../../../core/components/Spinner/Spinner'
 import RowDescription from '../../../chess/components/RowDescription/RowDescription'
-import styles from '../../../chess/components/Chess/Chess.module.scss'
+import styles from './Plan.module.scss'
+import { useApartmentsQuery } from '../../../BaseApartment/querries'
 
 const Plan = () => {
-  const { objectQuery: { data, isFetching },
-    preparedApartmentData: preparedChessData
+  const {
+    formReturn: {
+      watch
+    }
   } = useApartmentViewContext()
+  const { data, isFetching } = useLayoutsQuery(watch('building'))
+  // const { data, isFetching } = useApartmentsQuery(watch('building', 'layouts'))
+  console.log(data, 'planirovka')
   return (
-    <div>empty</div>
-    // <BaseApartment>
-    //   {data && !isFetching
-    //     ? (
-    //       <div className={styles.container}>
-    //         {!!preparedChessData.length && preparedChessData.map(({
-    //           resultArray,
-    //           flats,
-    //           floors
-    //         }) => (
-    //           <div key={`${floors}_${flats}_chess`} className={styles.wrapper}>
-    //             {resultArray.map((objects: TObject[], objectsIdx) => (
-    //               <div
-    //                 key={objects[objectsIdx]?.id}
-    //                 className={styles.row}
-    //                 style={{ gridTemplateColumns: `repeat(${flats}, 270px)` }}
-    //               >
-    //                 {objects.map((object: TObject, objectIdx) => (
-    //                   <>
-    //                     {object && (
-    //                       <div key={object.id} id={object.id}>
-    //                         {/* {!objectsIdx && (
-    //                           <p className={classNames(styles.order, styles.columnNumber)}>
-    //                             {objectIdx}
-    //                           </p>
-    //                         )} */}
-    //                         <PlanCard
-    //                           info={object}
-    //                           color={object.color}
-    //                           area={object.area}
-    //                           flatNumber={object.number_of_object}
-    //                           rooms={object.rooms}
-    //                           pricePerSquare={object.priceM2}
-    //                           isDisabled={object?.opacity}
-    //                           cost={object.cost}
-    //                           balconies={object.Balconies}
-    //                         />
-    //                       </div>
-    //                     )}
-    //                   </>
-    //                 ))}
-    //               </div>
-    //             ))}
-    //           </div>
-    //         ))}
-    //       </div>
-    //     )
-    //     : (
-    //       <div className={styles.spinnerWrapper}>
-    //         <Spinner/>
-    //       </div>
-    //     )}
-    // </BaseApartment>
+    <BaseApartment>
+      {data && !isFetching
+        ? (
+          <div className={styles.layouts}>
+            {data?.map((layout) => (
+              <div className={styles.layout} key={layout.value}>
+                <h4 className={styles.label}>{layout.label}</h4>
+                <img src={layout.img_adress} alt="" />
+              </div>
+            ))}
+          </div>
+        )
+        : (
+          <div className={styles.spinnerWrapper}>
+            <Spinner/>
+          </div>
+        )}
+    </BaseApartment>
   )
 }
 

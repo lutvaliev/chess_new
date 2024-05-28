@@ -54,6 +54,7 @@ export type TBaseForm = {
   district: string,
   building: string,
   section: string,
+  layouts: string,
   apartmentLayout: string,
   cost: {
     min: string,
@@ -96,6 +97,56 @@ export type TSection = {
   name: string
   number_of_floors?: number
   number_per_floor?: number
+}
+
+export type TLayouts = {
+  value: string,
+  label: string,
+  count_aparts: number,
+  parameters: {
+    Axis: string,
+    VendorCode: string,
+    PlanoplanLink: string,
+    LayoutCode: string,
+    Levels: number,
+    Risers: number,
+    CountRooms: number,
+    EnsuiteBathroom: boolean,
+    AreaKitchen: number,
+    AreaCorridor: number,
+    TotalAreaReceived: number,
+    AreaBathroom: number,
+    AreaLiving: number,
+    AreaHallway: number,
+    AreaWardrobe: number,
+    AreaBathroom2: number,
+    AreaBathroom1: number,
+    AreaRoom5: number,
+    AreaRoom4: number,
+    AreaRoom3: number,
+    AreaRoom2: number,
+    AreaRoom1: number,
+    AreaLivingRoom: number,
+    AreaBathroom3: number,
+    TotalProjectArea: number,
+    Description: string,
+    MinimalPrice: number,
+    MaximalPrice: number,
+    Loggia: number,
+    Glaze: number,
+    BalconyArea: number,
+    BalconyType: string,
+    French: number
+  },
+  img_adress: string
+}
+
+export type TApartments = {
+  Apart: {
+    id: string,
+    ApartName: string,
+    Description: string
+  }
 }
 
 export type TObjectParams = {

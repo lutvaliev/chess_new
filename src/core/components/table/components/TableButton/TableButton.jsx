@@ -6,33 +6,33 @@ import styles from './TableButton.module.scss';
 
 const TableButton: FC<{ rowData: any }> = ({ rowData }) => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-    // const drawerRef = useRef<HTMLDivElement>(null);
+    const drawerRef = useRef(null);
     const handleClose = () => setIsDrawerOpen(false);
 
     const handleButtonClick = () => {
         setIsDrawerOpen(true);
     };
 
-    // useEffect(() => {
-    //     const handleClickOutside = (event: MouseEvent) => {
-    //         if (drawerRef.current && !drawerRef.current.contains(event.target)) {
-    //             handleClose();
-    //         }
-    //     };
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (drawerRef.current && !drawerRef.current.contains(event.target)) {
+                handleClose();
+                console.log("drawerRef.current && !drawerRef.current.contains(event.target)")
+            }
+        }
+        if (isDrawerOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+        } else {
+            document.removeEventListener('mousedown', handleClickOutside);
+        }
 
-    //     if (isDrawerOpen) {
-    //         document.addEventListener('mousedown', handleClickOutside);
-    //     } else {
-    //         document.removeEventListener('mousedown', handleClickOutside);
-    //     }
-
-    //     return () => {
-    //         document.removeEventListener('mousedown', handleClickOutside);
-    //     };
-    // }, [isDrawerOpen]);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isDrawerOpen]);
 
     return (
-        <div >
+        <div>
             <button type="button" className={styles.more_btn} onClick={handleButtonClick}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="-4.5 0 20 20" version="1.1">
                     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -51,9 +51,10 @@ const TableButton: FC<{ rowData: any }> = ({ rowData }) => {
                 isOpen={isDrawerOpen}
                 onClose={handleClose}
                 className={styles.drawer}
-                // ref={drawerRef}
             >
-                {isDrawerOpen && <ApartmentInfoBase drawerClose={handleClose} info={rowData} />}
+                {isDrawerOpen && 
+                    <div ref={drawerRef}><ApartmentInfoBase drawerClose={handleClose} info={rowData} /></div>
+                }
             </CustomDrawer>
         </div>
     );

@@ -26,17 +26,17 @@ const List = () => {
       Cell: ({ value, row }: any) => <TableCell value={value} row={row} />
     },
     {
-      Header: 'Комнаты',
+      Header: 'Комнатность',
       accessor: 'rooms',
       Cell: ({ value, row }) => <TableCell value={value} row={row} />
     },
     {
-      Header: 'Общая площадь, м2:',
+      Header: 'Площадь',
       accessor: 'area',
       Cell: ({ value, row }) => <TableCell value={value} row={row} />
     },
     {
-      Header: 'Площадь кухни, м2:',
+      Header: 'S кухни',
       accessor: 'area_kitchen',
       Cell: ({ value, row }) => <TableCell value={value} row={row} />
     },
@@ -56,7 +56,7 @@ const List = () => {
       Cell: ({ value, row }) => <TableCell value={value} row={row} />
     },
     {
-      Header: 'Скидка:',
+      Header: 'Скидка',
       accessor: 'discounts',
       Cell: ({ value, row }) => (
         <TableCell value={Array.isArray(value) && value.length > 0 ? 'Да' : '-'} row={row} />

@@ -1,8 +1,8 @@
 import constate from 'constate'
 import { useEffect, useMemo, useState } from 'react'
 import { useForm, UseFormReturn } from 'react-hook-form'
-import { defaultFormValues, TBaseForm, useBuildingQuery, useDistrictQuery, useSectionQuery } from '../../BaseApartment'
-import { useObjectChessQuery } from '../../BaseApartment/querries'
+import { defaultFormValues, TBaseForm, useBuildingQuery, useDistrictQuery, useSectionQuery, useLayoutsQuery } from '../../BaseApartment'
+import { useApartmentsQuery, useObjectChessQuery } from '../../BaseApartment/querries'
 import { useFilteredData } from '../../BaseApartment/utils/useFilterData'
 import { prepareData } from '../../BaseApartment/utils/prepareData'
 import { TObject, TObjectParams } from '../../BaseApartment/types'
@@ -17,15 +17,20 @@ function useResetForm(
   const { data: districtData } = useDistrictQuery()
   const { data: buildingData } = useBuildingQuery(districtData?.[1]?.id)
   const { data: sectionData } = useSectionQuery('building', buildingData?.[0]?.id)
+  const { data: layoutsData } = useLayoutsQuery(buildingData?.[0]?.id)
+  // eslint-disable-next-line max-len
+  const { data: apartmentsData } = useApartmentsQuery(districtData?.[1]?.id, buildingData?.[0]?.id, layoutsData?.[0]?.value)
+  console.log(apartmentsData, 'apartmentsData')
 
   useEffect(() => {
-    if (!districtData || !buildingData || !sectionData) {
+    if (!districtData || !buildingData || !sectionData || !layoutsData) {
       return
     }
     setValue('district', districtData[1].id)
     setValue('building', buildingData[0].id)
     setValue('section', sectionData[0].id)
-  }, [districtData, buildingData, sectionData])
+    setValue('layouts', layoutsData[0].value)
+  }, [districtData, buildingData, sectionData, layoutsData])
 }
 
 function useApartmentFilter(data?: TObject[]) {
