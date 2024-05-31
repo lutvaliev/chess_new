@@ -20,17 +20,17 @@ function useResetForm(
   const { data: layoutsData } = useLayoutsQuery(buildingData?.[0]?.id)
   // eslint-disable-next-line max-len
   const { data: apartmentsData } = useApartmentsQuery(districtData?.[1]?.id, buildingData?.[0]?.id, layoutsData?.[0]?.value)
-  console.log(apartmentsData, 'apartmentsData')
 
   useEffect(() => {
-    if (!districtData || !buildingData || !sectionData || !layoutsData) {
+    if (!districtData || !buildingData || !sectionData || !layoutsData || !apartmentsData) {
       return
     }
     setValue('district', districtData[1].id)
     setValue('building', buildingData[0].id)
     setValue('section', sectionData[0].id)
     setValue('layouts', layoutsData[0].value)
-  }, [districtData, buildingData, sectionData, layoutsData])
+    setValue('apartments', apartmentsData[0])
+  }, [districtData, buildingData, sectionData, layoutsData, apartmentsData])
 }
 
 function useApartmentFilter(data?: TObject[]) {

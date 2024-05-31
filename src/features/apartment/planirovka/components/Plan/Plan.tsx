@@ -6,7 +6,6 @@ import PlanCard from '../PlanCard/PlanCard'
 import Spinner from '../../../../../core/components/Spinner/Spinner'
 import RowDescription from '../../../chess/components/RowDescription/RowDescription'
 import styles from './Plan.module.scss'
-import { useApartmentsQuery } from '../../../BaseApartment/querries'
 
 const Plan = () => {
   const {
@@ -15,7 +14,6 @@ const Plan = () => {
     }
   } = useApartmentViewContext()
   const { data, isFetching } = useLayoutsQuery(watch('building'))
-  // const { data, isFetching } = useApartmentsQuery(watch('building', 'layouts'))
   console.log(data, 'planirovka')
   return (
     <BaseApartment>
@@ -23,10 +21,7 @@ const Plan = () => {
         ? (
           <div className={styles.layouts}>
             {data?.map((layout) => (
-              <div className={styles.layout} key={layout.value}>
-                <h4 className={styles.label}>{layout.label}</h4>
-                <img src={layout.img_adress} alt="" />
-              </div>
+              <PlanCard layout={layout} key={layout.value}/>
             ))}
           </div>
         )

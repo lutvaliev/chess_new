@@ -68,8 +68,9 @@
 }
 
 .discountValue {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
   grid-gap: 1px;
   margin-top: 16px;
   background-color: #D7DBDF;
@@ -77,6 +78,7 @@
 }
 
 .discountText {
+  width: 100%;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -136,6 +138,8 @@
 
 .analogues{
   color: #127CCA;
+  border: none;
+  background-color: transparent;
   border-bottom: 1px solid #127CCA;
   width: fit-content;
   cursor: pointer;

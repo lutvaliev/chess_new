@@ -34,7 +34,7 @@ const Header: FC<TProp> = ({ info, drawerClose }) => {
       >
         <img
           className={styles.modalImage}
-          src={info.object_planes[0]}
+          src={info?.object_planes?.[0] ?? info?.img_adress}
           alt="" />
       </Modal>
       <div className={styles.headerInfo}>
@@ -43,7 +43,7 @@ const Header: FC<TProp> = ({ info, drawerClose }) => {
             <button type="button" className={styles.buttonImg} onClick={handleOpen}>
               <img
                 className={styles.mainImage}
-                src={info.object_planes[0]}
+                src={info?.object_planes?.[0] ?? info?.img_adress}
                 alt="" />
             </button>
           </div>

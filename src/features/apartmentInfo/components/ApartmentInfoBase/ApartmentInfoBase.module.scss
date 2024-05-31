@@ -25,3 +25,19 @@
   height: 4px;
   margin: 16px 0 18px;
 }
+
+.analogues_head{
+  display: flex;
+  justify-content: space-between;
+  button{
+    border: none;
+    background-color: transparent;
+  }
+  .analogues_titles{
+    display: flex;
+    align-items: center;
+    .analogues_title{
+      padding-left: 16px;
+    }
+  }
+}

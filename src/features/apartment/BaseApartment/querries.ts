@@ -101,7 +101,6 @@ export const useObjectChessQuery = (
 async function getLayouts(id_building: string): Promise<TLayouts[]> {
   try {
     const response = await apiClient.get(`https://gds.4dev.app/api/hs/restapi_v1/chess/layouts?id_building=${id_building}`)
-    console.log(response, 'response')
     return response.data
   } catch (e: any) {
     throw new Error(e)
@@ -110,7 +109,6 @@ async function getLayouts(id_building: string): Promise<TLayouts[]> {
 
 export function useLayoutsQuery(id_building?: string) {
   const keys = [QueryKeys.Layouts, id_building]
-  console.log(keys)
   return useQuery<TLayouts[], Error>(keys, () => getLayouts(id_building!), {
     enabled: !!id_building
   })
@@ -120,7 +118,7 @@ export function useLayoutsQuery(id_building?: string) {
 async function getApartments(id_district: string, id_building: string, id_layouts: string): Promise<TApartments[]> {
   try {
     const response = await apiClient.get(`https://gds.4dev.app/api/hs/restapi_v1/chess/apartment_by_layout?id_district=${id_district}&id_building=${id_building}&id_layouts=${id_layouts}`)
-    console.log(response, 'response')
+    console.log(response.data, 'response')
     return response.data
   } catch (e: any) {
     throw new Error(e)
@@ -129,7 +127,7 @@ async function getApartments(id_district: string, id_building: string, id_layout
 // eslint-disable-next-line max-len
 export function useApartmentsQuery(id_district?: string, id_building?: string, id_layouts?: string) {
   const keys = [QueryKeys.Apartments, id_district, id_building, id_layouts]
-  console.log(keys)
+  console.log(keys, 'keys')
   // eslint-disable-next-line max-len
   return useQuery<TApartments[], Error>(keys, () => getApartments(id_district!, id_building!, id_layouts!), {
     enabled: !!id_layouts

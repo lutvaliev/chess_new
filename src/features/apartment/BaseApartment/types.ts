@@ -55,6 +55,7 @@ export type TBaseForm = {
   building: string,
   section: string,
   layouts: string,
+  apartments: any,
   apartmentLayout: string,
   cost: {
     min: string,
