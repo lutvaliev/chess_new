@@ -1,8 +1,8 @@
 import { FC, useCallback, useEffect, useState, useRef } from 'react'
-import ApartmentInfoBase from '../../../../apartmentInfo/components/ApartmentInfoBase/ApartmentInfoBase'
 // import styles from './PlanCard.module.scss'
 import styles from './PlanCard.module.scss'
 import CustomDrawer from '../../../../../core/components/CustomDrawer/CustomDrawer'
+import PlanInfo from '../../../../apartmentInfo/components/ApartmentInfoBase/PlanInfoBase'
 
 type TProps = {
   layout: any
@@ -36,7 +36,14 @@ const PlanCard: FC<TProps> = (
         onClose={handleClose}
         className={styles.drawer}
       >
-        {isDrawerOpen && <ApartmentInfoBase drawerClose={handleClose} info={layout} />}
+        {isDrawerOpen
+          && (
+            <PlanInfo
+              drawerClose={handleClose}
+              info={layout.parameters}
+              img={layout.img_adress}
+              label={layout.label} />
+          )}
       </CustomDrawer>
       { /* eslint-disable-next-line */}
       <div key={layout.value}

@@ -9,10 +9,12 @@ import styles from './Header.module.scss'
 
 type TProp = {
   info: any,
+  img?: any,
+  label?: string,
   drawerClose: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void
 }
 
-const Header: FC<TProp> = ({ info, drawerClose }) => {
+const Header: FC<TProp> = ({ info, drawerClose, img, label }) => {
   const [open, setOpen] = useState(false)
 
   const handleOpen = () => {
@@ -34,7 +36,7 @@ const Header: FC<TProp> = ({ info, drawerClose }) => {
       >
         <img
           className={styles.modalImage}
-          src={info?.object_planes?.[0] ?? info?.img_adress}
+          src={info?.object_planes?.[0] ?? info?.img_adress ?? img}
           alt="" />
       </Modal>
       <div className={styles.headerInfo}>
@@ -43,7 +45,7 @@ const Header: FC<TProp> = ({ info, drawerClose }) => {
             <button type="button" className={styles.buttonImg} onClick={handleOpen}>
               <img
                 className={styles.mainImage}
-                src={info?.object_planes?.[0] ?? info?.img_adress}
+                src={info?.object_planes?.[0] ?? info?.img_adress ?? img}
                 alt="" />
             </button>
           </div>
@@ -61,10 +63,13 @@ const Header: FC<TProp> = ({ info, drawerClose }) => {
         <div className={styles.info}>
           <div className={styles.titleWrapper}>
             {/* <div className={styles.title}>{`${info.district}`}</div> */}
-            <div className={styles.title}>{`${info.name}`}</div>
+            <div className={styles.title}>{`${info.name ?? label}`}</div>
           </div>
           <div className={styles.status}>
-            <Row title="Статус" value={info.status} />
+            <div className={styles.subtitle}>
+              В ипотеку - от
+              {` ${info.MinimalPrice} ₽/мес`}
+            </div>
           </div>
           {/* <div className={styles.buttonsWrapper}>
           <PrimaryButton text="Бронь" className={styles.button} />

@@ -127,7 +127,6 @@ async function getApartments(id_district: string, id_building: string, id_layout
 // eslint-disable-next-line max-len
 export function useApartmentsQuery(id_district?: string, id_building?: string, id_layouts?: string) {
   const keys = [QueryKeys.Apartments, id_district, id_building, id_layouts]
-  console.log(keys, 'keys')
   // eslint-disable-next-line max-len
   return useQuery<TApartments[], Error>(keys, () => getApartments(id_district!, id_building!, id_layouts!), {
     enabled: !!id_layouts

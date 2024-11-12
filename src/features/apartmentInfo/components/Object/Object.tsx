@@ -7,16 +7,15 @@ import Row from '../Row/Row'
 import PrimaryButton from '../../../../core/components/buttons/PrimaryButton/PrimaryButton'
 import styles from './Object.module.scss'
 
-const Object = ({ info, setAnalogues }: any) => {
+const Object = ({ info, setAnalogues, type }: any) => {
   const {
     formReturn: {
       watch
     }
   } = useApartmentViewContext()
   const [district, building] = watch(['district', 'building'])
-  const layout = info.id_Layout
+  const layout = info?.id_Layout
   const { data } = useApartmentsQuery(district, building, layout)
-  console.log(data, 'ayka')
   return (
     <div className="plashka">
       <div className={`${styles.body} noPadding`}>
@@ -26,16 +25,19 @@ const Object = ({ info, setAnalogues }: any) => {
             {/* <DocumentIcon /> */}
           </div>
           <div className={styles.generalInfoWrapper}>
-            <Row title="Этаж" value={info.floor} />
-            <Row title="Количество уровней" value={info.Levels} />
-            <Row title="Количество комнат" value={info.rooms} />
-            <Row title="Планировка" value={info.Layout} />
-            <Row title="Жилая площадь, м²" value={info.livingarea} />
-            <Row title="Общая площадь, м²" value={info.area} />
-            <Row title="Отделка" value={info.finishing} />
-            <Row title="Санузел" value={info.EnsuiteBathroom} />
+            <Row title="Этаж" value={info?.floor} />
+            <Row title="Количество уровней" value={info?.Levels} />
+            <Row title="Количество комнат" value={info?.rooms} />
+            <Row title="Планировка" value={info?.Layout ?? info.layot} />
+            <Row title="Жилая площадь, м²" value={info?.livingarea} />
+            <Row title="Общая площадь, м²" value={info?.area} />
+            <Row title="Отделка" value={info?.finishing} />
+            <Row title="Санузел" value={info?.EnsuiteBathroom ? '+' : '-'} />
+            <Row title="Террасы, м2" value={info?.EnsuiteBathroom ? '+' : '-'} />
+            <Row title="Балконы, м2" value={info?.BalconyArea} />
+            <Row title="Лоджии, м2" value={info?.Loggia} />
             <div>{' '}</div>
-            {info.Balconies.map((balcon: any) => (
+            {info?.Balconies?.map((balcon: any) => (
               <Row key={balcon.type} title={balcon.type} value={`${balcon.square_meters} м²`} />
             ))}
             {/* <Row title="Лоджии, м²" value="no info" />
@@ -52,15 +54,14 @@ const Object = ({ info, setAnalogues }: any) => {
               Описание
             </AccordionSummary>
             <AccordionDetails sx={{ padding: 0 }}>
-              {info.description}
+              {info?.description || info?.Description}
             </AccordionDetails>
           </Accordion>
           <div className={styles.flatModel}>
-            <a href={info.tour_3d}>3D-модель квартиры</a>
+            <a href={info?.tour_3d}>3D-модель квартиры</a>
           </div>
         </div>
         <div className={styles.prices}>
-
           <Accordion defaultExpanded sx={{ boxShadow: 0 }}>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -71,7 +72,7 @@ const Object = ({ info, setAnalogues }: any) => {
             </AccordionSummary>
             <AccordionDetails sx={{ padding: 0 }}>
               <div className={styles.pricesInfo}>
-                {info.prices.map((price: any) => (
+                {info?.prices?.map((price: any) => (
                   <div key={price.id} className={styles.row}>
                     <Row title="Вид цены" value={price.price_name} />
                     <Row title="Текущая цена, м²" value={price.price.toLocaleString()} />
@@ -99,7 +100,7 @@ const Object = ({ info, setAnalogues }: any) => {
                     Размер скидки
                   </div>
                 </div>
-                {info.discounts.map((discount: any) => (
+                {info?.discounts?.map((discount: any) => (
                   <div key={discount.discount_id} style={{ display: 'flex' }}>
                     <div className={styles.discountText}>{discount.discount_name ? discount.discount_name : ''}</div>
                     <div className={styles.discountText}>{discount.amount.toLocaleString()}</div>
@@ -109,15 +110,30 @@ const Object = ({ info, setAnalogues }: any) => {
             </AccordionDetails>
           </Accordion>
         </div>
-        <div className={styles.stats}>
-          <Row title="Еще квартир такого типа" value={data?.length} />
-          <button type="button" className={styles.analogues} onClick={() => setAnalogues(true)}>Квартиры аналоги</button>
-        </div>
-        <div className={styles.buttonsWrapper}>
-          <PrimaryButton text="Забронировать" className={styles.button} />
-          <PrimaryButton text="Рассчитать Ипотеку" className={styles.button} />
-          <PrimaryButton text="Задать вопрос" className={styles.button} />
-        </div>
+        {type !== 'plan' ? (
+          <>
+            <div className={styles.stats}>
+              <Row title="Еще квартир такого типа" value={data?.length} />
+              <button type="button" className={styles.analogues} onClick={() => setAnalogues(true)}>Квартиры аналоги</button>
+            </div>
+            <div className={styles.chooseFlat}>
+              <div className={styles.buttonsWrapper}>
+                <PrimaryButton text="Забронировать" className={styles.button} />
+                <PrimaryButton text="Рассчитать Ипотеку" className={styles.button} />
+                <PrimaryButton text="Задать вопрос" className={styles.button} />
+              </div>
+            </div>
+          </>
+        ) : (
+          <div className={styles.chooseFlat}>
+            <h5>Выбрать квартиру</h5>
+            <div className={styles.flatButtons}>
+              <PrimaryButton text="Забронировать"/>
+              <PrimaryButton text="Рассчитать Ипотеку"/>
+              <PrimaryButton text="Задать вопрос"/>
+            </div>
+          </div>
+        )}
         {/* <div className={styles.deal}>
         <div className={styles.sectionTitle}>
           Сделка
