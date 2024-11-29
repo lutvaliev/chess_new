@@ -1,25 +1,35 @@
 import constate from 'constate'
 import { useEffect, useMemo, useState } from 'react'
 import { useForm, UseFormReturn } from 'react-hook-form'
-import { defaultFormValues, TBaseForm, useBuildingQuery, useDistrictQuery, useSectionQuery, useLayoutsQuery } from '../../BaseApartment'
+import {
+  defaultFormValues,
+  TBaseForm,
+  useBuildingQuery,
+  useDistrictQuery,
+  useSectionQuery,
+  useLayoutsQuery
+} from '../../BaseApartment'
 import { useApartmentsQuery, useObjectChessQuery } from '../../BaseApartment/querries'
 import { useFilteredData } from '../../BaseApartment/utils/useFilterData'
 import { prepareData } from '../../BaseApartment/utils/prepareData'
 import { TObject, TObjectParams } from '../../BaseApartment/types'
 
-const useFormInit = () => useForm<TBaseForm>({
-  defaultValues: { ...defaultFormValues, view: 'TILE_PLUS' }
-})
+const useFormInit = () =>
+  useForm<TBaseForm>({
+    defaultValues: { ...defaultFormValues, view: 'TILE_PLUS' }
+  })
 
-function useResetForm(
-  { setValue }: UseFormReturn<TBaseForm>
-) {
+function useResetForm({ setValue }: UseFormReturn<TBaseForm>) {
   const { data: districtData } = useDistrictQuery()
   const { data: buildingData } = useBuildingQuery(districtData?.[1]?.id)
   const { data: sectionData } = useSectionQuery('building', buildingData?.[0]?.id)
   const { data: layoutsData } = useLayoutsQuery(buildingData?.[0]?.id)
   // eslint-disable-next-line max-len
-  const { data: apartmentsData } = useApartmentsQuery(districtData?.[1]?.id, buildingData?.[0]?.id, layoutsData?.[0]?.value)
+  const { data: apartmentsData } = useApartmentsQuery(
+    districtData?.[1]?.id,
+    buildingData?.[0]?.id,
+    layoutsData?.[0]?.value
+  )
 
   useEffect(() => {
     if (!districtData || !buildingData || !sectionData || !layoutsData || !apartmentsData) {
@@ -37,30 +47,32 @@ function useApartmentFilter(data?: TObject[]) {
   return useMemo(() => {
     if (!data) return undefined
 
-    return data.reduce((acc, currentValue) => {
-      Object.entries(currentValue).forEach(([key, value]) => {
-        if (key in acc) {
-          acc[key].push(value)
+    return data.reduce(
+      (acc, currentValue) => {
+        Object.entries(currentValue).forEach(([key, value]) => {
+          if (key in acc) {
+            acc[key].push(value)
+          }
+        })
+        return {
+          ...acc,
+          rooms: acc.rooms
+            .filter((room: any, index: any, self: any) => self.indexOf(room) === index)
+            .sort()
+          // rooms: [acc.rooms]
         }
-      })
-      return {
-        ...acc,
-        rooms: acc.rooms.filter((room: any, index: any, self: any) => self.indexOf(room) === index)
-        // rooms: [acc.rooms]
-      }
-    }, {
-      rooms: [],
-      area: [],
-      cost: []
-    } as any)
+      },
+      {
+        rooms: [],
+        area: [],
+        cost: []
+      } as any
+    )
   }, [data])
 }
 
 function usePrepareData(data?: TObject[]) {
-  return useMemo(() => (data?.length
-    ? prepareData(data)
-    : []),
-  [data])
+  return useMemo(() => (data?.length ? prepareData(data) : []), [data])
 }
 
 function useObjectParams(formReturn: UseFormReturn<TBaseForm>): TObjectParams {

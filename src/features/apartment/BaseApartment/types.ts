@@ -16,12 +16,12 @@ export type TObject = {
   }
   secondestate: boolean
   color: any,
-  area: number | string
+  area: number
   area_kitchen?: number
   available?: boolean
   building?: string
   building_id?: string
-  cost: number | string
+  cost: number
   district?: string
   district_id?: string
   floor: number
@@ -58,17 +58,22 @@ export type TBaseForm = {
   apartments: any,
   apartmentLayout: string,
   cost: {
-    min: string,
-    max: string
+    min: number,
+    max: number
   },
   room: string | number,
   status: string,
   actions: string
   totalArea: {
-    min: string,
-    max: string
+    min: number,
+    max: number
+  }
+  floor: {
+    min: number,
+    max: number
   }
   view: TView
+  sorting: string
 }
 
 export type TDistrict = {

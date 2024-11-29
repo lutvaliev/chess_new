@@ -5,7 +5,7 @@ import { useController, Control } from 'react-hook-form'
 import { useApartmentViewContext } from '../../../../ApartmentView/state/ApartmentViewState'
 import { floatFormat } from '../../../../../../core/utils/formFormat'
 import CustomInput from '../../../../../../core/components/CustomInput/CustomInput'
-import styles from './CostBar.module.scss'
+import styles from './FloorBar.module.scss'
 import RubleIcon from '../../../../../../core/components/icons/SvgIcons/RubleIcon'
 
 type TProps = {
@@ -19,11 +19,11 @@ type TRange = {
   max: number
 }
 
-const CostBar: FC<TProps> = ({ control, resetFilters, resetFlag }) => {
-  const { field } = useController({ name: 'cost', control })
+const FloorBar: FC<TProps> = ({ control, resetFilters, resetFlag }) => {
+  const { field } = useController({ name: 'floor', control })
   // eslint-disable-next-line max-len
-  const [minCostObject, setMinCostObject] = useState<number>(0 ?? undefined)
-  const [maxCostObject, setMaxCostObject] = useState<number>(0 ?? undefined)
+  const [minFloor, setMinFloor] = useState<number>(0 ?? undefined)
+  const [maxFloor, setMaxFloor] = useState<number>(0 ?? undefined)
   const [view, setView] = useState()
   const { objectQuery: { data, isFetching },
     preparedApartmentData: preparedChessData
@@ -32,37 +32,21 @@ const CostBar: FC<TProps> = ({ control, resetFilters, resetFlag }) => {
   useEffect(() => {
     setView(control?._fields?.view?._f.value)
   },[control?._fields?.view?._f.value])
-  
+
   useEffect(() => {
-    if (!data || data.length === 0) {
-      setMinCostObject(0)
-      setMaxCostObject(0)
+    if (!preparedChessData || preparedChessData.length === 0) {
+		  setMinFloor(0)
+      setMaxFloor(0)
       return
     }
-
-    let minCostObj = data[0]
-    let minCost = data[0].cost
-    let maxCostObj = data[0]
-    let maxCost = data[0].cost
-
-    data.forEach((obj) => {
-      if (obj.cost > maxCost) {
-        maxCost = obj.cost
-        maxCostObj = obj
-      } else if (obj.cost < minCost) {
-        minCost = obj.cost
-        minCostObj = obj
-      }
-    })
-
-    setMinCostObject(Number(minCostObj.cost))
-    setMaxCostObject(Number(maxCostObj.cost))
-    setRange({ min: Number(minCostObj.cost), max: Number(maxCostObj.cost) })
+    setMinFloor(1)
+    setMaxFloor(preparedChessData[0].floors)
+    setRange({ min: 1, max: preparedChessData[0].floors })
   }, [data,view])
 
   // Initial range value
   // eslint-disable-next-line max-len
-  const [range, setRange] = useState<{ min: number, max: number }>({ min: Number(minCostObject) || 0, max: Number(maxCostObject) || 0 })
+  const [range, setRange] = useState<{ min: number, max: number }>({ min: minFloor || 0, max: maxFloor || 0 })
 
   const handleSliderChange = (event: Event, newValue: number | number[]) => {
     const newRange: TRange = typeof newValue === 'number'
@@ -74,8 +58,8 @@ const CostBar: FC<TProps> = ({ control, resetFilters, resetFlag }) => {
   }
 
   useEffect(() => {
-    setRange({ min: minCostObject, max: maxCostObject })
-    field.onChange({ min: Number(minCostObject), max: Number(maxCostObject) })
+    setRange({ min: minFloor, max: maxFloor })
+    field.onChange({ min: minFloor, max: maxFloor })
   }, [resetFlag])
 
   return (
@@ -84,12 +68,10 @@ const CostBar: FC<TProps> = ({ control, resetFilters, resetFlag }) => {
         <p style={{ display: 'flex' }}>
           от &nbsp;
           {range.min}
-          <RubleIcon/>
         </p>
         <p style={{ display: 'flex' }}>
           до &nbsp;
           {range.max}
-          <RubleIcon/>
         </p>
       </Typography>
       <Slider
@@ -98,11 +80,11 @@ const CostBar: FC<TProps> = ({ control, resetFilters, resetFlag }) => {
         valueLabelDisplay="auto"
         aria-labelledby="range-slider"
         getAriaLabel={(index) => (index === 0 ? 'Minimum' : 'Maximum')}
-        min={Number(minCostObject)}
-        max={Number(maxCostObject)} // Adjust the range as needed
+        min={minFloor}
+        max={maxFloor} // Adjust the range as needed
       />
     </div>
   )
 }
 
-export default CostBar
+export default FloorBar

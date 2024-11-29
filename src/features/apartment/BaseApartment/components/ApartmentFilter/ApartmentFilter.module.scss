@@ -1,23 +1,24 @@
-@import "src/core/styles/common";
-.wrapper{
+@import 'src/core/styles/common';
+.wrapper {
   display: flex;
+  align-items: center;
   gap: 12px;
   margin-top: 0px;
   width: 100%;
 }
 
-.leftSideFilter{
+.leftSideFilter {
   width: 100%;
 }
 
-.selects{
+.selects {
   display: flex;
   justify-content: flex-start;
   align-items: flex-end;
   gap: 12px;
 }
 
-.metrics{
+.metrics {
   display: flex;
   justify-content: flex-start;
   align-items: flex-end;
@@ -25,7 +26,7 @@
   gap: 25px;
 }
 
-.button{
+.button {
   min-width: 78px;
   padding: 12px 16px;
   cursor: pointer;
@@ -33,22 +34,22 @@
   border-radius: 4px;
 }
 
-.bar{
-  width: 220px;
+.bar {
+  min-width: 220px;
   @include fontFamily(Ubuntu);
   display: flex;
   flex-direction: column;
-  gap:10px;
+  gap: 10px;
   // width: 350px;
   margin-left: 10px;
 }
 
-.buttons{
+.buttons {
   display: flex;
-  gap: 12px
+  gap: 12px;
 }
 
-.resetBtn{
+.resetBtn {
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -58,15 +59,15 @@
   border-radius: 10px;
   color: #127cca;
   font-size: 14px;
-  svg{
+  svg {
     margin-left: 8px;
-    path{
-      fill: #fff;;
+    path {
+      fill: #fff;
     }
   }
 }
 
-.filterBtn{
+.filterBtn {
   display: flex;
   align-items: center;
   padding: 8px;
@@ -76,6 +77,44 @@
   color: #127cca;
 }
 
-.text{
+.text {
   font-size: 14px;
+}
+
+.mainWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.footer {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+}
+
+.count {
+  @include fontFamily(Ubuntu);
+  font-size: 18px;
+  font-weight: 600;
+  color: #3579f3;
+}
+
+.sort_select {
+	background: #F6F8F9 !important;
+	border: 1px solid #D0E2FA !important;
+	
+	padding-left: 40px !important;
+}
+
+.icon {
+	position: relative;
+	display: flex;
+	align-items: center;
+
+	& > svg {
+		position: absolute;
+		left: 10px;
+		z-index: 99999;
+	}
 }

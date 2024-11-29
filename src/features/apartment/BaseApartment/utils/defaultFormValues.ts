@@ -7,11 +7,16 @@ export const defaultFormValues = {
   status: '',
   actions: '',
   cost: {
-    min: '',
-    max: ''
+    min: 0,
+    max: 0
   },
   totalArea: {
-    min: '',
-    max: ''
-  }
+    min: 0,
+    max: 0
+  },
+  floor: {
+    min: 0,
+    max: 0
+  },
+  sorting: ''
 }

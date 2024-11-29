@@ -19,8 +19,8 @@ export const useOptions = () => {
     if (district) {
       setValue('building', data?.[0].id!)
       setValue('room', '')
-      setValue('cost', { min: '', max: '' })
-      setValue('totalArea', { min: '', max: '' })
+      setValue('cost', { min: 0, max: 0 })
+      setValue('totalArea', { min: 0, max: 0 })
     }
   }, [data, district])
 

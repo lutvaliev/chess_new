@@ -3,7 +3,7 @@ import { useMemo } from 'react'
 import { TBaseForm, TObject } from '../types'
 
 export function useFilteredData(formReturn: UseFormReturn<TBaseForm>, data?: TObject[]) {
-  const { cost, room, totalArea } = formReturn.watch()
+  const { cost, room, totalArea, floor, sorting } = formReturn.watch()
   const { setValue } = formReturn
 
   return useMemo(() => {
@@ -56,7 +56,37 @@ export function useFilteredData(formReturn: UseFormReturn<TBaseForm>, data?: TOb
           .map((data: TObject) => (cost.max < data.cost ? { ...data, opacity: true } : data))
       }
     }
+    if (floor.min || floor.max) {
+      if (floor.min) {
+        tempData = tempData
+          .map((data: TObject) => (floor.min > data.floor ? { ...data, opacity: true } : data))
+      }
+      if (floor.max) {
+        tempData = tempData
+          .map((data: TObject) => (floor.max < data.floor ? { ...data, opacity: true } : data))
+      }
+    }
+    console.log(sorting)
+
+    if (sorting) {
+      switch (sorting) {
+      case 'priceAsc':
+        tempData = [...tempData].sort((a, b) => Number(a.cost) - Number(b.cost))
+        break
+      case 'priceDesc':
+        tempData = [...tempData].sort((a, b) => Number(b.cost) - Number(a.cost))
+        break
+      case 'areaAsc':
+        tempData = [...tempData].sort((a, b) => Number(a.area) - Number(b.area))
+        break
+      case 'areaDesc':
+        tempData = [...tempData].sort((a, b) => Number(b.area) - Number(a.area))
+        break
+      default:
+        return tempData
+      }
+    }
 
     return tempData
-  }, [room, cost.min, cost.max, totalArea.min, totalArea.max, data])
+  }, [room, cost.min, cost.max, totalArea.min, totalArea.max, floor.min, floor.max, data, sorting])
 }

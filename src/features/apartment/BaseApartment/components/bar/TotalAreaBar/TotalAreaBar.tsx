@@ -9,7 +9,7 @@ import styles from './TotalAreaBar.module.scss'
 
 type TProps = {
   control: any
-  resetFilters: any,
+  resetFilters: any
   resetFlag: any
 }
 
@@ -23,43 +23,44 @@ const TotalAreaBar: FC<TProps> = ({ control, resetFilters, resetFlag }) => {
   const [minAreaObject, setMinAreaObject] = useState<number>(0 ?? undefined)
   const [maxAreaObject, setMaxAreaObject] = useState<number>(0 ?? undefined)
   const [view, setView] = useState()
-  const { objectQuery: { data, isFetching }, filteredData,
+  const {
+    objectQuery: { data, isFetching },
+    filteredData,
     preparedApartmentData: preparedChessData
   } = useApartmentViewContext()
 
-
   useEffect(() => {
     setView(control._fields.view._f.value)
-  },[control._fields.view._f.value])
+  }, [control._fields.view._f.value])
   // Function to find the object with the maximum area
 
   useEffect(() => {
-    let minAreaObj;
-    let minArea:any;
-    let maxAreaObj;
-    let maxArea:any;
-      if (!data || data.length === 0) {
-        setMinAreaObject(0)
-        setMaxAreaObject(0)
-        return
+    let minAreaObj
+    let minArea: any
+    let maxAreaObj
+    let maxArea: any
+    if (!data || data.length === 0) {
+      setMinAreaObject(0)
+      setMaxAreaObject(0)
+      return
+    }
+    minAreaObj = data[0]
+    minArea = data[0].area
+    maxAreaObj = data[0]
+    maxArea = data[0].area
+    data.forEach((obj) => {
+      if (obj.area > maxArea) {
+        maxArea = obj.area
+        maxAreaObj = obj
+      } else if (obj.area < minArea) {
+        minArea = obj.area
+        minAreaObj = obj
       }
-      minAreaObj = data[0]
-      minArea = data[0].area
-      maxAreaObj = data[0]
-      maxArea = data[0].area
-      data.forEach((obj) => {
-        if (obj.area > maxArea) {
-            maxArea = obj.area
-            maxAreaObj = obj
-          } else if (obj.area < minArea) {
-            minArea = obj.area
-            minAreaObj = obj
-          }
-      })
-      setMinAreaObject(Number(minAreaObj.area))
-      setMaxAreaObject(Number(maxAreaObj.area))
-      setRange({ min: Number(minAreaObj.area), max: Number(maxAreaObj.area) })
-  }, [data,view])
+    })
+    setMinAreaObject(Number(minAreaObj.area))
+    setMaxAreaObject(Number(maxAreaObj.area))
+    setRange({ min: Number(minAreaObj.area), max: Number(maxAreaObj.area) })
+  }, [data, view])
 
   useEffect(() => {
     setRange({ min: minAreaObject, max: maxAreaObject })
@@ -72,13 +73,17 @@ const TotalAreaBar: FC<TProps> = ({ control, resetFilters, resetFlag }) => {
 
   // Initial range value
   // eslint-disable-next-line max-len
-  const [range, setRange] = useState<{ min: number, max: number }>({ min: Number(minAreaObject) || 0, max: Number(maxAreaObject) || 0 })
+  const [range, setRange] = useState<{ min: number; max: number }>({
+    min: Number(minAreaObject) || 0,
+    max: Number(maxAreaObject) || 0
+  })
 
   const handleSliderChange = (event: Event, newValue: number | number[]) => {
-    const newRange: TRange = typeof newValue === 'number'
-      ? { min: newValue, max: newValue }
-      // eslint-disable-next-line max-len
-      : { min: newValue[0], max: newValue[1] } // Ensure newValue is an object with 'min' and 'max' properties
+    const newRange: TRange =
+      typeof newValue === 'number'
+        ? { min: newValue, max: newValue }
+        : // eslint-disable-next-line max-len
+          { min: newValue[0], max: newValue[1] } // Ensure newValue is an object with 'min' and 'max' properties
     setRange(newRange)
     field.onChange(newRange)
   }
@@ -86,17 +91,13 @@ const TotalAreaBar: FC<TProps> = ({ control, resetFilters, resetFlag }) => {
   return (
     <div className={styles.wrapper}>
       <Typography variant="body2" gutterBottom className={styles.rangeNumbers}>
-        <p>
+        <p style={{ display: 'flex' }}>
           от &nbsp;
-          {range.min}
-          м
-          <sup>2</sup>
+          {range.min}м<sup>2</sup>
         </p>
-        <p>
+        <p style={{ display: 'flex' }}>
           до &nbsp;
-          {range.max}
-          м
-          <sup>2</sup>
+          {range.max}м<sup>2</sup>
         </p>
       </Typography>
       <Slider

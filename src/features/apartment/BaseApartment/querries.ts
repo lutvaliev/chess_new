@@ -118,7 +118,6 @@ export function useLayoutsQuery(id_building?: string) {
 async function getApartments(id_district: string, id_building: string, id_layouts: string): Promise<TApartments[]> {
   try {
     const response = await apiClient.get(`https://gds.4dev.app/api/hs/restapi_v1/chess/apartment_by_layout?id_district=${id_district}&id_building=${id_building}&id_layouts=${id_layouts}`)
-    console.log(response.data, 'response')
     return response.data
   } catch (e: any) {
     throw new Error(e)
