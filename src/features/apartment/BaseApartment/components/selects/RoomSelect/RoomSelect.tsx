@@ -29,9 +29,12 @@ function clickElementByDataValue(dataValue: string | number) {
   }
 }
 // FC<TBaseSelectProps>
-const RoomSelect = ({ control, resetFilters, resetFlag }: any) => {
+const RoomSelect = ({ resetFilters, resetFlag }: any) => {
   const [activeIndices, setActiveIndices] = useState<number[]>([])
   const options = useOptions()
+  const {
+    formReturn: { control, setValue, getValues }
+  } = useApartmentViewContext()
 
   const tempOptions = [
     // {
@@ -41,14 +44,20 @@ const RoomSelect = ({ control, resetFilters, resetFlag }: any) => {
     ...options
   ]
 
-  const handleClick = (value: any, index: number) => {
-    const currentIndex = activeIndices.indexOf(index)
-    if (currentIndex === -1) {
-      setActiveIndices([...activeIndices, index]) // Add to active indices if not present
-    } else {
-      setActiveIndices(activeIndices.filter((i) => i !== index))
-    }
-    clickElementByDataValue(value)
+  const handleClick = (value: string | number, index: number) => {
+    const currentRoom = getValues('room') || []
+    const updatedRoom = Array.isArray(currentRoom)
+      ? currentRoom.includes(value)
+        ? currentRoom.filter((v) => v !== value)
+        : [...currentRoom, value]
+      : [value]
+
+    const updatedIndices = activeIndices.includes(index)
+      ? activeIndices.filter((i) => i !== index)
+      : [...activeIndices, index]
+
+    setActiveIndices(updatedIndices)
+    setValue('room', updatedRoom)
   }
 
   useEffect(() => {

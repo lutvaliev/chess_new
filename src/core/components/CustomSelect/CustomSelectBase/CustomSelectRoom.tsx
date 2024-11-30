@@ -22,7 +22,7 @@ const CustomSelectRoom = ({
   disabledOption,
   ...rest
 }: any) => {
-  const [isOpen, setIsOpen] = useState(name === 'view' || name === 'room')
+  const [isOpen, setIsOpen] = useState(false)
 
   const menuElements: NodeListOf<Element> = document.querySelectorAll('#menu-')
   menuElements.forEach((element) => {
@@ -59,7 +59,7 @@ const CustomSelectRoom = ({
           const label = options.find((elem: any) => elem.value === selected)?.label
           return label || defaultPlaceholder
         }}
-        open={name === 'view' || name === 'room' ? true : isOpen}
+        open={isOpen}
         onOpen={() => setIsOpen(true)}
         onClose={() => {
           setIsOpen(false)

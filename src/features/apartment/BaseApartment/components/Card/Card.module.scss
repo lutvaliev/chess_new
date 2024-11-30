@@ -57,6 +57,12 @@
   font-style: normal;
   font-weight: 500;
   border-bottom: 1px solid #E3E6E8;
+  gap: 4px;
+
+  &_icon {
+	font-size: 14px;
+	color:#63707a;
+  }
 }
 
 .areaInfo{
@@ -76,6 +82,11 @@
   justify-content: center;
   align-items: center;
   gap: 4px;
+
+  &_number {
+	width: max-content;
+	display: block;
+  }
 }
 
 .verticalLine{

@@ -7,30 +7,18 @@ import SectionSelect from '../selects/SectionSelect/SectionSelect'
 import styles from './ObjectFilter.module.scss'
 import { Planirovka, PlitkaPlus, Spisok } from '../../../../../img'
 import CustomTooltip from '../CustomTooltip/CustomTooltip'
+import { TView } from '../../../ApartmentView'
 
 const ObjectFilter = () => {
   const [show, setShow] = useState(true)
   const {
-    formReturn: { control }
+    formReturn: { control, setValue }
   } = useApartmentViewContext()
-  const handleChessClick = (e: string) => {
-    const list = document.querySelector('[data-value="LIST"]') as HTMLButtonElement
-    const plitka = document.querySelector('[data-value="TILE"]') as HTMLButtonElement
-    const plitkaplus = document.querySelector('[data-value="TILE_PLUS"]') as HTMLButtonElement
-    const plan = document.querySelector('[data-value="PLAN"]') as HTMLButtonElement
-    if (e === 'LIST') {
-      list.click()
-    }
-    if (e === 'TILE') {
-      plitka.click()
-    }
-    if (e === 'TILE_PLUS') {
-      plitkaplus.click()
-    }
-    if (e === 'PLAN') {
-      plan.click()
-    }
+
+  const handleChessClick = (view: TView) => {
+    setValue('view', view)
   }
+
   function toggleAdditionalButtons() {
     const additionalButtons = document.getElementById('additionalButtons')
 

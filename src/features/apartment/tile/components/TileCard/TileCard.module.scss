@@ -3,8 +3,8 @@
 .disabled{
   position: absolute;
   background-color: rgba(0, 0, 0, 0.3);
-  height: 60px;
-  width: 60px;
+  height: 45px;
+  width: 45px;
   border-radius: 4px;
   z-index: 10;
   top: 0;
@@ -22,16 +22,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 60px;
-  height: 60px;
+  width: 45px;
+  height: 45px;
   padding: 10px 0;
-  font-size: 24px;
+  font-size: 21px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
   border-radius: 4px;
   background: $white;
   box-shadow: 1px 1px 30px 0 rgba(27, 39, 47, 0.05), 1px 1px 2px 0 rgba(27, 39, 47, 0.05);
+  box-shadow: 1px 1px 30px 0 rgba(27, 39, 47, 0.1), 1px 1px 2px 0 rgba(27, 39, 47, 0.08);
   cursor: pointer;
   position: relative;
 }

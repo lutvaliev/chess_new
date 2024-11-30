@@ -22,7 +22,7 @@ const CustomSelectBase = ({
   disabledOption,
   ...rest
 }: any) => {
-  const [isOpen, setIsOpen] = useState(name === 'view' || name === 'room')
+  const [isOpen, setIsOpen] = useState(false)
 
   const menuElements: NodeListOf<Element> = document.querySelectorAll('#menu-')
   menuElements.forEach((element) => {
@@ -48,12 +48,15 @@ const CustomSelectBase = ({
           handleChange(event.target.value)
           setIsOpen(true)
         }}
+        MenuProps={{
+          disableScrollLock: true
+        }}
         renderValue={(selected) => {
           const defaultPlaceholder = <p className={classNames(styles.placeholder)}>{placeholder}</p>
           const label = options.find((elem: any) => elem.value === selected)?.label
           return label || defaultPlaceholder
         }}
-        open={name === 'view' || name === 'room' ? true : isOpen}
+        open={isOpen}
         onOpen={() => setIsOpen(true)}
         onClose={() => {
           setIsOpen(false)
@@ -62,13 +65,10 @@ const CustomSelectBase = ({
           <button
             {...props}
             type="button"
-            className={classNames(
-              styles.iconWrapper,
-              {
-                [styles.cursorDefault]: disabled,
-                [styles.toggle]: isOpen
-              }
-            )}
+            className={classNames(styles.iconWrapper, {
+              [styles.cursorDefault]: disabled,
+              [styles.toggle]: isOpen
+            })}
             onClick={!disabled ? () => setIsOpen(true) : undefined}
           >
             <ChevronBottomIcon />
@@ -76,18 +76,16 @@ const CustomSelectBase = ({
         )}
         {...rest}
       >
-        {
-          options.map(({ value, label, disabledOption }: any) => (
-            <MenuItem
-              className={`${styles.menuItem}`}
-              key={value}
-              value={value}
-              disabled={disabledOption}
-            >
-              {label}
-            </MenuItem>
-          ))
-        }
+        {options.map(({ value, label, disabledOption }: any) => (
+          <MenuItem
+            className={`${styles.menuItem}`}
+            key={value}
+            value={value}
+            disabled={disabledOption}
+          >
+            {label}
+          </MenuItem>
+        ))}
       </Select>
     </FormControl>
   )

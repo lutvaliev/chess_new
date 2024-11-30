@@ -18,7 +18,7 @@ export const useOptions = () => {
   useEffect(() => {
     if (district) {
       setValue('building', data?.[0].id!)
-      setValue('room', '')
+      setValue('room', [])
       setValue('cost', { min: 0, max: 0 })
       setValue('totalArea', { min: 0, max: 0 })
     }

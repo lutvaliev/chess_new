@@ -1,12 +1,9 @@
 /* eslint-disable */
-import { FC, useState, useEffect } from 'react'
+import { FC, useState, useEffect, useCallback } from 'react'
 import { Slider, Typography } from '@mui/material'
 import { useController, Control } from 'react-hook-form'
 import { useApartmentViewContext } from '../../../../ApartmentView/state/ApartmentViewState'
-import { floatFormat } from '../../../../../../core/utils/formFormat'
-import CustomInput from '../../../../../../core/components/CustomInput/CustomInput'
 import styles from './FloorBar.module.scss'
-import RubleIcon from '../../../../../../core/components/icons/SvgIcons/RubleIcon'
 
 type TProps = {
   control: Control<any>
@@ -22,8 +19,8 @@ type TRange = {
 const FloorBar: FC<TProps> = ({ control, resetFilters, resetFlag }) => {
   const { field } = useController({ name: 'floor', control })
   // eslint-disable-next-line max-len
-  const [minFloor, setMinFloor] = useState<number>(0 ?? undefined)
-  const [maxFloor, setMaxFloor] = useState<number>(0 ?? undefined)
+  const [minFloor, setMinFloor] = useState<number>(0)
+  const [maxFloor, setMaxFloor] = useState<number>(0)
   const [view, setView] = useState()
   const { objectQuery: { data, isFetching },
     preparedApartmentData: preparedChessData
@@ -48,14 +45,13 @@ const FloorBar: FC<TProps> = ({ control, resetFilters, resetFlag }) => {
   // eslint-disable-next-line max-len
   const [range, setRange] = useState<{ min: number, max: number }>({ min: minFloor || 0, max: maxFloor || 0 })
 
-  const handleSliderChange = (event: Event, newValue: number | number[]) => {
-    const newRange: TRange = typeof newValue === 'number'
-      ? { min: newValue, max: newValue }
-      // eslint-disable-next-line max-len
-      : { min: newValue[0], max: newValue[1] } // Ensure newValue is an object with 'min' and 'max' properties
-    setRange(newRange)
-    field.onChange(newRange)
-  }
+  const handleSliderChange = useCallback((event: Event, newValue: number | number[]) => {
+	const newRange: TRange = Array.isArray(newValue)
+	  ? { min: newValue[0], max: newValue[1] }
+	  : { min: newValue, max: newValue };
+	setRange(newRange);
+	field.onChange(newRange);
+  }, [field]);
 
   useEffect(() => {
     setRange({ min: minFloor, max: maxFloor })

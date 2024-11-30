@@ -33,9 +33,7 @@ const Card: FC<TCard> = ({
           </div>
         ) : null}
         {secondestate ? <div className={styles.bordered}>ВН</div> : null}
-        <div className={styles.bordered}>
-          {rooms === 0 ? 'C' : `${rooms}К`}
-        </div>
+        <div className={styles.bordered}>{rooms === 0 ? 'C' : `${rooms}К`}</div>
         <div className={styles.flatNumber}>
           №
           {flatNumber}
@@ -46,19 +44,20 @@ const Card: FC<TCard> = ({
     <div style={{ backgroundColor: `#${color}` }} className={styles.line} />
     <div className={styles.cost}>
       {cost.toLocaleString()}
-      <RubleIcon />
+      <div className={styles.cost_icon}>₽</div>
     </div>
     <div className={styles.areaInfo}>
       <div className={styles.totalArea}>
-        {area}
-        {' '}
-        м²
-        <RubleIcon />
+        <div className={styles.totalArea_number}>
+          {`${area}`}
+          {' '}
+          м²
+        </div>
       </div>
       <div className={styles.verticalLine} />
       <div className={styles.pricePerMeter}>
         {pricePerMeter.toLocaleString() || '-'}
-        <RubleIcon />
+        <div className={styles.cost_icon}>₽</div>
       </div>
     </div>
   </div>

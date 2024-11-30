@@ -11,7 +11,6 @@ const Tile = () => {
     objectQuery: { data, isFetching },
     preparedApartmentData: preparedTileData
   } = useApartmentViewContext()
-
   return (
     <BaseApartment>
       {data && !isFetching
@@ -27,7 +26,7 @@ const Tile = () => {
                   <div
                     key={objects[objectsIdx]?.id}
                     className={styles.row}
-                    style={{ gridTemplateColumns: `36px repeat(${flats}, 65px)` }}
+                    style={{ gridTemplateColumns: `36px repeat(${flats}, 45px)` }}
                   >
                     <div className={classNames(styles.order, styles.rowNumber)}>
                       {Number(floors) - objectsIdx}

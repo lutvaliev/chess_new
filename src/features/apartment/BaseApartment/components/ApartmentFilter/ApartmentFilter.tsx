@@ -15,7 +15,7 @@ import CustomSelectRoom from '../../../../../core/components/CustomSelect/Custom
 
 const ApartmentFilter = ({ name }: any) => {
   const {
-    formReturn: { control, watch },
+    formReturn: { control, watch, setValue },
     filteredData
   } = useApartmentViewContext()
   const [resetFlag, setResetFlag] = useState(false)
@@ -49,7 +49,6 @@ const ApartmentFilter = ({ name }: any) => {
           {/* <StatusSelect control={control}/> */}
           <RoomSelect
             name={name}
-            control={control}
             resetFilters={resetRange}
             resetFlag={resetFlag}
             setResetFlag={setResetFlag}

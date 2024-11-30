@@ -1,10 +1,8 @@
 /* eslint-disable */
-import { FC, useState, useEffect } from 'react'
+import { FC, useState, useEffect, useCallback } from 'react'
 import { Slider, Typography } from '@mui/material'
 import { useController, Control } from 'react-hook-form'
 import { useApartmentViewContext } from '../../../../ApartmentView/state/ApartmentViewState'
-import { floatFormat } from '../../../../../../core/utils/formFormat'
-import CustomInput from '../../../../../../core/components/CustomInput/CustomInput'
 import styles from './TotalAreaBar.module.scss'
 
 type TProps = {
@@ -20,8 +18,8 @@ type TRange = {
 
 const TotalAreaBar: FC<TProps> = ({ control, resetFilters, resetFlag }) => {
   const { field } = useController({ name: 'totalArea', control })
-  const [minAreaObject, setMinAreaObject] = useState<number>(0 ?? undefined)
-  const [maxAreaObject, setMaxAreaObject] = useState<number>(0 ?? undefined)
+  const [minAreaObject, setMinAreaObject] = useState<number>(0)
+  const [maxAreaObject, setMaxAreaObject] = useState<number>(0)
   const [view, setView] = useState()
   const {
     objectQuery: { data, isFetching },
@@ -78,15 +76,14 @@ const TotalAreaBar: FC<TProps> = ({ control, resetFilters, resetFlag }) => {
     max: Number(maxAreaObject) || 0
   })
 
-  const handleSliderChange = (event: Event, newValue: number | number[]) => {
-    const newRange: TRange =
-      typeof newValue === 'number'
-        ? { min: newValue, max: newValue }
-        : // eslint-disable-next-line max-len
-          { min: newValue[0], max: newValue[1] } // Ensure newValue is an object with 'min' and 'max' properties
-    setRange(newRange)
-    field.onChange(newRange)
-  }
+  const handleSliderChange = useCallback((event: Event, newValue: number | number[]) => {
+	const newRange: TRange = Array.isArray(newValue)
+	  ? { min: newValue[0], max: newValue[1] }
+	  : { min: newValue, max: newValue };
+	setRange(newRange);
+	field.onChange(newRange);
+  }, [field]);
+
 
   return (
     <div className={styles.wrapper}>

@@ -3,7 +3,7 @@ export const defaultFormValues = {
   building: '',
   section: '',
   apartmentLayout: '',
-  room: '',
+  room: [],
   status: '',
   actions: '',
   cost: {

@@ -1,10 +1,8 @@
 /* eslint-disable */
-import { FC, useState, useEffect } from 'react'
+import { FC, useState, useEffect, useCallback } from 'react'
 import { Slider, Typography } from '@mui/material'
 import { useController, Control } from 'react-hook-form'
 import { useApartmentViewContext } from '../../../../ApartmentView/state/ApartmentViewState'
-import { floatFormat } from '../../../../../../core/utils/formFormat'
-import CustomInput from '../../../../../../core/components/CustomInput/CustomInput'
 import styles from './CostBar.module.scss'
 import RubleIcon from '../../../../../../core/components/icons/SvgIcons/RubleIcon'
 
@@ -22,8 +20,8 @@ type TRange = {
 const CostBar: FC<TProps> = ({ control, resetFilters, resetFlag }) => {
   const { field } = useController({ name: 'cost', control })
   // eslint-disable-next-line max-len
-  const [minCostObject, setMinCostObject] = useState<number>(0 ?? undefined)
-  const [maxCostObject, setMaxCostObject] = useState<number>(0 ?? undefined)
+  const [minCostObject, setMinCostObject] = useState<number>(0)
+  const [maxCostObject, setMaxCostObject] = useState<number>(0)
   const [view, setView] = useState()
   const { objectQuery: { data, isFetching },
     preparedApartmentData: preparedChessData
@@ -64,14 +62,14 @@ const CostBar: FC<TProps> = ({ control, resetFilters, resetFlag }) => {
   // eslint-disable-next-line max-len
   const [range, setRange] = useState<{ min: number, max: number }>({ min: Number(minCostObject) || 0, max: Number(maxCostObject) || 0 })
 
-  const handleSliderChange = (event: Event, newValue: number | number[]) => {
-    const newRange: TRange = typeof newValue === 'number'
-      ? { min: newValue, max: newValue }
-      // eslint-disable-next-line max-len
-      : { min: newValue[0], max: newValue[1] } // Ensure newValue is an object with 'min' and 'max' properties
-    setRange(newRange)
-    field.onChange(newRange)
-  }
+  const handleSliderChange = useCallback((event: Event, newValue: number | number[]) => {
+	const newRange: TRange = Array.isArray(newValue)
+	  ? { min: newValue[0], max: newValue[1] }
+	  : { min: newValue, max: newValue };
+	setRange(newRange);
+	field.onChange(newRange);
+  }, [field]);
+
 
   useEffect(() => {
     setRange({ min: minCostObject, max: maxCostObject })

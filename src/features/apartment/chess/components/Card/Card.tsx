@@ -111,8 +111,8 @@ const Card: FC<TProps> = ({
           <div className={styles.additionalInfo}>
             <CardSection title={<TotalAreaIcon />} value={area} icon="м²" />
             <CardSection title={<BalconyAreaIcon />} value={balconies} />
-            <CardSection title="За м²" value={pricePerSquare} icon={<div><RubleIcon /></div>} />
-            <CardSection title="Всего" value={cost} icon={<div><RubleIcon /></div>} />
+            <CardSection title="За м²" value={pricePerSquare} icon={<div>₽</div>} />
+            <CardSection title="Всего" value={cost} icon={<div>₽</div>} />
           </div>
         </div>
       </div>
