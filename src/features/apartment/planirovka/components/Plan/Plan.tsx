@@ -6,16 +6,14 @@ import styles from './Plan.module.scss'
 
 const Plan = () => {
   const {
-    formReturn: { watch }
+    layoutFilterData
   } = useApartmentViewContext()
-  const { data, isFetching } = useLayoutsQuery(watch('building'))
 
-  console.log(data, 'planirovka')
   return (
     <BaseApartment>
-      {data && !isFetching ? (
+      {layoutFilterData ? (
         <div className={styles.layouts}>
-          {data?.map((layout) => (
+          {layoutFilterData?.map((layout) => (
             <PlanCard layout={layout} key={layout.value} />
           ))}
         </div>

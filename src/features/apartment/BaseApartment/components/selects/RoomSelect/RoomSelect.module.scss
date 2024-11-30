@@ -1,37 +1,40 @@
-.wrapper{
+.wrapper {
   display: none !important;
-  &:global(.MuiInputBase-root){
-  width: 180px;
-  border: none;
-  padding: 14px;
-  p{
-    font-size: 14px;
-  }
+  &:global(.MuiInputBase-root) {
+    width: 180px;
+    border: none;
+    padding: 14px;
+    p {
+      font-size: 14px;
+    }
   }
 }
-.rooms_filter{
+.rooms_filter {
   display: block;
-  .text{
+  .text {
     font-family: Ubuntu, sans-serif;
     font-size: 14px;
     margin-bottom: 10px;
   }
-  .active{
+  .active {
     color: white;
     background-color: #377dfc !important;
   }
-  .rooms{
+  .rooms {
     display: flex;
     gap: 10px;
-    .room{
+    .room {
       border: none;
       font-size: 14px;
       font-family: Ubuntu, sans-serif;
       cursor: pointer;
       padding: 10px 16px;
       border-radius: 6px;
-      background-color: #F6F8F9;
+      background-color: #f6f8f9;
+      transition: all 0.3s;
+      &:hover {
+        background-color: #cbe3f7;
+      }
     }
   }
 }
-

@@ -13,6 +13,7 @@ import { useApartmentsQuery, useObjectChessQuery } from '../../BaseApartment/que
 import { useFilteredData } from '../../BaseApartment/utils/useFilterData'
 import { prepareData } from '../../BaseApartment/utils/prepareData'
 import { TObject, TObjectParams } from '../../BaseApartment/types'
+import { useLayoutFilterData } from '../../BaseApartment/utils/useLayoutFilterData'
 
 const useFormInit = () =>
   useForm<TBaseForm>({
@@ -23,7 +24,7 @@ function useResetForm({ setValue }: UseFormReturn<TBaseForm>) {
   const { data: districtData } = useDistrictQuery()
   const { data: buildingData } = useBuildingQuery(districtData?.[1]?.id)
   const { data: sectionData } = useSectionQuery('building', buildingData?.[0]?.id)
-  const { data: layoutsData } = useLayoutsQuery(buildingData?.[0]?.id)
+  const { data: layoutsData } = useLayoutsQuery(buildingData?.[0]?.id, sectionData?.[0].id)
   // eslint-disable-next-line max-len
   const { data: apartmentsData } = useApartmentsQuery(
     districtData?.[1]?.id,
@@ -103,7 +104,9 @@ const ApartmentViewState = () => {
   const { pageParam, elemPerPageParam } = usePageProps(formReturn)
   const objectParams = useObjectParams(formReturn)
   const { data } = useObjectChessQuery(objectParams, pageParam, elemPerPageParam)
+  const { data: layoutData } = useLayoutsQuery(formReturn.watch('building'), formReturn.watch('section'))
   const filteredData = useFilteredData(formReturn, data)
+  const layoutFilterData = useLayoutFilterData(formReturn, layoutData)
   const preparedApartmentData = usePrepareData(filteredData)
   const apartmentFilterData = useApartmentFilter(data)
 
@@ -112,7 +115,8 @@ const ApartmentViewState = () => {
     objectQuery: useObjectChessQuery(objectParams),
     preparedApartmentData,
     apartmentFilterData,
-    filteredData
+    filteredData,
+    layoutFilterData
   }
 }
 

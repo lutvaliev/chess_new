@@ -98,18 +98,18 @@ export const useObjectChessQuery = (
   )
 }
 
-async function getLayouts(id_building: string): Promise<TLayouts[]> {
+async function getLayouts(id_building: string, id_section?: string): Promise<TLayouts[]> {
   try {
-    const response = await apiClient.get(`https://gds.4dev.app/api/hs/restapi_v1/chess/layouts?id_building=${id_building}`)
+    const response = await apiClient.get(`https://gds.4dev.app/api/hs/restapi_v1/chess/layouts?id_building=${id_building}&id_section=${id_section}`)
     return response.data
   } catch (e: any) {
     throw new Error(e)
   }
 }
 
-export function useLayoutsQuery(id_building?: string) {
-  const keys = [QueryKeys.Layouts, id_building]
-  return useQuery<TLayouts[], Error>(keys, () => getLayouts(id_building!), {
+export function useLayoutsQuery(id_building?: string, id_section?: string) {
+  const keys = [QueryKeys.Layouts, id_building, id_section]
+  return useQuery<TLayouts[], Error>(keys, () => getLayouts(id_building!, id_section!), {
     enabled: !!id_building
   })
 }

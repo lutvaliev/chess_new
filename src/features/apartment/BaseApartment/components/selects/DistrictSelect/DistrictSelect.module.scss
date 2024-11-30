@@ -8,3 +8,14 @@
   border-radius: 0;
   }
 }
+
+.wrapper {
+	div[role="button"] {
+		transition: all 0.3s;
+	}
+	&:hover {
+		div[role="button"] {
+			transform: translateX(3px);
+		}
+	}
+}

@@ -15,8 +15,9 @@ import CustomSelectRoom from '../../../../../core/components/CustomSelect/Custom
 
 const ApartmentFilter = ({ name }: any) => {
   const {
-    formReturn: { control, watch, setValue },
-    filteredData
+    formReturn: { control, watch },
+    filteredData,
+    layoutFilterData
   } = useApartmentViewContext()
   const [resetFlag, setResetFlag] = useState(false)
   const resetRange = () => {
@@ -41,6 +42,10 @@ const ApartmentFilter = ({ name }: any) => {
       value: 'areaAsc'
     }
   ]
+
+  const planCount = watch('view') === 'PLAN'
+    ? layoutFilterData.length
+    : filteredData.filter((item) => !item.opacity).length
 
   return (
     <div className={styles.mainWrapper}>
@@ -151,9 +156,7 @@ const ApartmentFilter = ({ name }: any) => {
           </div>
         )}
         <div className={styles.count}>
-          {`Найдена ${filteredData.filter((item) => !item.opacity).length} планиров${getPlanPrefix(
-            filteredData.filter((item) => !item.opacity).length
-          )}:`}
+          {`Найдена ${planCount} планиров${getPlanPrefix(planCount)}:`}
         </div>
       </div>
     </div>

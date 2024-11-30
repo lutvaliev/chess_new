@@ -59,11 +59,15 @@
   border-radius: 10px;
   color: #127cca;
   font-size: 14px;
+  transition: all 0.5s;
   svg {
     margin-left: 8px;
     path {
       fill: #fff;
     }
+  }
+  &:hover {
+    background: #e7f4ff;
   }
 }
 
@@ -75,6 +79,11 @@
   border: 1px solid #127cca;
   border-radius: 10px;
   color: #127cca;
+  transition: all 0.3s;
+  cursor: pointer;
+  &:hover {
+    background: #e7f4ff;
+  }
 }
 
 .text {
@@ -88,9 +97,9 @@
 }
 
 .footer {
-	display: flex;
-	align-items: center;
-	gap: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 .count {
@@ -101,20 +110,24 @@
 }
 
 .sort_select {
-	background: #F6F8F9 !important;
-	border: 1px solid #D0E2FA !important;
-	
-	padding-left: 40px !important;
+  background: #f6f8f9 !important;
+  border: 1px solid #d0e2fa !important;
+
+  padding-left: 40px !important;
+  transition: all 0.3s;
+  &:hover {
+    background: #e7f4ff !important;
+  }
 }
 
 .icon {
-	position: relative;
-	display: flex;
-	align-items: center;
+  position: relative;
+  display: flex;
+  align-items: center;
 
-	& > svg {
-		position: absolute;
-		left: 10px;
-		z-index: 99999;
-	}
+  & > svg {
+    position: absolute;
+    left: 10px;
+    z-index: 99999;
+  }
 }

@@ -142,7 +142,9 @@ export type TLayouts = {
     Glaze: number,
     BalconyArea: number,
     BalconyType: string,
-    French: number
+    French: number,
+    area: number,
+    rooms: number
   },
   img_adress: string
 }
