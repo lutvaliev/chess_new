@@ -17,19 +17,14 @@ const TableBodyRow: FC<TProps> = ({ row }) => {
   prepareRow(row)
 
   return (
-    <TableRow
-      {...row.getRowProps()}
-      onClick={() => onRowClick?.(row)}
-    >
+    <TableRow {...row.getRowProps()} onClick={() => onRowClick?.(row)} className={styles.row}>
       {row.cells.map((cell) => (
         // eslint-disable-next-line react/jsx-key
         <TableCell
           {...cell.getCellProps()}
-          className={`${styles.tableCell} ${
-            classNames(styles.row, {
-              [styles.opacity]: (row.original as { opacity: boolean }).opacity
-            })
-          }`}
+          className={`${styles.tableCell} ${classNames(styles.row, {
+            [styles.opacity]: (row.original as { opacity: boolean }).opacity
+          })}`}
         >
           {cell.render('Cell')}
         </TableCell>

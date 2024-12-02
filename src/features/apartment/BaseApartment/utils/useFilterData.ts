@@ -1,9 +1,21 @@
+/* eslint-disable max-len */
 import { UseFormReturn } from 'react-hook-form'
 import { useMemo } from 'react'
 import { TBaseForm, TObject } from '../types'
 
 export function useFilteredData(formReturn: UseFormReturn<TBaseForm>, data?: TObject[]) {
-  const { cost, room, totalArea, floor, sorting } = formReturn.watch()
+  const {
+    cost,
+    room,
+    totalArea,
+    floor,
+    sorting,
+    advantages,
+    feature,
+    furnish,
+    layoutType,
+    windowView
+  } = formReturn.watch()
 
   return useMemo(() => {
     if (!data) {
@@ -33,6 +45,30 @@ export function useFilteredData(formReturn: UseFormReturn<TBaseForm>, data?: TOb
         opacity = true
       }
 
+      //   if (
+      //     advantages
+      //     && advantages.length > 0
+      //     && !advantages.some((adv) => item.advantages?.includes(adv))
+      //   ) {
+      //     opacity = true
+      //   }
+
+      //   if (feature && feature.length > 0 && !feature.some((feat) => item.features?.includes(feat))) {
+      //     opacity = true
+      //   }
+
+      //   if (furnish && furnish.length > 0 && !furnish.some((fur) => item.furnish?.includes(fur))) {
+      //     opacity = true
+      //   }
+
+      //   if (layoutType && layoutType !== 'any' && item.layoutType !== layoutType) {
+      //     opacity = true
+      //   }
+
+      //   if (windowView && windowView !== 'any' && item.windowView !== windowView) {
+      //     opacity = true
+      //   }
+
       return { ...item, opacity }
     })
 
@@ -48,5 +84,17 @@ export function useFilteredData(formReturn: UseFormReturn<TBaseForm>, data?: TOb
     default:
       return filteredData
     }
-  }, [room, cost, totalArea, floor, data, sorting])
+  }, [
+    room,
+    cost,
+    totalArea,
+    floor,
+    data,
+    sorting,
+    advantages,
+    feature,
+    furnish,
+    layoutType,
+    windowView
+  ])
 }

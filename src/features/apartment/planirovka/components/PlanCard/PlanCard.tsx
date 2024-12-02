@@ -44,7 +44,7 @@ const PlanCard: FC<TProps> = ({ layout }) => {
         onClick={() => setIsDrawerOpen(true)}
       >
         <h4 className={styles.label}>{layout.label}</h4>
-        <img src={getImageSrc(layout)} alt="" />
+        <img src={getImageSrc(layout.img_adress)} alt="" />
       </div>
     </div>
   )

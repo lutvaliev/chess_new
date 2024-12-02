@@ -74,6 +74,11 @@ export type TBaseForm = {
   }
   view: TView
   sorting: string
+  advantages: string[]
+  feature: string[]
+  furnish: string[]
+  layoutType: string
+  windowView: string
 }
 
 export type TDistrict = {

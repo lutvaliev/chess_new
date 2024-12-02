@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import { Modal } from '@mui/material'
 import styles from '../List/List.module.scss'
 import { TTableCell } from '../../types'
+import { getImageSrc } from '../../../utils/getImageSrc'
 
 const TableCell: FC<TTableCell> = ({ value, row }) => {
   const rowOriginal = row.original
@@ -28,7 +29,7 @@ const TableCell: FC<TTableCell> = ({ value, row }) => {
             }
           }}
         >
-          <img src={value[0]} alt="" />
+          <img src={getImageSrc(value)} alt="" />
         </button>
       ) : (
         value
@@ -42,7 +43,7 @@ const TableCell: FC<TTableCell> = ({ value, row }) => {
           aria-describedby="modal-modal-description">
           <img
             className={styles.modalImage}
-            src={value[0]}
+            src={getImageSrc(value)}
             alt="" />
         </Modal>
       )

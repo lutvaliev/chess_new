@@ -1,15 +1,9 @@
-interface Layout {
-  img_adress: string[]
-}
+import defaultImage from '../../../img/featured.png'
 
-interface Props {
-  layout: Layout
-}
-
-export const getImageSrc = (layout: Layout): string => {
+export const getImageSrc = (img_adress: string[]): string => {
   const validExtensions = ['.png', '.jpg', '.jpeg']
-  const validImage = layout.img_adress.find((url) =>
+  const validImage = img_adress.find((url) =>
     validExtensions.some((ext) => url.toLowerCase().endsWith(ext)))
 
-  return validImage || 'https://via.placeholder.com/150'
+  return validImage || defaultImage
 }

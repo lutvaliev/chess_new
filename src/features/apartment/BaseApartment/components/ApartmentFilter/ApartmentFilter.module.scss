@@ -1,10 +1,11 @@
 @import 'src/core/styles/common';
 .wrapper {
   display: flex;
-  align-items: center;
-  gap: 12px;
+  align-items: flex-end;
+  gap: 20px;
   margin-top: 0px;
   width: 100%;
+  flex-wrap: wrap;
 }
 
 .leftSideFilter {
@@ -22,7 +23,6 @@
   display: flex;
   justify-content: flex-start;
   align-items: flex-end;
-  flex-wrap: wrap;
   gap: 25px;
 }
 
@@ -104,9 +104,9 @@
 
 .count {
   @include fontFamily(Ubuntu);
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
-  color: #3579f3;
+  color: #1976d2;
 }
 
 .sort_select {
@@ -130,4 +130,10 @@
     left: 10px;
     z-index: 99999;
   }
+}
+
+.filter_select {
+	width: 100% !important;
+	height: 50px !important;
+	border: 1px solid #D0E2FA !important;
 }

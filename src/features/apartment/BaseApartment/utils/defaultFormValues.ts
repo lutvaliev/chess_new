@@ -18,5 +18,10 @@ export const defaultFormValues = {
     min: 0,
     max: 0
   },
-  sorting: ''
+  sorting: '',
+  advantages: [],
+  feature: [],
+  furnish: [],
+  layoutType: 'any',
+  windowView: 'any'
 }
