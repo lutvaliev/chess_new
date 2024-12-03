@@ -34,7 +34,7 @@ export type TObject = {
   rooms: number | string
   section_: string
   section_id?: string
-  status?: string
+  status: string
   type_apartment?: number
   type_object?: string
   opacity?: boolean
@@ -54,6 +54,9 @@ export type TBaseForm = {
   district: string,
   building: string,
   section: string,
+
+  initValues: boolean,
+
   layouts: string,
   apartments: any,
   apartmentLayout: string,

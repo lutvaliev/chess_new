@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import classNames from 'classnames'
 import ChevronBottomIcon from '../../icons/SvgIcons/ChevromBottonIcon'
 import styles from './CustomSelectBase.module.scss'
+import { useApartmentViewContext } from '../../../../features/apartment/ApartmentView/state/ApartmentViewState'
 
 const CustomSelectBase = ({
   options,
@@ -22,6 +23,9 @@ const CustomSelectBase = ({
   disabledOption,
   ...rest
 }: any) => {
+  const {
+    formReturn: { setValue }
+  } = useApartmentViewContext()
   const [isOpen, setIsOpen] = useState(false)
 
   const menuElements: NodeListOf<Element> = document.querySelectorAll('#menu-')
@@ -46,6 +50,7 @@ const CustomSelectBase = ({
           event.stopPropagation()
           event.preventDefault()
           handleChange(event.target.value)
+          setValue('initValues', false)
           setIsOpen(true)
         }}
         MenuProps={{

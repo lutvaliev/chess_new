@@ -153,7 +153,7 @@ const ApartmentFilter = ({ name }: any) => {
       <div className={styles.footer}>
         {(watch('view') === 'LIST' || watch('view') === 'PLAN') && (
           <div className={styles.icon}>
-            <SwapVertIcon style={{ marginRight: 8 }} />
+            <SwapVertIcon style={{ marginLeft: 10, fontSize: 18 }} />
             <CustomSelectControl
               control={control}
               name="sorting"

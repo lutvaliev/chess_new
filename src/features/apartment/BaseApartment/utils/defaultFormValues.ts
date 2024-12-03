@@ -23,5 +23,6 @@ export const defaultFormValues = {
   feature: [],
   furnish: [],
   layoutType: 'any',
-  windowView: 'any'
+  windowView: 'any',
+  initValues: true
 }

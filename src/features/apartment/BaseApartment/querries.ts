@@ -100,7 +100,11 @@ export const useObjectChessQuery = (
 
 async function getLayouts(id_building: string, id_section?: string): Promise<TLayouts[]> {
   try {
-    const response = await apiClient.get(`https://gds.4dev.app/api/hs/restapi_v1/chess/layouts?id_building=${id_building}&id_section=${id_section}`)
+    let apiLink = `https://gds.4dev.app/api/hs/restapi_v1/chess/layouts?id_building=${id_building}`
+    if (id_section !== 'ALL_SECTIONS' && id_section !== undefined && id_section) {
+      apiLink += `&id_section=${id_section}`
+    }
+    const response = await apiClient.get(apiLink)
     return response.data
   } catch (e: any) {
     throw new Error(e)

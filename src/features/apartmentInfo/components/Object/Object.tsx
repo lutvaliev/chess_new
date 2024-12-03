@@ -9,9 +9,7 @@ import styles from './Object.module.scss'
 
 const Object = ({ info, setAnalogues, type }: any) => {
   const {
-    formReturn: {
-      watch
-    }
+    formReturn: { watch }
   } = useApartmentViewContext()
   const [district, building] = watch(['district', 'building'])
   const layout = info?.id_Layout
@@ -36,7 +34,7 @@ const Object = ({ info, setAnalogues, type }: any) => {
             <Row title="Террасы, м2" value={info?.EnsuiteBathroom ? '+' : '-'} />
             <Row title="Балконы, м2" value={info?.BalconyArea} />
             <Row title="Лоджии, м2" value={info?.Loggia} />
-            <div>{' '}</div>
+            <div> </div>
             {info?.Balconies?.map((balcon: any) => (
               <Row key={balcon.type} title={balcon.type} value={`${balcon.square_meters} м²`} />
             ))}
@@ -50,7 +48,8 @@ const Object = ({ info, setAnalogues, type }: any) => {
               expandIcon={<ExpandMoreIcon />}
               id="panel-header"
               aria-controls="panel-content"
-              sx={{ padding: 0 }}>
+              sx={{ padding: 0, fontWeight: 600 }}
+            >
               Описание
             </AccordionSummary>
             <AccordionDetails sx={{ padding: 0 }}>
@@ -58,7 +57,7 @@ const Object = ({ info, setAnalogues, type }: any) => {
             </AccordionDetails>
           </Accordion>
           <div className={styles.flatModel}>
-            <a href={info?.tour_3d}>3D-модель квартиры</a>
+            <a href={info?.tour_3d} target="_blank" rel="noreferrer">3D-модель квартиры</a>
           </div>
         </div>
         <div className={styles.prices}>
@@ -67,7 +66,8 @@ const Object = ({ info, setAnalogues, type }: any) => {
               expandIcon={<ExpandMoreIcon />}
               id="panel-header"
               aria-controls="panel-content"
-              sx={{ padding: 0 }}>
+              sx={{ padding: 0, fontWeight: 600 }}
+            >
               Цены
             </AccordionSummary>
             <AccordionDetails sx={{ padding: 0 }}>
@@ -75,8 +75,8 @@ const Object = ({ info, setAnalogues, type }: any) => {
                 {info?.prices?.map((price: any) => (
                   <div key={price.id} className={styles.row}>
                     <Row title="Вид цены" value={price.price_name} />
-                    <Row title="Текущая цена, м²" value={price.price.toLocaleString()} />
-                    <Row title="Текущая стоимость" value={price.cost.toLocaleString()} />
+                    <Row title="Текущая цена, м²" value={`${price.price.toLocaleString()} ₽`} />
+                    <Row title="Текущая стоимость" value={`${price.cost.toLocaleString()} ₽`} />
                   </div>
                 ))}
                 {/* <Row title="Вид цены" value="Субсидированная" />
@@ -87,25 +87,29 @@ const Object = ({ info, setAnalogues, type }: any) => {
               <Row title="Долг клиента" value="0" /> */}
               </div>
               <div className={styles.discount}>
-                <Row title="Скидки" value="" />
-                <div className={styles.discountValue} style={{ display: 'flex' }}>
-                  <div
-                    className={classNames(styles.discountText, styles.discountHeader)}
-                  >
-                    Название скидки
-                  </div>
-                  <div
-                    className={classNames(styles.discountText, styles.discountHeader)}
-                  >
-                    Размер скидки
-                  </div>
-                </div>
-                {info?.discounts?.map((discount: any) => (
-                  <div key={discount.discount_id} style={{ display: 'flex' }}>
-                    <div className={styles.discountText}>{discount.discount_name ? discount.discount_name : ''}</div>
-                    <div className={styles.discountText}>{discount.amount.toLocaleString()}</div>
-                  </div>
-                ))}
+                <Row title="Скидки" value={info.discount ? '' : '-'} />
+                {info.discount ? (
+                  <>
+                    <div className={styles.discountValue} style={{ display: 'flex' }}>
+                      <div className={classNames(styles.discountText, styles.discountHeader)}>
+                        Название скидки
+                      </div>
+                      <div className={classNames(styles.discountText, styles.discountHeader)}>
+                        Размер скидки
+                      </div>
+                    </div>
+                    {info?.discounts?.map((discount: any) => (
+                      <div key={discount.discount_id} style={{ display: 'flex' }}>
+                        <div className={styles.discountText}>
+                          {discount.discount_name ? discount.discount_name : ''}
+                        </div>
+                        <div className={styles.discountText}>
+                          {discount.amount.toLocaleString()}
+                        </div>
+                      </div>
+                    ))}
+                  </>
+                ) : null}
               </div>
             </AccordionDetails>
           </Accordion>
@@ -114,7 +118,9 @@ const Object = ({ info, setAnalogues, type }: any) => {
           <>
             <div className={styles.stats}>
               <Row title="Еще квартир такого типа" value={data?.length} />
-              <button type="button" className={styles.analogues} onClick={() => setAnalogues(true)}>Квартиры аналоги</button>
+              <button type="button" className={styles.analogues} onClick={() => setAnalogues(true)}>
+                Квартиры аналоги
+              </button>
             </div>
             <div className={styles.chooseFlat}>
               <div className={styles.buttonsWrapper}>
@@ -128,9 +134,9 @@ const Object = ({ info, setAnalogues, type }: any) => {
           <div className={styles.chooseFlat}>
             <h5>Выбрать квартиру</h5>
             <div className={styles.flatButtons}>
-              <PrimaryButton text="Забронировать"/>
-              <PrimaryButton text="Рассчитать Ипотеку"/>
-              <PrimaryButton text="Задать вопрос"/>
+              <PrimaryButton text="Забронировать" />
+              <PrimaryButton text="Рассчитать Ипотеку" />
+              <PrimaryButton text="Задать вопрос" />
             </div>
           </div>
         )}

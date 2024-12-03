@@ -18,7 +18,7 @@ const handleClickInside = (event: any) => {
 
 const PlanInfo: FC<TProp> = ({ info, drawerClose, img, label }) => {
   const [analogues, setAnalogues] = useState(false)
-  console.log(info, 'info')
+
   return (
     !analogues ? (
       <div

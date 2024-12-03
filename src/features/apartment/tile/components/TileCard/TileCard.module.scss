@@ -1,19 +1,22 @@
-@import "src/core/styles/common";
+@import 'src/core/styles/common';
 
-.disabled{
+.disabled {
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.4);
   height: 45px;
   width: 45px;
-  border-radius: 4px;
+  border-radius: 8px;
   z-index: 10;
   top: 0;
 }
 
-.drawer{
-  :global(.MuiDrawer-paper){
-    top: 30px;
-    border-top-left-radius: 16px;
+.drawer {
+  :global(.MuiDrawer-paper) {
+    top: 0px;
+    // border-top-left-radius: 16px;
+
+    overflow-x: hidden !important;
+    // overflow-y: hidden !important;
   }
 }
 
@@ -29,15 +32,19 @@
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  border-radius: 4px;
   background: $white;
-  box-shadow: 1px 1px 30px 0 rgba(27, 39, 47, 0.05), 1px 1px 2px 0 rgba(27, 39, 47, 0.05);
-  box-shadow: 1px 1px 30px 0 rgba(27, 39, 47, 0.1), 1px 1px 2px 0 rgba(27, 39, 47, 0.08);
+
   cursor: pointer;
   position: relative;
+
+  border-radius: 8px;
+  box-shadow: 1.189px 1.189px 2.378px 0px rgba(27, 39, 47, 0.05),
+    1.189px 1.189px 35.67px 0px rgba(27, 39, 47, 0.05);
+
+  color: #1b272f;
 }
 
-.red_dot{
+.red_dot {
   width: 5px;
   height: 5px;
   border-radius: 20px;

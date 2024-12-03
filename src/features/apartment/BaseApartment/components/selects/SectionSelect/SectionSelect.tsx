@@ -1,6 +1,5 @@
 import { FC, useEffect, useMemo } from 'react'
-import CustomSelectControl
-  from '../../../../../../core/components/CustomSelect/CustomSelectControl/CustomSelectControl'
+import CustomSelectControl from '../../../../../../core/components/CustomSelect/CustomSelectControl/CustomSelectControl'
 import { TBaseSelectProps } from '../../../types'
 import { useSectionQuery } from '../../../querries'
 import { useApartmentViewContext } from '../../../../ApartmentView/state/ApartmentViewState'
@@ -8,10 +7,7 @@ import styles from './SectionSelect.module.scss'
 
 function useOptions() {
   const {
-    formReturn: {
-      watch,
-      setValue
-    }
+    formReturn: { watch, setValue, getValues }
   } = useApartmentViewContext()
   const { data } = useSectionQuery('building', watch('building'))
   const { building, view } = watch()
@@ -19,7 +15,9 @@ function useOptions() {
 
   useEffect(() => {
     if (building) {
-      setValue('section', defaultOption)
+      if (!getValues('initValues')) {
+        setValue('section', defaultOption)
+      }
     }
   }, [data, building])
 
@@ -32,7 +30,10 @@ function useOptions() {
 }
 
 const SectionSelect: FC<TBaseSelectProps> = ({ control }: any) => {
-  const { formReturn: { watch }, objectQuery: { data } } = useApartmentViewContext()
+  const {
+    formReturn: { watch },
+    objectQuery: { data }
+  } = useApartmentViewContext()
   const options = useOptions()
   const tempOptions = [
     {

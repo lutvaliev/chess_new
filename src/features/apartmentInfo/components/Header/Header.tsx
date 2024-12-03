@@ -6,11 +6,12 @@ import RubleCircledIcon from '../../../../core/components/icons/SvgIcons/RubleCi
 import PlusOutlineIcon from '../../../../core/components/icons/SvgIcons/PlusOutlineIcon'
 import CloseIcon from '../../../../core/components/icons/SvgIcons/CloseIcon'
 import styles from './Header.module.scss'
+import { getImageSrc } from '../../../apartment/utils/getImageSrc'
 
 type TProp = {
-  info: any,
-  img?: any,
-  label?: string,
+  info: any
+  img?: any
+  label?: string
   drawerClose: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void
 }
 
@@ -25,6 +26,9 @@ const Header: FC<TProp> = ({ info, drawerClose, img, label }) => {
     setOpen(false)
   }
 
+  const hasImage = info?.object_planes ?? info?.img_adress
+  const imgLink = getImageSrc(hasImage)
+
   return (
     <div className={styles.header}>
       <Modal
@@ -34,19 +38,21 @@ const Header: FC<TProp> = ({ info, drawerClose, img, label }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <img
-          className={styles.modalImage}
-          src={info?.object_planes?.[0] ?? info?.img_adress ?? img}
-          alt="" />
+        <img className={styles.modalImage} src={imgLink} alt="" />
       </Modal>
       <div className={styles.headerInfo}>
         <div className={styles.images}>
           <div className={styles.mainImage}>
-            <button type="button" className={styles.buttonImg} onClick={handleOpen}>
-              <img
-                className={styles.mainImage}
-                src={info?.object_planes?.[0] ?? info?.img_adress ?? img}
-                alt="" />
+            <button
+              type="button"
+              className={styles.buttonImg}
+              onClick={() => {
+                if (hasImage && hasImage.length !== 0) {
+                  handleOpen()
+                }
+              }}
+            >
+              <img className={styles.mainImage_img} src={imgLink} alt="" />
             </button>
           </div>
           {/* <div className={styles.additionalImages}>
@@ -86,11 +92,8 @@ const Header: FC<TProp> = ({ info, drawerClose, img, label }) => {
         </div> */}
         </div>
       </div>
-      { /* eslint-disable-next-line */}
-      <div
-        className={styles.close}
-        onClick={drawerClose}
-      >
+      {/* eslint-disable-next-line */}
+      <div className={styles.close} onClick={drawerClose}>
         <CloseIcon />
       </div>
     </div>

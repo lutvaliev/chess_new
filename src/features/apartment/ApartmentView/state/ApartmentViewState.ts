@@ -15,12 +15,27 @@ import { prepareData } from '../../BaseApartment/utils/prepareData'
 import { TObject, TObjectParams } from '../../BaseApartment/types'
 import { useLayoutFilterData } from '../../BaseApartment/utils/useLayoutFilterData'
 
-const useFormInit = () =>
-  useForm<TBaseForm>({
-    defaultValues: { ...defaultFormValues, view: 'TILE_PLUS' }
+const useFormInit = () => {
+  const queryParams = new URLSearchParams(window.location.search)
+  const district = queryParams.get('district') || ''
+  const building = queryParams.get('building') || ''
+  const section = queryParams.get('section') || ''
+  const view = queryParams.get('view') || 'TILE'
+
+  return useForm<TBaseForm>({
+    defaultValues: {
+      ...defaultFormValues,
+      view,
+      district,
+      building,
+      section,
+      initValues: true
+    }
   })
+}
 
 function useResetForm({ setValue }: UseFormReturn<TBaseForm>) {
+  const formReturn = useFormInit()
   const { data: districtData } = useDistrictQuery()
   const { data: buildingData } = useBuildingQuery(districtData?.[1]?.id)
   const { data: sectionData } = useSectionQuery('building', buildingData?.[0]?.id)
@@ -36,6 +51,12 @@ function useResetForm({ setValue }: UseFormReturn<TBaseForm>) {
     if (!districtData || !buildingData || !sectionData || !layoutsData || !apartmentsData) {
       return
     }
+
+    if (formReturn.getValues('initValues')) {
+      formReturn.setValue('initValues', false)
+      return
+    }
+
     setValue('district', districtData[1].id)
     setValue('building', buildingData[0].id)
     setValue('section', sectionData[0].id)
@@ -104,7 +125,10 @@ const ApartmentViewState = () => {
   const { pageParam, elemPerPageParam } = usePageProps(formReturn)
   const objectParams = useObjectParams(formReturn)
   const { data } = useObjectChessQuery(objectParams, pageParam, elemPerPageParam)
-  const { data: layoutData } = useLayoutsQuery(formReturn.watch('building'), formReturn.watch('section'))
+  const { data: layoutData } = useLayoutsQuery(
+    formReturn.watch('building'),
+    formReturn.watch('section')
+  )
   const filteredData = useFilteredData(formReturn, data)
   const layoutFilterData = useLayoutFilterData(formReturn, layoutData)
   const preparedApartmentData = usePrepareData(filteredData)

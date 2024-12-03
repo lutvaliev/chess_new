@@ -4,8 +4,9 @@ import styles from './CustomTooltip.module.scss'
 
 type TProps = {
   children: ReactNode
+  disabled: boolean
 } & TooltipProps
-const CustomTooltip: FC<TProps> = ({ children, ...rest }) => (
+const CustomTooltip: FC<TProps> = ({ children, disabled, ...rest }) => (
   <Tooltip
     {...rest}
     componentsProps={{ tooltip: { className: styles.wrapper } }}
@@ -27,6 +28,9 @@ const CustomTooltip: FC<TProps> = ({ children, ...rest }) => (
         }
       }
     }}
+    disableHoverListener={disabled}
+    disableTouchListener={disabled}
+    disableFocusListener={disabled}
   >
     {children}
   </Tooltip>

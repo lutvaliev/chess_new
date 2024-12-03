@@ -132,11 +132,11 @@ const ObjectFilter = () => {
       </span>
       <SectionSelect control={control} />
       <div className={styles.view_buttons} style={{ display: 'flex', flexDirection: 'row' }}>
-        <CustomTooltip title="Карточки">
+        {/* <CustomTooltip title="Карточки">
           <Button onClick={() => handleChessClick('TILE_PLUS')}>
             <img src={PlitkaPlus} alt="Шахматка" />
           </Button>
-        </CustomTooltip>
+        </CustomTooltip> */}
         <CustomTooltip title="Шахматка">
           <Button onClick={() => handleChessClick('TILE')}>
             <svg
