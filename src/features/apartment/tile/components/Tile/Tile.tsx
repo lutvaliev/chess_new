@@ -16,6 +16,9 @@ const Legend = memo(({ legendItems }: { legendItems: [string, string][] }) => {
 
   return (
     <div className={styles.legendWrapper}>
+      <button onClick={() => setLegendVisible(!isLegendVisible)} className={styles.legendToggle}>
+        {isLegendVisible ? 'Скрыть легенду' : 'Показать легенду'}
+      </button>
       <div className={`${styles.legend} ${isLegendVisible ? styles.open : ''}`}>
         <div className={styles.legend_wrapper}>
           {legendItems.map(([status, color]) => (
@@ -26,9 +29,6 @@ const Legend = memo(({ legendItems }: { legendItems: [string, string][] }) => {
           ))}
         </div>
       </div>
-      <button onClick={() => setLegendVisible(!isLegendVisible)} className={styles.legendToggle}>
-        {isLegendVisible ? 'Скрыть легенду' : 'Показать легенду'}
-      </button>
     </div>
   )
 })
@@ -58,7 +58,6 @@ const Tile = () => {
 
   return (
     <BaseApartment>
-      <Legend legendItems={legendItems} />
       {data && !isFetching ? (
         <div className={styles.container}>
           {!!preparedApartmentData.length &&
@@ -84,6 +83,7 @@ const Tile = () => {
           <Spinner />
         </div>
       )}
+      {data && !isFetching && <Legend legendItems={legendItems} />}
     </BaseApartment>
   )
 }
@@ -119,7 +119,7 @@ const Row = memo(
                   cost={object.cost}
                   area={object.area}
                   pricePerMeter={object.priceM2}
-                  isDisabled={object?.opacity}
+                  isDisabled={object?.opacity || object?.status === 'Не для продажи'}
                 />
               </div>
             )

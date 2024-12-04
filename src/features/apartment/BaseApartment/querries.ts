@@ -1,7 +1,15 @@
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { apiClient } from '../../../core/api/apiClient'
-import { TBuilding, TDistrict, TSection, TObject, TObjectParams, TLayouts, TApartments } from './types'
+import {
+  TBuilding,
+  TDistrict,
+  TSection,
+  TObject,
+  TObjectParams,
+  TLayouts,
+  TApartments
+} from './types'
 
 const QueryKeys = {
   District: 'District',
@@ -12,9 +20,15 @@ const QueryKeys = {
   ObjectChess: 'ObjectChess'
 }
 
+const getApiUrlFromQuery = (): string => {
+  const urlParams = new URLSearchParams(window.location.search)
+  return urlParams.get('apiUrl') || 'https://gds.4dev.app/api'
+}
+
 async function getDistrict(): Promise<TDistrict[]> {
+  const apiUrl = getApiUrlFromQuery()
   try {
-    const response = await apiClient.get('https://gds.4dev.app/api/hs/restapi_v1/district')
+    const response = await apiClient.get(`${apiUrl}/hs/restapi_v1/district`)
     return response.data.data
   } catch (e: any) {
     throw new Error(e)
@@ -27,8 +41,11 @@ export function useDistrictQuery() {
 }
 
 async function getBuilding(buildingId: string): Promise<TBuilding[]> {
+  const apiUrl = getApiUrlFromQuery()
   try {
-    const response = await apiClient.get(`https://gds.4dev.app/api/hs/restapi_v1/building?filter_type=district&id=${buildingId}`)
+    const response = await apiClient.get(
+      `${apiUrl}/hs/restapi_v1/building?filter_type=district&id=${buildingId}`
+    )
     return response.data.data
   } catch (e: any) {
     throw new Error(e)
@@ -43,8 +60,11 @@ export function useBuildingQuery(buildingId?: string) {
 }
 
 async function getSection(sectionId: string, filter: string): Promise<TSection[]> {
+  const apiUrl = getApiUrlFromQuery()
   try {
-    const response = await apiClient.get(`https://gds.4dev.app/api/hs/restapi_v1/section?filter_type=${filter}&id=${sectionId}`)
+    const response = await apiClient.get(
+      `${apiUrl}/hs/restapi_v1/section?filter_type=${filter}&id=${sectionId}`
+    )
     return response.data.data
   } catch (e: any) {
     throw new Error(e)
@@ -65,17 +85,17 @@ async function getObjectChess(
   pagesize?: number
 ): Promise<TObject[]> {
   try {
-    const response = await apiClient('https://gds.4dev.app/api/hs/restapi_v1/estate_object?',
-      {
-        params: {
-          id,
-          filter_type: filter,
-          status: true,
-          additional_info: true,
-          page: page || undefined,
-          pagesize: pagesize || undefined
-        }
-      })
+    const apiUrl = getApiUrlFromQuery()
+    const response = await apiClient(`${apiUrl}/hs/restapi_v1/estate_object?`, {
+      params: {
+        id,
+        filter_type: filter,
+        status: true,
+        additional_info: true,
+        page: page || undefined,
+        pagesize: pagesize || undefined
+      }
+    })
     return response.data?.data
   } catch (e: any) {
     throw new Error(e)
@@ -88,19 +108,16 @@ export const useObjectChessQuery = (
   pagesize?: number
 ) => {
   const keys = [QueryKeys.ObjectChess, id, filter, page, pagesize]
-  return useQuery(
-    keys,
-    () => getObjectChess(id, filter, page, pagesize),
-    {
-      enabled: !!id,
-      keepPreviousData: true
-    }
-  )
+  return useQuery(keys, () => getObjectChess(id, filter, page, pagesize), {
+    enabled: !!id,
+    keepPreviousData: true
+  })
 }
 
 async function getLayouts(id_building: string, id_section?: string): Promise<TLayouts[]> {
+  const apiUrl = getApiUrlFromQuery()
   try {
-    let apiLink = `https://gds.4dev.app/api/hs/restapi_v1/chess/layouts?id_building=${id_building}`
+    let apiLink = `${apiUrl}/hs/restapi_v1/chess/layouts?id_building=${id_building}`
     if (id_section !== 'ALL_SECTIONS' && id_section !== undefined && id_section) {
       apiLink += `&id_section=${id_section}`
     }
@@ -119,19 +136,34 @@ export function useLayoutsQuery(id_building?: string, id_section?: string) {
 }
 
 // eslint-disable-next-line max-len
-async function getApartments(id_district: string, id_building: string, id_layouts: string): Promise<TApartments[]> {
+async function getApartments(
+  id_district: string,
+  id_building: string,
+  id_layouts: string
+): Promise<TApartments[]> {
+  const apiUrl = getApiUrlFromQuery()
   try {
-    const response = await apiClient.get(`https://gds.4dev.app/api/hs/restapi_v1/chess/apartment_by_layout?id_district=${id_district}&id_building=${id_building}&id_layouts=${id_layouts}`)
+    const response = await apiClient.get(
+      `${apiUrl}/hs/restapi_v1/chess/apartment_by_layout?id_district=${id_district}&id_building=${id_building}&id_layouts=${id_layouts}`
+    )
     return response.data
   } catch (e: any) {
     throw new Error(e)
   }
 }
 // eslint-disable-next-line max-len
-export function useApartmentsQuery(id_district?: string, id_building?: string, id_layouts?: string) {
+export function useApartmentsQuery(
+  id_district?: string,
+  id_building?: string,
+  id_layouts?: string
+) {
   const keys = [QueryKeys.Apartments, id_district, id_building, id_layouts]
   // eslint-disable-next-line max-len
-  return useQuery<TApartments[], Error>(keys, () => getApartments(id_district!, id_building!, id_layouts!), {
-    enabled: !!id_layouts
-  })
+  return useQuery<TApartments[], Error>(
+    keys,
+    () => getApartments(id_district!, id_building!, id_layouts!),
+    {
+      enabled: !!id_layouts
+    }
+  )
 }

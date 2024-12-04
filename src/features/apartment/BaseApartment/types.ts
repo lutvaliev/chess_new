@@ -55,7 +55,9 @@ export type TBaseForm = {
   building: string,
   section: string,
 
-  initValues: boolean,
+  initDistrict: boolean,
+  initBuilding: boolean,
+  initSection: boolean,
 
   layouts: string,
   apartments: any,
@@ -82,6 +84,7 @@ export type TBaseForm = {
   furnish: string[]
   layoutType: string
   windowView: string
+  apiUrl: string
 }
 
 export type TDistrict = {

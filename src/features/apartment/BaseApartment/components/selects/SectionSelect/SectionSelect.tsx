@@ -15,7 +15,7 @@ function useOptions() {
 
   useEffect(() => {
     if (building) {
-      if (!getValues('initValues')) {
+      if (!getValues('initSection')) {
         setValue('section', defaultOption)
       }
     }

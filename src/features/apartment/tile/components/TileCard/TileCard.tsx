@@ -98,11 +98,7 @@ const TileCard: FC<TProp> = ({
         >
           <div className={classNames({ [styles.disabled]: isDisabled })} />
           {discounts.length > 0 ? <div className={styles.red_dot} /> : null}
-          {isLock ? (
-            <LockIcon style={{ fontSize: 20, color: '#000' }} />
-          ) : (
-            <p className={styles.text}>{rooms === 0 ? 'C' : rooms}</p>
-          )}
+          {<p className={styles.text}>{rooms === 0 ? 'C' : rooms}</p>}
         </div>
       </CustomTooltip>
     </div>

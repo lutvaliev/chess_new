@@ -61,14 +61,14 @@ const FloorBar: FC<TProps> = ({ control, resetFilters, resetFlag }) => {
   return (
     <div className={styles.wrapper}>
       <Typography variant="body2" gutterBottom className={styles.rangeNumbers}>
-        <p style={{ display: 'flex' }}>
+        <span style={{ display: 'flex' }}>
           от &nbsp;
           {range.min}
-        </p>
-        <p style={{ display: 'flex' }}>
+        </span>
+        <span style={{ display: 'flex' }}>
           до &nbsp;
           {range.max}
-        </p>
+        </span>
       </Typography>
       <Slider
         value={[range.min, range.max]}

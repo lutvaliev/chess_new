@@ -79,16 +79,16 @@ const CostBar: FC<TProps> = ({ control, resetFilters, resetFlag }) => {
   return (
     <div className={styles.wrapper}>
       <Typography variant="body2" gutterBottom className={styles.rangeNumbers}>
-        <p style={{ display: 'flex' }}>
+        <span style={{ display: 'flex' }}>
           от &nbsp;
           {range.min}
           <RubleIcon/>
-        </p>
-        <p style={{ display: 'flex' }}>
-          до &nbsp;
+        </span>
+        <span style={{ display: 'flex' }}>
+          spanдо &nbsp;
           {range.max}
           <RubleIcon/>
-        </p>
+        </span>
       </Typography>
       <Slider
         value={[range.min, range.max]}

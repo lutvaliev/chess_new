@@ -50,7 +50,6 @@ const CustomSelectBase = ({
           event.stopPropagation()
           event.preventDefault()
           handleChange(event.target.value)
-          setValue('initValues', false)
           setIsOpen(true)
         }}
         MenuProps={{

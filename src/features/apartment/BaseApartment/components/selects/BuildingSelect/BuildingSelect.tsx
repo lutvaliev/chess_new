@@ -14,7 +14,7 @@ export const useOptions = () => {
   const { district } = watch()
   useEffect(() => {
     if (district) {
-      if (!getValues('initValues')) {
+      if (!getValues('initBuilding')) {
         setValue('building', data?.[0].id!)
       }
       setValue('room', [])

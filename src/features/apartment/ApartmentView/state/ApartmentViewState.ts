@@ -17,10 +17,11 @@ import { useLayoutFilterData } from '../../BaseApartment/utils/useLayoutFilterDa
 
 const useFormInit = () => {
   const queryParams = new URLSearchParams(window.location.search)
-  const district = queryParams.get('district') || ''
-  const building = queryParams.get('building') || ''
-  const section = queryParams.get('section') || ''
+  const district = queryParams.get('districtId') || ''
+  const building = queryParams.get('buildingId') || ''
+  const section = queryParams.get('sectionId') || ''
   const view = queryParams.get('view') || 'TILE'
+  const apiUrl = queryParams.get('apiUrl') || 'https://gds.4dev.app/api'
 
   return useForm<TBaseForm>({
     defaultValues: {
@@ -29,7 +30,10 @@ const useFormInit = () => {
       district,
       building,
       section,
-      initValues: true
+      apiUrl,
+      initDistrict: !!district,
+      initBuilding: !!building,
+      initSection: !!section
     }
   })
 }
@@ -52,8 +56,8 @@ function useResetForm({ setValue }: UseFormReturn<TBaseForm>) {
       return
     }
 
-    if (formReturn.getValues('initValues')) {
-      formReturn.setValue('initValues', false)
+    if (formReturn.getValues('initDistrict')) {
+      formReturn.setValue('initDistrict', false)
       return
     }
 

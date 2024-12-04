@@ -6,13 +6,13 @@ import Login from './features/auth/login/components/Login/Login'
 import { ApartmentView } from './features/apartment/ApartmentView'
 
 const Routes = () => (
-  <BrowserRouter>
+  <BrowserRouter basename="/app">
     <RouterRoutes>
-      <Route path="/" element={<MainLayout/>}>
-        <Route path="/" element={<Navigate to="/apartment" />}/>
-        <Route index element={<ApartmentView/>}/>
+      <Route path="/" element={<MainLayout />}>
+        <Route path="/" element={<Navigate to="/apartment" />} />
+        <Route index element={<ApartmentView />} />
       </Route>
-      <Route path="login" element={<Login/>}/>
+      <Route path="login" element={<Login />} />
     </RouterRoutes>
   </BrowserRouter>
 )
