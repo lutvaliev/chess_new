@@ -24,7 +24,7 @@ const ObjectTabs = ({ info, setAnalogues, type }: any) => {
         <Tab disableRipple value="3" label="Статистика"/>
       </Tabs> */}
       <TabPanel value="1" className={styles.apartment_tabpanel}>
-        <Object info={info} setAnalogues={setAnalogues} type={type}/>
+        <Object info={info} setAnalogues={setAnalogues} type={type} />
       </TabPanel>
       {/* <TabPanel value="2">
         <Advertising/>

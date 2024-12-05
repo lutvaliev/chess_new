@@ -10,10 +10,15 @@ import ObjectTabs from '../Tabs/Tabs'
 import styles from './ApartmentInfoBase.module.scss'
 import CloseIcon from '../../../../core/components/icons/SvgIcons/CloseIcon'
 import defaultImage from '../../../../img/featured.png'
+import LikeButton from '../LikeButton/LikeButton'
+import StatisticsButton from '../StatisticsButton/StatisticsButton'
+import DownloadButton from '../DownloadButton/DownloadButton'
+import ShareButton from '../ShareButton/ShareButton'
 
 type TProp = {
   info: any
   img?: any
+  bgColor?: string
   drawerClose: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void
 }
 
@@ -22,7 +27,7 @@ const handleClickInside = (event: any) => {
   event.stopPropagation()
 }
 
-const ApartmentInfo: FC<TProp> = ({ info, drawerClose, img }) => {
+const ApartmentInfo: FC<TProp> = ({ info, drawerClose, img, bgColor }) => {
   const {
     formReturn: { watch }
   } = useApartmentViewContext()
@@ -46,7 +51,17 @@ const ApartmentInfo: FC<TProp> = ({ info, drawerClose, img }) => {
         onClick={handleClickInside}
       >
         <Header drawerClose={drawerClose} info={info} img={img} />
-        <div className={styles.statusLine} style={{ backgroundColor: `#${info.color}` }} />
+
+        <div className={styles.btns}>
+          <LikeButton />
+          <StatisticsButton />
+          <DownloadButton />
+          <ShareButton />
+        </div>
+        <div
+          className={styles.statusLine}
+          style={{ backgroundColor: bgColor === '#fff' ? '#127cca' : bgColor }}
+        />
         <ObjectTabs info={info} setAnalogues={setAnalogues} />
       </div>
       <div

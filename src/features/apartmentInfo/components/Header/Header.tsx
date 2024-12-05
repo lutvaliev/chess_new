@@ -1,33 +1,65 @@
-import React, { FC, useState } from 'react'
+/* eslint-disable react/jsx-curly-newline */
+/* eslint-disable react/jsx-one-expression-per-line */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable react/button-has-type */
+import React, { FC, useEffect, useState } from 'react'
 import { Modal } from '@mui/material'
-import Row from '../Row/Row'
-import PrimaryButton from '../../../../core/components/buttons/PrimaryButton/PrimaryButton'
-import RubleCircledIcon from '../../../../core/components/icons/SvgIcons/RubleCircledIcon'
-import PlusOutlineIcon from '../../../../core/components/icons/SvgIcons/PlusOutlineIcon'
+import { KeyboardArrowRight, KeyboardArrowLeft } from '@mui/icons-material'
 import CloseIcon from '../../../../core/components/icons/SvgIcons/CloseIcon'
 import styles from './Header.module.scss'
 import { getImageSrc } from '../../../apartment/utils/getImageSrc'
 
 type TProp = {
   info: any
-  img?: any
+  img: string
   label?: string
   drawerClose: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void
 }
 
 const Header: FC<TProp> = ({ info, drawerClose, img, label }) => {
   const [open, setOpen] = useState(false)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [isFullscreen, setIsFullscreen] = useState(false)
 
   const handleOpen = () => {
     setOpen(true)
+    setIsFullscreen(true)
   }
 
   const handleClose = () => {
     setOpen(false)
+    setIsFullscreen(false)
   }
 
-  const hasImage = info?.object_planes ?? info?.img_adress
-  const imgLink = getImageSrc(hasImage)
+  const handleChangeImage = (index: number) => {
+    setCurrentImageIndex(index)
+  }
+
+  const hasImageObject = info?.object_planes ?? img
+  const hasImageFloor = info?.floor_planes
+  const imgObjectLink = getImageSrc(hasImageObject)
+  const imgFloorLink = getImageSrc(hasImageFloor)
+  const images = [imgObjectLink, imgFloorLink]
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (isFullscreen) {
+      if (e.key === 'ArrowRight') {
+        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length)
+      }
+      if (e.key === 'ArrowLeft') {
+        setCurrentImageIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length)
+      }
+    }
+  }
+
+  // eslint-disable-next-line consistent-return
+  useEffect(() => {
+    if (isFullscreen) {
+      window.addEventListener('keydown', handleKeyDown)
+      return () => window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [isFullscreen])
 
   return (
     <div className={styles.header}>
@@ -38,61 +70,72 @@ const Header: FC<TProp> = ({ info, drawerClose, img, label }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <img className={styles.modalImage} src={imgLink} alt="" />
+        <div className={styles.fullscreenImageContainer}>
+          <img className={styles.modalImage} src={images[currentImageIndex]} alt="Full screen" />
+          <div className={styles.fullscreenNavigation}>
+            <button
+              onClick={() =>
+                setCurrentImageIndex((currentImageIndex - 1 + images.length) % images.length)
+              }
+              className={`${styles.navButton} ${styles.navLeft}`}
+            >
+              <KeyboardArrowLeft fontSize="large" />
+            </button>
+            <button
+              onClick={() => setCurrentImageIndex((currentImageIndex + 1) % images.length)}
+              className={`${styles.navButton} ${styles.navRight}`}
+            >
+              <KeyboardArrowRight fontSize="large" />
+            </button>
+          </div>
+        </div>
       </Modal>
+
       <div className={styles.headerInfo}>
         <div className={styles.images}>
           <div className={styles.mainImage}>
             <button
               type="button"
               className={styles.buttonImg}
-              onClick={() => {
-                if (hasImage && hasImage.length !== 0) {
-                  handleOpen()
-                }
-              }}
+              onClick={handleOpen}
             >
-              <img className={styles.mainImage_img} src={imgLink} alt="" />
+              <img className={styles.mainImage_img} src={images[currentImageIndex]} alt="" />
+              <div className={styles.carusel}>
+                <span className={currentImageIndex === 0 ? styles.selected : ''} />
+                <span className={currentImageIndex === 1 ? styles.selected : ''} />
+              </div>
             </button>
           </div>
-          {/* <div className={styles.additionalImages}>
-          <img
-            className={styles.image}
-            src="https://static3.depositphotos.com/1009948/264/i/600/depositphotos_2648677-stock-photo-interior-of-the-stylish-apartment.jpg"
-            alt="" />
-          <img
-            className={styles.image}
-            src="https://static3.depositphotos.com/1009948/264/i/600/depositphotos_2648677-stock-photo-interior-of-the-stylish-apartment.jpg"
-            alt="" />
-        </div> */}
+          <div className={styles.imageTabs}>
+            <button
+              onClick={() => handleChangeImage(0)}
+              className={`${styles.tabButton} ${currentImageIndex === 0 ? styles.activeTab : ''}`}
+            >
+              Планировка
+            </button>
+            <button
+              onClick={() => handleChangeImage(1)}
+              className={`${styles.tabButton} ${currentImageIndex === 1 ? styles.activeTab : ''}`}
+            >
+              На этаже
+            </button>
+          </div>
         </div>
+
         <div className={styles.info}>
           <div className={styles.titleWrapper}>
-            {/* <div className={styles.title}>{`${info.district}`}</div> */}
             <div className={styles.title}>{`${info.name ?? label}`}</div>
           </div>
           <div className={styles.status}>
-            <div className={styles.subtitle}>
-              В ипотеку - от
-              {` ${info.MinimalPrice} ₽/мес`}
-            </div>
+            {1 && (
+              <div className={styles.subtitle}>
+                В ипотеку - от {` ${info.MinimalPrice ?? ''} ₽/мес`}
+              </div>
+            )}
+            {1 && <div className={styles.subtitle}>{` Срок сдачи ${info.date ?? ''}`}</div>}
           </div>
-          {/* <div className={styles.buttonsWrapper}>
-          <PrimaryButton text="Бронь" className={styles.button} />
-          <PrimaryButton text="Ипотека" className={styles.button} />
-          <PrimaryButton text="Договор" className={styles.button} />
-          <div className={styles.offerWrapper}>
-            <RubleCircledIcon />
-            <div className={styles.offer}>КП</div>
-          </div>
-          <div className={styles.offerWrapper}>
-            <PlusOutlineIcon />
-            <div className={styles.offer}>КП</div>
-          </div>
-        </div> */}
         </div>
       </div>
-      {/* eslint-disable-next-line */}
       <div className={styles.close} onClick={drawerClose}>
         <CloseIcon />
       </div>

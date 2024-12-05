@@ -61,12 +61,12 @@ const TileCard: FC<TProp> = ({
         onClose={handleClose}
         className={styles.drawer}
       >
-        {isDrawerOpen && <ApartmentInfoBase drawerClose={handleClose} info={info} />}
+        {isDrawerOpen && <ApartmentInfoBase drawerClose={handleClose} info={info} bgColor={bgColor} />}
       </CustomDrawer>
       <CustomTooltip
         title={
           isLock ? (
-            <div style={{ padding: 5 }}>Не для продажи</div>
+            ""
           ) : (
             <Card
               color={info.color}
@@ -98,7 +98,7 @@ const TileCard: FC<TProp> = ({
         >
           <div className={classNames({ [styles.disabled]: isDisabled })} />
           {discounts.length > 0 ? <div className={styles.red_dot} /> : null}
-          {<p className={styles.text}>{rooms === 0 ? 'C' : rooms}</p>}
+          {<p className={styles.text}>{isLock ? '' : rooms === 0 ? 'C' : rooms}</p>}
         </div>
       </CustomTooltip>
     </div>

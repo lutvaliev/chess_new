@@ -56,9 +56,13 @@ const Object = ({ info, setAnalogues, type }: any) => {
               {info?.description || info?.Description}
             </AccordionDetails>
           </Accordion>
-          <div className={styles.flatModel}>
-            <a href={info?.tour_3d} target="_blank" rel="noreferrer">3D-модель квартиры</a>
-          </div>
+          {info?.tour_3d && (
+            <div className={styles.flatModel}>
+              <a href={info?.tour_3d} target="_blank" rel="noreferrer">
+                3D-модель квартиры
+              </a>
+            </div>
+          )}
         </div>
         <div className={styles.prices}>
           <Accordion defaultExpanded sx={{ boxShadow: 0 }}>

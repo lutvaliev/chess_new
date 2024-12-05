@@ -85,7 +85,7 @@ const CostBar: FC<TProps> = ({ control, resetFilters, resetFlag }) => {
           <RubleIcon/>
         </span>
         <span style={{ display: 'flex' }}>
-          spanдо &nbsp;
+          до &nbsp;
           {range.max}
           <RubleIcon/>
         </span>

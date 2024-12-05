@@ -1,3 +1,5 @@
+/* eslint-disable react/no-this-in-sfc */
+/* eslint-disable no-restricted-globals */
 import { Button, Tooltip } from '@mui/material'
 import { useState } from 'react'
 import { useApartmentViewContext } from '../../../ApartmentView/state/ApartmentViewState'
@@ -9,10 +11,16 @@ import { Planirovka, PlitkaPlus, Spisok } from '../../../../../img'
 import CustomTooltip from '../CustomTooltip/CustomTooltip'
 import { TView } from '../../../ApartmentView'
 
+declare global {
+  interface Window {
+    closeIFrame?: () => void
+  }
+}
+
 const ObjectFilter = () => {
   const [show, setShow] = useState(true)
   const {
-    formReturn: { control, setValue }
+    formReturn: { control, setValue, getValues }
   } = useApartmentViewContext()
 
   const handleChessClick = (view: TView) => {
@@ -30,9 +38,14 @@ const ObjectFilter = () => {
       }
     }
   }
+
+  const handleCloseIframe = () => {
+    window.parent.postMessage('closeIframe', '*')
+  }
+
   return (
     <div className={styles.wrapper}>
-      <Button variant="contained" className={styles.button} onClick={() => window.history.go(-1)}>
+      <Button variant="contained" className={styles.button} onClick={handleCloseIframe}>
         <svg
           width="36"
           height="36"
@@ -138,7 +151,10 @@ const ObjectFilter = () => {
           </Button>
         </CustomTooltip> */}
         <CustomTooltip title="Шахматка">
-          <Button onClick={() => handleChessClick('TILE')}>
+          <Button
+            onClick={() => handleChessClick('TILE')}
+            style={getValues('view') === 'TILE' ? { backgroundColor: '#d9edfc' } : {}}
+          >
             <svg
               width="24"
               height="24"
@@ -178,12 +194,18 @@ const ObjectFilter = () => {
           </Button>
         </CustomTooltip>
         <CustomTooltip title="Список">
-          <Button onClick={() => handleChessClick('LIST')}>
+          <Button
+            onClick={() => handleChessClick('LIST')}
+            style={getValues('view') === 'LIST' ? { backgroundColor: '#d9edfc' } : {}}
+          >
             <img src={Spisok} alt="" />
           </Button>
         </CustomTooltip>
         <CustomTooltip title="Планировки">
-          <Button onClick={() => handleChessClick('PLAN')}>
+          <Button
+            onClick={() => handleChessClick('PLAN')}
+            style={getValues('view') === 'PLAN' ? { backgroundColor: '#d9edfc' } : {}}
+          >
             <img src={Planirovka} alt="" />
           </Button>
         </CustomTooltip>

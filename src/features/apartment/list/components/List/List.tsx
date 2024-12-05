@@ -9,6 +9,7 @@ import { TObject } from '../../../BaseApartment/types'
 import TableButton from '../../../../../core/components/table/components/TableButton/TableButton'
 import styles from './List.module.scss'
 import { formatNumber } from '../../../utils/formatNumber'
+import NotFound from '../../../../../core/components/NotFound/NotFound'
 
 const List = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -23,6 +24,11 @@ const List = () => {
   } = useApartmentViewContext()
 
   const maxFloor = preparedChessData[0]?.floors ?? 0
+
+  const hasVisibleItems = useMemo(
+    () => filteredData?.some((item) => item.opacity === undefined || item.opacity === false),
+    [filteredData]
+  )
 
   const columns = useMemo<Column<TObject>[]>(
     () => [
@@ -151,7 +157,11 @@ const List = () => {
 
   return (
     <BaseApartment>
-      {data && !isFetching ? (
+      {isFetching ? (
+        <div className={styles.spinnerWrapper}>
+          <Spinner />
+        </div>
+      ) : data && hasVisibleItems ? (
         <div className={styles.wrapper} role="button" tabIndex={0}>
           <Table
             data={filteredData || []}
@@ -170,8 +180,8 @@ const List = () => {
           />
         </div>
       ) : (
-        <div className={styles.spinnerWrapper}>
-          <Spinner />
+        <div className={styles.noResultsWrapper}>
+          <NotFound />
         </div>
       )}
     </BaseApartment>

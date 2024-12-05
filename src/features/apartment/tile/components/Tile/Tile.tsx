@@ -8,16 +8,22 @@ import Spinner from '../../../../../core/components/Spinner/Spinner'
 import styles from './Tile.module.scss'
 import { memo, useMemo, useState } from 'react'
 import lightenColor from '../../../utils/lightenColor'
+import { KeyboardArrowDown } from '@mui/icons-material'
 
 const Legend = memo(({ legendItems }: { legendItems: [string, string][] }) => {
-  const [isLegendVisible, setLegendVisible] = useState(false)
+  const [isLegendVisible, setLegendVisible] = useState(true)
 
   if (legendItems.length === 0) return <div className={styles.legendWrapper}></div>
 
   return (
     <div className={styles.legendWrapper}>
       <button onClick={() => setLegendVisible(!isLegendVisible)} className={styles.legendToggle}>
-        {isLegendVisible ? 'Скрыть легенду' : 'Показать легенду'}
+        <div className={styles.legend_btn_text}>
+          Легенда{' '}
+          <span className={`${isLegendVisible ? styles.open : ''}`}>
+            <KeyboardArrowDown />
+          </span>
+        </div>
       </button>
       <div className={`${styles.legend} ${isLegendVisible ? styles.open : ''}`}>
         <div className={styles.legend_wrapper}>

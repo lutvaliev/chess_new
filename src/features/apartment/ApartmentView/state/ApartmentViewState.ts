@@ -111,8 +111,8 @@ function useObjectParams(formReturn: UseFormReturn<TBaseForm>): TObjectParams {
 }
 
 function usePageProps(formReturn: UseFormReturn<TBaseForm>) {
-  const [page, setPage] = useState(1)
-  const elemPerPage = 20
+  const [page, setPage] = useState(undefined)
+  const elemPerPage = undefined
   const { view } = formReturn.watch()
   const pageParam = view === 'LIST' ? page : undefined
   const elemPerPageParam = view === 'LIST' ? elemPerPage : undefined

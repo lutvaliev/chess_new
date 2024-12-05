@@ -33,6 +33,12 @@ const CustomSelectBase = ({
     element.setAttribute('style', 'z-index: -1; opacity: 0;')
   })
 
+  const changeFilter = () => {
+    setValue('initDistrict', false)
+    setValue('initBuilding', false)
+    setValue('initSection', false)
+  }
+
   return (
     <FormControl fullWidth>
       <Select
@@ -51,6 +57,7 @@ const CustomSelectBase = ({
           event.preventDefault()
           handleChange(event.target.value)
           setIsOpen(true)
+          changeFilter()
         }}
         MenuProps={{
           disableScrollLock: true

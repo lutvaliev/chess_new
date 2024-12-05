@@ -1,38 +1,43 @@
-@import "src/core/styles/common";
+@import 'src/core/styles/common';
 
 .header {
   display: flex;
+  position: relative;
 }
 
 .headerInfo {
   display: flex;
-  gap: 17px;
-  width: 100%
+  gap: 10px;
+  width: 100%;
 }
 
 .images {
   display: flex;
-  gap: 8px;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 999;
 }
 
 .mainImage {
-  width: 116px;
-  height: 116px;
+  width: 176px;
+  height: 176px;
   border-radius: 4px;
 
   &_img {
-	width: 100%;
-	height: 100%;
-	object-fit: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 }
 
-.modal{
+.modal {
   display: flex;
   justify-content: center;
 }
 
-.buttonImg{
+.buttonImg {
+  position: relative;
   border: none;
   outline: none;
   background-color: #fff;
@@ -40,7 +45,7 @@
   width: 100%;
 }
 
-.modalImage{
+.modalImage {
   height: 100%;
   display: flex;
   justify-content: center;
@@ -60,16 +65,21 @@
 }
 
 .info {
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
 }
 
 .titleWrapper {
-  color: #1B272F;
+  color: #1b272f;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
   line-height: 20px;
+  .title {
+    font-weight: 600;
+    font-size: 18px;
+  }
 }
 
 .status {
@@ -85,7 +95,7 @@
 
 .button {
   border-radius: 4px !important;
-  background: #127CCA !important;
+  background: #127cca !important;
   color: $white !important;
   text-align: center !important;
   font-size: 14px !important;
@@ -103,16 +113,108 @@
 }
 
 .offer {
-  color: #127CCA;
-  border-bottom: 1px solid #127CCA;
+  color: #127cca;
+  border-bottom: 1px solid #127cca;
 }
 
-.subtitle{
+.subtitle {
   font-size: 14px;
   font-weight: 400;
   color: rgba(99, 112, 122, 1);
 }
 
 .close {
-	cursor: pointer;
+  cursor: pointer;
+}
+
+.mainImage {
+  button {
+    cursor: pointer;
+    img {
+      transition: transform 0.3s ease;
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+}
+
+.imageTabs {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  gap: 5px;
+
+  button {
+    cursor: pointer;
+    transition: background-color 0.3s;
+    &.activeTab {
+      //   background-color: #007bff;
+      color: #0260c4;
+
+      &:hover {
+        background-color: #e0e0e0;
+      }
+    }
+    &:hover {
+      background-color: #e0e0e0;
+    }
+  }
+}
+
+.fullscreenImageContainer {
+  position: relative;
+}
+
+.fullscreenNavigation {
+  position: absolute;
+  bottom: 100px;
+  width: 100%;
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  button {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 2rem;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    transition: background-color 0.3s;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+    svg {
+      display: block;
+    }
+  }
+}
+
+.tabButton {
+  padding: 5px 10px;
+  border-radius: 14px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  transition: all 0.3s;
+}
+
+.carusel {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 5px;
+  span {
+    width: 20px;
+    height: 6px;
+    transition: all 0.3s;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+  }
+
+  .selected {
+    background-color: #127cca;
+  }
 }
