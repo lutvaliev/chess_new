@@ -127,12 +127,12 @@ const Header: FC<TProp> = ({ info, drawerClose, img, label }) => {
             <div className={styles.title}>{`${info.name ?? label}`}</div>
           </div>
           <div className={styles.status}>
-            {1 && (
+            {info.MinimalPrice && (
               <div className={styles.subtitle}>
                 В ипотеку - от {` ${info.MinimalPrice ?? ''} ₽/мес`}
               </div>
             )}
-            {1 && <div className={styles.subtitle}>{` Срок сдачи ${info.date ?? ''}`}</div>}
+            {info.date && <div className={styles.subtitle}>{` Срок сдачи ${info.date ?? ''}`}</div>}
           </div>
         </div>
       </div>
