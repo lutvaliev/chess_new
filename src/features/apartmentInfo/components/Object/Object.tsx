@@ -1,11 +1,13 @@
 import classNames from 'classnames'
 import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import { useState } from 'react'
 import { useApartmentViewContext } from '../../../apartment/ApartmentView/state/ApartmentViewState'
 import { useApartmentsQuery } from '../../../apartment/BaseApartment/querries'
 import Row from '../Row/Row'
 import PrimaryButton from '../../../../core/components/buttons/PrimaryButton/PrimaryButton'
 import styles from './Object.module.scss'
+import ModalForm from '../ModalForm/ModalForm'
 
 const Object = ({ info, setAnalogues, type }: any) => {
   const {
@@ -14,6 +16,19 @@ const Object = ({ info, setAnalogues, type }: any) => {
   const [district, building] = watch(['district', 'building'])
   const layout = info?.id_Layout
   const { data } = useApartmentsQuery(district, building, layout)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [currentFormType, setCurrentFormType] = useState('')
+
+  const openModal = (formType: string) => {
+    setCurrentFormType(formType)
+    setIsModalOpen(true)
+  }
+
+  const closeModal = () => {
+    setIsModalOpen(false)
+    setCurrentFormType('')
+  }
+
   return (
     <div className="plashka">
       <div className={`${styles.body} noPadding`}>
@@ -128,9 +143,21 @@ const Object = ({ info, setAnalogues, type }: any) => {
             </div>
             <div className={styles.chooseFlat}>
               <div className={styles.buttonsWrapper}>
-                <PrimaryButton text="Забронировать" className={styles.button} />
-                <PrimaryButton text="Рассчитать Ипотеку" className={styles.button} />
-                <PrimaryButton text="Задать вопрос" className={styles.button} />
+                <PrimaryButton
+                  text="Забронировать"
+                  className={styles.button}
+                  onClick={() => openModal('Забронировать')}
+                />
+                <PrimaryButton
+                  text="Рассчитать Ипотеку"
+                  className={styles.button}
+                  onClick={() => openModal('Рассчитать Ипотеку')}
+                />
+                <PrimaryButton
+                  text="Задать вопрос"
+                  className={styles.button}
+                  onClick={() => openModal('Задать вопрос')}
+                />
               </div>
             </div>
           </>
@@ -138,53 +165,25 @@ const Object = ({ info, setAnalogues, type }: any) => {
           <div className={styles.chooseFlat}>
             <h5>Выбрать квартиру</h5>
             <div className={styles.flatButtons}>
-              <PrimaryButton text="Забронировать" />
-              <PrimaryButton text="Рассчитать Ипотеку" />
-              <PrimaryButton text="Задать вопрос" />
+              <PrimaryButton
+                text="Забронировать"
+                className={styles.button}
+                onClick={() => openModal('Забронировать')}
+              />
+              <PrimaryButton
+                text="Рассчитать Ипотеку"
+                className={styles.button}
+                onClick={() => openModal('Рассчитать Ипотеку')}
+              />
+              <PrimaryButton
+                text="Задать вопрос"
+                className={styles.button}
+                onClick={() => openModal('Задать вопрос')}
+              />
             </div>
           </div>
         )}
-        {/* <div className={styles.deal}>
-        <div className={styles.sectionTitle}>
-          Сделка
-          <DocumentIcon />
-        </div>
-        <div className={styles.dealInfo}>
-          <div className={styles.dealGeneralInfo}>
-            <Row
-              title="Клиент"
-              value={(
-                <div className={styles.client}>
-                  no info
-                </div>
-              )} />
-            <Row
-              title="Бронирование"
-              value={(
-                <div className={styles.document}>
-                  <div>12.04.2022 - 12.05.2022</div>
-                  <DocumentIcon />
-                </div>
-              )} />
-            <Row title="Дата оформления сделки" value="12.фев.2022" />
-            <Row title="Автор сделки" value="no info" />
-            <Row title="Ответственный" value="no info" />
-          </div>
-          <div className={styles.dealAdditionalInfo}>
-            <Row
-              title="Телефон"
-              value={(
-                <div className={styles.contacts}>
-                  <div className={styles.phone}>no info</div>
-                  <PhoneIcon />
-                  <EmailIcon />
-                </div>
-              )}
-            />
-            <Row title="Способ оплаты" value="Рассрочка" />
-          </div>
-        </div>
-      </div> */}
+        <ModalForm isOpen={isModalOpen} onClose={closeModal} formType={currentFormType} />
       </div>
     </div>
   )
