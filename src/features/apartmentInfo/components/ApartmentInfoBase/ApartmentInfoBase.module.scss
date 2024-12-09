@@ -17,6 +17,7 @@
     right: -100%;
     top: 0;
     transition: right 0.4s;
+    z-index: 999999;
     &__open {
       right: 0;
     }

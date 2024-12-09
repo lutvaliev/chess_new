@@ -17,6 +17,7 @@ const CustomSelectControl = ({
   handleError,
   isRequired,
   placeholder,
+  MenuProps,
   ...rest
 }: any) => {
   // const { requiredRule } = useValidationRules()
@@ -58,6 +59,7 @@ const CustomSelectControl = ({
           currentValue={currentValue}
           handleChange={onChange}
           name={name}
+          MenuProps={MenuProps}
           {...rest}
         />
       )}

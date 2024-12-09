@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { FC, useCallback, useState, useRef } from 'react'
 import styles from './PlanCard.module.scss'
 import CustomDrawer from '../../../../../core/components/CustomDrawer/CustomDrawer'
@@ -19,7 +21,7 @@ const PlanCard: FC<TProps> = ({ layout }) => {
   }
 
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={(e: any) => handleClickOutside(e)}>
       <CustomDrawer
         anchor="right"
         hideBackdrop

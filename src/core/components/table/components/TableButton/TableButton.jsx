@@ -3,6 +3,7 @@ import { FC, useState, useRef, useEffect } from 'react';
 import CustomDrawer from '../../../CustomDrawer/CustomDrawer';
 import ApartmentInfoBase from '../../../../../features/apartmentInfo/components/ApartmentInfoBase/ApartmentInfoBase';
 import styles from './TableButton.module.scss';
+import getStatusColor from '../../../../../features/apartment/utils/getStatusColor'
 
 const TableButton: FC<{ rowData: any }> = ({ rowData }) => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -13,23 +14,14 @@ const TableButton: FC<{ rowData: any }> = ({ rowData }) => {
         setIsDrawerOpen(true);
     };
 
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (drawerRef.current && !drawerRef.current.contains(event.target)) {
-                handleClose();
-                console.log("drawerRef.current && !drawerRef.current.contains(event.target)")
-            }
-        }
-        if (isDrawerOpen) {
-            document.addEventListener('mousedown', handleClickOutside);
-        } else {
-            document.removeEventListener('mousedown', handleClickOutside);
-        }
+    
+  const bgColor = getStatusColor(rowData.color)
 
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, [isDrawerOpen]);
+  const handleClickOutside = (event: MouseEvent) => {
+    if (drawerRef.current && !drawerRef.current.contains(event.target)) {
+      setIsDrawerOpen(false)
+    }
+  }
 
     return (
         <div>
@@ -45,7 +37,8 @@ const TableButton: FC<{ rowData: any }> = ({ rowData }) => {
                     </g>
                 </svg>
             </button>
-            <CustomDrawer
+           <div onClick={(e: any) => handleClickOutside(e)}>
+           <CustomDrawer
                 anchor="right"
                 hideBackdrop
                 isOpen={isDrawerOpen}
@@ -53,9 +46,10 @@ const TableButton: FC<{ rowData: any }> = ({ rowData }) => {
                 className={styles.drawer}
             >
                 {isDrawerOpen && 
-                    <div ref={drawerRef}><ApartmentInfoBase drawerClose={handleClose} info={rowData} /></div>
+                    <div ref={drawerRef}><ApartmentInfoBase drawerClose={handleClose} info={rowData} bgColor={bgColor}/></div>
                 }
             </CustomDrawer>
+           </div>
         </div>
     );
 };

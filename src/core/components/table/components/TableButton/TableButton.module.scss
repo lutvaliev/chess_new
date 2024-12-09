@@ -1,7 +1,10 @@
-.drawer{
-  :global(.MuiDrawer-paper){
-    top: 30px;
-    border-top-left-radius: 16px;
+.drawer {
+  :global(.MuiDrawer-paper) {
+    top: 0px;
+    // border-top-left-radius: 16px;
+
+    overflow-x: hidden !important;
+    // overflow-y: hidden !important;
   }
 }
 

@@ -161,6 +161,16 @@ const ApartmentFilter = ({ name }: any) => {
               options={sortOptions}
               handleError={(error: any) => error?.actions}
               selectClassName={styles.sort_select}
+              MenuProps={{
+                MenuListProps: {
+                  sx: {
+                    padding: 0,
+                    '& .MuiMenuItem-root': {
+                      padding: '10px 16px'
+                    }
+                  }
+                }
+              }}
             />
           </div>
         )}

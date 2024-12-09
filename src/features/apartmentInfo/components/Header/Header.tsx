@@ -41,6 +41,10 @@ const Header: FC<TProp> = ({ info, drawerClose, img, label }) => {
   const imgObjectLink = getImageSrc(hasImageObject)
   const imgFloorLink = getImageSrc(hasImageFloor)
   const images = [imgObjectLink, imgFloorLink]
+  const hasOneImage = !(hasImageObject?.length > 0 && hasImageFloor?.length > 0)
+  const activeImage = getImageSrc(
+    (Array.isArray(hasImageObject) && hasImageObject.length > 0) ? hasImageObject : hasImageFloor
+  )
 
   const handleKeyDown = (e: KeyboardEvent) => {
     if (isFullscreen) {
@@ -59,6 +63,10 @@ const Header: FC<TProp> = ({ info, drawerClose, img, label }) => {
       window.addEventListener('keydown', handleKeyDown)
       return () => window.removeEventListener('keydown', handleKeyDown)
     }
+
+    if (hasImageObject && hasImageObject.length === 0) {
+      setCurrentImageIndex(1)
+    }
   }, [isFullscreen])
 
   return (
@@ -71,23 +79,25 @@ const Header: FC<TProp> = ({ info, drawerClose, img, label }) => {
         aria-describedby="modal-modal-description"
       >
         <div className={styles.fullscreenImageContainer}>
-          <img className={styles.modalImage} src={images[currentImageIndex]} alt="Full screen" />
-          <div className={styles.fullscreenNavigation}>
-            <button
-              onClick={() =>
-                setCurrentImageIndex((currentImageIndex - 1 + images.length) % images.length)
-              }
-              className={`${styles.navButton} ${styles.navLeft}`}
-            >
-              <KeyboardArrowLeft fontSize="large" />
-            </button>
-            <button
-              onClick={() => setCurrentImageIndex((currentImageIndex + 1) % images.length)}
-              className={`${styles.navButton} ${styles.navRight}`}
-            >
-              <KeyboardArrowRight fontSize="large" />
-            </button>
-          </div>
+          <img className={styles.modalImage} src={hasOneImage ? activeImage : images[currentImageIndex]} alt="Full screen" />
+          {!hasOneImage && (
+            <div className={styles.fullscreenNavigation}>
+              <button
+                onClick={() =>
+                  setCurrentImageIndex((currentImageIndex - 1 + images.length) % images.length)
+                }
+                className={`${styles.navButton} ${styles.navLeft}`}
+              >
+                <KeyboardArrowLeft fontSize="large" />
+              </button>
+              <button
+                onClick={() => setCurrentImageIndex((currentImageIndex + 1) % images.length)}
+                className={`${styles.navButton} ${styles.navRight}`}
+              >
+                <KeyboardArrowRight fontSize="large" />
+              </button>
+            </div>
+          )}
         </div>
       </Modal>
 
@@ -99,26 +109,32 @@ const Header: FC<TProp> = ({ info, drawerClose, img, label }) => {
               className={styles.buttonImg}
               onClick={handleOpen}
             >
-              <img className={styles.mainImage_img} src={images[currentImageIndex]} alt="" />
-              <div className={styles.carusel}>
-                <span className={currentImageIndex === 0 ? styles.selected : ''} />
-                <span className={currentImageIndex === 1 ? styles.selected : ''} />
-              </div>
+              <img className={styles.mainImage_img} src={hasOneImage ? activeImage : images[currentImageIndex]} alt="" />
+              {!hasOneImage && (
+                <div className={styles.carusel}>
+                  <span className={currentImageIndex === 0 ? styles.selected : ''} />
+                  <span className={currentImageIndex === 1 ? styles.selected : ''} />
+                </div>
+              )}
             </button>
           </div>
           <div className={styles.imageTabs}>
-            <button
-              onClick={() => handleChangeImage(0)}
-              className={`${styles.tabButton} ${currentImageIndex === 0 ? styles.activeTab : ''}`}
-            >
-              Планировка
-            </button>
-            <button
-              onClick={() => handleChangeImage(1)}
-              className={`${styles.tabButton} ${currentImageIndex === 1 ? styles.activeTab : ''}`}
-            >
-              На этаже
-            </button>
+            {hasImageObject && hasImageObject.length > 0 && (
+              <button
+                onClick={() => handleChangeImage(0)}
+                className={`${styles.tabButton} ${currentImageIndex === 0 ? styles.activeTab : ''}`}
+              >
+                Планировка
+              </button>
+            )}
+            {hasImageFloor && hasImageFloor.length > 0 && (
+              <button
+                onClick={() => handleChangeImage(1)}
+                className={`${styles.tabButton} ${currentImageIndex === 1 ? styles.activeTab : ''}`}
+              >
+                На этаже
+              </button>
+            )}
           </div>
         </div>
 

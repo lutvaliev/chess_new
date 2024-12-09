@@ -39,6 +39,8 @@ const CustomSelectBase = ({
     setValue('initSection', false)
   }
 
+  console.log(MenuProps)
+
   return (
     <FormControl fullWidth>
       <Select
@@ -59,7 +61,7 @@ const CustomSelectBase = ({
           setIsOpen(true)
           changeFilter()
         }}
-        MenuProps={{
+        MenuProps={MenuProps || {
           disableScrollLock: true
         }}
         renderValue={(selected) => {

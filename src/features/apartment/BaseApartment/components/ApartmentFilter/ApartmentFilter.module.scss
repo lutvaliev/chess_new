@@ -120,6 +120,9 @@
   &:hover {
     background: #e7f4ff !important;
   }
+  &:global(.MuiPaper-root .MuiList-root){
+    padding: 8px 10px !important
+  }
 }
 
 .icon {
