@@ -1,4 +1,6 @@
-import { useMemo, useState, useRef } from 'react'
+/* eslint-disable react/button-has-type */
+/* eslint-disable max-len */
+import { useMemo, useState, useRef, useEffect } from 'react'
 import { Column } from 'react-table'
 import { useApartmentViewContext } from '../../../ApartmentView/state/ApartmentViewState'
 import { Table } from '../../../../../core/components/table'
@@ -13,8 +15,8 @@ import NotFound from '../../../../../core/components/NotFound/NotFound'
 
 const List = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const handleClose = () => setIsModalOpen(false)
-  const drawerRef = useRef<HTMLDivElement>(null)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [itemsPerPage, setItemsPerPage] = useState(10)
 
   const {
     formReturn: { watch },
@@ -25,10 +27,12 @@ const List = () => {
 
   const maxFloor = preparedChessData[0]?.floors ?? 0
 
-  const hasVisibleItems = useMemo(
-    () => filteredData?.some((item) => item.opacity === undefined || item.opacity === false),
+  const visibleItems = useMemo(
+    () => filteredData?.filter((item) => item.opacity !== true) || [],
     [filteredData]
   )
+
+  const hasVisibleItems = useMemo(() => visibleItems.length > 0, [visibleItems])
 
   const columns = useMemo<Column<TObject>[]>(
     () => [
@@ -93,67 +97,31 @@ const List = () => {
           )
         }
       },
-      //   {
-      //     Header: 'Скидка',
-      //     accessor: 'discounts',
-      //     Cell: ({ value, row }) => (
-      //       <TableCell value={Array.isArray(value) && value.length > 0 ? 'Да' : '-'} row={row} />
-      //     )
-      //   },
       {
         Header: ' ',
-        accessor: (row: any) => row, // Accessing all data for the row
-        // eslint-disable-next-line max-len
+        accessor: (row: any) => row,
         Cell: ({ row }: any) => <TableButton rowData={row.original} />
       }
-      // {
-      //   Header: 'Статус',
-      //   accessor: 'status',
-      //   Cell: ({ value, row }) => <TableCell value={value} row={row} />
-      // },
-      // {
-      //   Header: 'Номер',
-      //   accessor: 'number_of_object',
-      //   Cell: ({ value, row }) => <TableCell value={value} row={row} />
-      // },
-      // {
-      //   Header: 'Стоимость, руб',
-      //   accessor: 'cost',
-      //   Cell: ({ value, row }) => <TableCell value={value} row={row} />
-      // },
-      // {
-      //   Header: 'Секция',
-      //   accessor: 'section_',
-      //   Cell: ({ value, row }) => <TableCell value={value} row={row} />
-      // },
-      // {
-      //   Header: 'Планировка',
-      //   accessor: 'type_apartment',
-      //   Cell: ({ value, row }) => <TableCell value={value} row={row} />
-      // },
-      // {
-      //   Header: 'Приведенная площадь, м2:',
-      //   accessor: 'type_object',
-      //   Cell: ({ value, row }) => <TableCell value={value} row={row} />
-      // },
-      // {
-      //   Header: 'Общая пл.(БТИ), м2:',
-      //   accessor: 'name',
-      //   Cell: ({ value, row }) => <TableCell value={value} row={row} />
-      // },
-      // {
-      //   Header: 'Приведен. пл. (БТИ), м2:',
-      //   accessor: 'district',
-      //   Cell: ({ value, row }) => <TableCell value={value} row={row} />
-      // },
-      // {
-      //   Header: 'Площадь кухни (БТИ), м2:',
-      //   accessor: 'district_id',
-      //   Cell: ({ value, row }) => <TableCell value={value} row={row} />
-      // }
     ],
     [watch()]
   )
+
+  const paginatedData = useMemo(() => {
+    const startIndex = (currentPage - 1) * itemsPerPage
+    return visibleItems.slice(startIndex, startIndex + itemsPerPage)
+  }, [visibleItems, currentPage, itemsPerPage])
+
+  const totalPages = useMemo(() => Math.ceil(visibleItems.length / itemsPerPage), [visibleItems, itemsPerPage])
+
+  const handlePageChange = (newPage: any) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage)
+    }
+  }
+
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [filteredData])
 
   return (
     <BaseApartment>
@@ -164,20 +132,44 @@ const List = () => {
       ) : data && hasVisibleItems ? (
         <div className={styles.wrapper} role="button" tabIndex={0}>
           <Table
-            data={filteredData || []}
+            data={paginatedData || []}
             // @ts-ignore
             columns={columns}
             contentClass={styles.table}
             onRowClick={() => setIsModalOpen(true)}
-            // paginationConfig={data?.length && {
-            //   isEnabled: true,
-            //   manual: true,
-            //   pageSize: totalPages,
-            //   totalRows: data?.count,
-            //   pageCount: +pageElements,
-            //   onPageChange: (page) => setCurrentPage(page)
-            // }}
           />
+          <div className={styles.paginationWrapper}>
+            <button
+              className={styles.paginationButton}
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
+              Предыдущая
+            </button>
+            <span>{`${currentPage} из ${totalPages}`}</span>
+            <button
+              className={styles.paginationButton}
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+            >
+              Следующая
+            </button>
+            <select
+              value={itemsPerPage}
+              onChange={(e) => {
+                setItemsPerPage(Number(e.target.value))
+                setCurrentPage(1)
+              }}
+            >
+              {[5, 10, 20, 50].map((count) => (
+                <option key={count} value={count}>
+                  {count}
+                  {' '}
+                  на странице
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       ) : (
         <div className={styles.noResultsWrapper}>

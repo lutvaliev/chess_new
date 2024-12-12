@@ -39,8 +39,6 @@ const CustomSelectBase = ({
     setValue('initSection', false)
   }
 
-  console.log(MenuProps)
-
   return (
     <FormControl fullWidth>
       <Select

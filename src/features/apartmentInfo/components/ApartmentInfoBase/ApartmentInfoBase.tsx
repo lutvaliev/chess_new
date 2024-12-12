@@ -36,7 +36,7 @@ const ApartmentInfo: FC<TProp> = ({ info, drawerClose, img, bgColor }) => {
   const layout = info?.id_Layout
   const { data } = useApartmentsQuery(district, building, layout)
   const [analogues, setAnalogues] = useState(false)
-
+  console.log(info.id)
   return (
     <>
       <div

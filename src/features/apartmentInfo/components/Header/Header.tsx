@@ -148,7 +148,7 @@ const Header: FC<TProp> = ({ info, drawerClose, img, label }) => {
                 В ипотеку - от {` ${info.MinimalPrice ?? ''} ₽/мес`}
               </div>
             )}
-            {info.date && <div className={styles.subtitle}>{` Срок сдачи ${info.date ?? ''}`}</div>}
+            {info.deadline && <div className={styles.subtitle}>{` Срок сдачи - ${info.deadline ?? ''}`}</div>}
           </div>
         </div>
       </div>
