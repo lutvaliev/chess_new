@@ -167,3 +167,31 @@ export function useApartmentsQuery(
     }
   )
 }
+
+// async function getApartmenById(id: string): Promise<TObject[]> {
+//   try {
+//     const apiUrl = getApiUrlFromQuery()
+//     const response = await apiClient(`${apiUrl}/hs/restapi_v1/estate_object?`, {
+//       params: {
+//         id,
+//         status: true,
+//         additional_info: true
+//       }
+//     })
+//     return response.data?.data
+//   } catch (e: any) {
+//     throw new Error(e)
+//   }
+// }
+
+// export const useObjectChessQuery = (
+//   { id, filter }: TObjectParams,
+//   page?: number,
+//   pagesize?: number
+// ) => {
+//   const keys = [QueryKeys.ObjectChess, id, filter, page, pagesize]
+//   return useQuery(keys, () => getObjectChess(id, filter, page, pagesize), {
+//     enabled: !!id,
+//     keepPreviousData: true
+//   })
+// }

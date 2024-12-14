@@ -3,6 +3,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { FC, useState } from 'react'
 import { OpenInFullOutlined } from '@mui/icons-material'
+import { Modal } from '@mui/material'
 import { useApartmentsQuery } from '../../../apartment/BaseApartment/querries'
 import { useApartmentViewContext } from '../../../apartment/ApartmentView/state/ApartmentViewState'
 import Header from '../Header/Header'
@@ -14,6 +15,7 @@ import LikeButton from '../LikeButton/LikeButton'
 import StatisticsButton from '../StatisticsButton/StatisticsButton'
 import DownloadButton from '../DownloadButton/DownloadButton'
 import ShareButton from '../ShareButton/ShareButton'
+import ApartmentAnalogues from '../ApartmentAnalogues/ApartmentAnalogues'
 
 type TProp = {
   info: any
@@ -23,11 +25,11 @@ type TProp = {
 }
 
 const handleClickInside = (event: any) => {
-  // Prevent the click event from propagating to the parent
   event.stopPropagation()
 }
 
 const ApartmentInfo: FC<TProp> = ({ info, drawerClose, img, bgColor }) => {
+  const [open, setOpen] = useState(false)
   const {
     formReturn: { watch }
   } = useApartmentViewContext()
@@ -36,7 +38,18 @@ const ApartmentInfo: FC<TProp> = ({ info, drawerClose, img, bgColor }) => {
   const layout = info?.id_Layout
   const { data } = useApartmentsQuery(district, building, layout)
   const [analogues, setAnalogues] = useState(false)
-  console.log(info.id)
+  const [fullImage, setFullImage] = useState('')
+  const [apartmentId, setApartmentId] = useState('')
+  const [apartmentIsOpen, setApartmentIsOpen] = useState(false)
+
+  const handleOpen = (img: any) => {
+    setOpen(true)
+    setFullImage(img)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+  }
   return (
     <>
       <div
@@ -77,9 +90,20 @@ const ApartmentInfo: FC<TProp> = ({ info, drawerClose, img, bgColor }) => {
         }`}
         onClick={handleClickInside}
       >
+        <Modal
+          open={open}
+          onClose={handleClose}
+          className={styles.modal}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <div className={styles.fullscreenImageContainer}>
+            <img className={styles.modalImage} src={fullImage} alt="Full screen" />
+          </div>
+        </Modal>
         <div className={styles.analogues_head}>
           <div className={styles.analogues_titles}>
-            <button type="button" onClick={() => setAnalogues(false)}>
+            <button type="button" onClick={() => { setAnalogues(false); setApartmentIsOpen(false) }}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="14"
@@ -114,19 +138,49 @@ const ApartmentInfo: FC<TProp> = ({ info, drawerClose, img, bgColor }) => {
         <div className={styles.apartments_list}>
           {data?.map((elem, i) => (
             <div key={elem?.Apart?.id} className={styles.apartment_card}>
-              <div className={styles.card_img}>
-                <img src={defaultImage} alt="" />
+              <div
+                className={styles.card_img}
+                onClick={() =>
+                  handleOpen(
+                    elem?.Apart?.floor_planes.find((plane) => plane.endsWith('.png'))
+                      || defaultImage
+                  )}
+              >
+                <img
+                  src={
+                    elem?.Apart?.floor_planes.find((plane) => plane.endsWith('.png'))
+                    || defaultImage
+                  }
+                  alt=""
+                />
               </div>
               <div className={styles.card_info}>
                 <div className={styles.number}>{i + 1}</div>
                 <h4>{elem?.Apart?.ApartName}</h4>
                 <p>{elem?.Apart?.Description}</p>
-                <button type="button" className={styles.view_button} onClick={() => -1}>
+                <button
+                  type="button"
+                  className={styles.view_button}
+                  onClick={() => {
+                    setApartmentId(elem?.Apart?.id)
+                    setApartmentIsOpen(true)
+                  }}
+                >
                   Перейти к квартире
                 </button>
               </div>
             </div>
           ))}
+        </div>
+        <div className={`${styles.apartment_container} ${apartmentIsOpen && styles.open}`}>
+          {apartmentIsOpen && (
+            <ApartmentAnalogues
+              id={apartmentId}
+              drawerClose={drawerClose}
+              handleClickInside={handleClickInside}
+              onClose={setApartmentIsOpen}
+            />
+          )}
         </div>
       </div>
     </>

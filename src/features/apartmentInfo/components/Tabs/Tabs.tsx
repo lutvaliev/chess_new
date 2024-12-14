@@ -8,7 +8,7 @@ import Advertising from '../Advertising/Advertising'
 import Statistics from '../Statistics/Statistics'
 import styles from './Tabs.module.scss'
 
-const ObjectTabs = ({ info, setAnalogues, type }: any) => {
+const ObjectTabs = ({ info, setAnalogues, type, layout_value }: any) => {
   const [filterIndex, setFilterIndex] = useState('1')
   return (
     <TabContext value={filterIndex}>
@@ -24,7 +24,7 @@ const ObjectTabs = ({ info, setAnalogues, type }: any) => {
         <Tab disableRipple value="3" label="Статистика"/>
       </Tabs> */}
       <TabPanel value="1" className={styles.apartment_tabpanel}>
-        <Object info={info} setAnalogues={setAnalogues} type={type} />
+        <Object info={info} setAnalogues={setAnalogues} type={type} layout_value={layout_value} />
       </TabPanel>
       {/* <TabPanel value="2">
         <Advertising/>

@@ -1,7 +1,12 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
+/* eslint-disable no-tabs */
+/* eslint-disable no-plusplus */
 /* eslint-disable react/button-has-type */
 /* eslint-disable max-len */
 import { useMemo, useState, useRef, useEffect } from 'react'
 import { Column } from 'react-table'
+import { Button, IconButton, MenuItem, Select } from '@mui/material'
+import { ArrowBack, ArrowForward } from '@mui/icons-material'
 import { useApartmentViewContext } from '../../../ApartmentView/state/ApartmentViewState'
 import { Table } from '../../../../../core/components/table'
 import { BaseApartment } from '../../../BaseApartment'
@@ -12,6 +17,38 @@ import TableButton from '../../../../../core/components/table/components/TableBu
 import styles from './List.module.scss'
 import { formatNumber } from '../../../utils/formatNumber'
 import NotFound from '../../../../../core/components/NotFound/NotFound'
+
+const renderPageButtons = (currentPage: any, totalPages: any, handlePageChange: any) => {
+  const pageButtons = []
+  const maxPagesToShow = 5
+
+  for (let i = 1; i <= totalPages; i++) {
+    if (i === 1 || i === totalPages || (i >= currentPage - 2 && i <= currentPage + 2)) {
+      pageButtons.push(
+        <Button
+          key={i}
+          variant={currentPage === i ? 'contained' : 'outlined'}
+          onClick={() => handlePageChange(i)}
+          className={styles.pageButton}
+          sx={{ width: '40px', height: '40px' }}
+        >
+          {i}
+        </Button>
+      )
+    } else if (
+      (i === currentPage - 3 && currentPage > 4)
+      || (i === currentPage + 3 && currentPage < totalPages - 3)
+    ) {
+      pageButtons.push(
+        <span key={`ellipsis-${i}`} className={styles.ellipsis}>
+          ...
+        </span>
+      )
+    }
+  }
+
+  return pageButtons
+}
 
 const List = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -111,7 +148,10 @@ const List = () => {
     return visibleItems.slice(startIndex, startIndex + itemsPerPage)
   }, [visibleItems, currentPage, itemsPerPage])
 
-  const totalPages = useMemo(() => Math.ceil(visibleItems.length / itemsPerPage), [visibleItems, itemsPerPage])
+  const totalPages = useMemo(
+    () => Math.ceil(visibleItems.length / itemsPerPage),
+    [visibleItems, itemsPerPage]
+  )
 
   const handlePageChange = (newPage: any) => {
     if (newPage >= 1 && newPage <= totalPages) {
@@ -139,36 +179,43 @@ const List = () => {
             onRowClick={() => setIsModalOpen(true)}
           />
           <div className={styles.paginationWrapper}>
-            <button
-              className={styles.paginationButton}
-              onClick={() => handlePageChange(currentPage - 1)}
-              disabled={currentPage === 1}
-            >
-              Предыдущая
-            </button>
-            <span>{`${currentPage} из ${totalPages}`}</span>
-            <button
-              className={styles.paginationButton}
-              onClick={() => handlePageChange(currentPage + 1)}
-              disabled={currentPage === totalPages}
-            >
-              Следующая
-            </button>
-            <select
+            <Select
               value={itemsPerPage}
               onChange={(e) => {
                 setItemsPerPage(Number(e.target.value))
                 setCurrentPage(1)
               }}
+              sx={{
+                height: 40,
+                '.MuiSelect-select': {
+                  padding: 1
+                }
+              }}
+              className={styles.select}
             >
               {[5, 10, 20, 50].map((count) => (
-                <option key={count} value={count}>
+                <MenuItem key={count} value={count}>
                   {count}
-                  {' '}
-                  на странице
-                </option>
+                </MenuItem>
               ))}
-            </select>
+            </Select>
+            <IconButton
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className={styles.arrowButton}
+            >
+              <ArrowBack />
+            </IconButton>
+            <div className={styles.pageButtons}>
+              {renderPageButtons(currentPage, totalPages, handlePageChange)}
+            </div>
+            <IconButton
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className={styles.arrowButton}
+            >
+              <ArrowForward />
+            </IconButton>
           </div>
         </div>
       ) : (

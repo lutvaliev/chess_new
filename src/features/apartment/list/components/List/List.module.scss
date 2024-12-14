@@ -1,31 +1,31 @@
-.wrapper{
+.wrapper {
   width: 100%;
   overflow-x: auto;
   outline: none;
   padding-bottom: 30px;
 }
 
-.noResultsWrapper{
-	height: 100%;
+.noResultsWrapper {
+  height: 100%;
 }
 
 .table {
   width: 100%;
   display: flex;
-  thead{
+  thead {
     width: 100%;
     display: flex;
-    tr{
+    tr {
       width: 100%;
       display: flex;
       justify-content: space-around;
-      th{
+      th {
         border: none !important;
         display: flex;
         justify-content: center;
         align-items: center;
         text-align: center;
-        &:first-child{
+        &:first-child {
           min-width: 130px;
         }
       }
@@ -81,44 +81,44 @@
   //     width: 150px!important;
   //   }
   // }
-  th{
+  th {
     width: 130px;
-    padding: 2px 4px!important;
+    padding: 2px 4px !important;
   }
-  td{
+  td {
     width: 130px;
     display: flex;
     justify-content: space-between;
-    padding: 0!important;
+    padding: 0 !important;
     // height: 36px!important;
     white-space: nowrap;
   }
 }
 
-.row{
+.row {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 4px 0!important;
+  padding: 4px 0 !important;
 }
 
-.opacity{
+.opacity {
   display: none;
 }
 
-.opacity + tr{
+.opacity + tr {
   display: none;
 }
 
-.drawer{
-  :global(.MuiDrawer-paper){
+.drawer {
+  :global(.MuiDrawer-paper) {
     top: 30px;
     border-top-left-radius: 16px;
   }
 }
 
-.list{
+.list {
   width: 80%;
   font-family: Ubuntu, sans-serif;
   display: flex;
@@ -130,7 +130,7 @@
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
-.table_titles{
+.table_titles {
   width: 80%;
   display: flex;
   justify-content: space-between;
@@ -138,55 +138,92 @@
   font-family: Ubuntu, sans-serif;
 }
 
-.table_title{
+.table_title {
   text-align: center;
   width: 150px;
 }
 
-.flat_view{
+.flat_view {
   height: 100px;
 }
 
-.flat_view img{
+.flat_view img {
   width: 130px;
   height: 100%;
   object-fit: contain;
 }
 
-.flat_info{
+.flat_info {
   opacity: 1;
   width: 150px;
   text-align: center;
 }
 
-.modal{
+.modal {
   display: flex;
   justify-content: center;
 }
 
-.modalImage{
+.modalImage {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .discount {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 
-	span {
-		height: max-content;
-		line-height: 100%;
-		font-weight: 400;
-	}
+  span {
+    height: max-content;
+    line-height: 100%;
+    font-weight: 400;
+  }
 }
 
+.spinnerWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
 
-.spinnerWrapper{
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 100%;
+.paginationWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.pageButtons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.pageButton {
+  min-width: unset !important;
+  padding: 0 !important;
+  font-size: 14px;
+}
+
+.arrowButton {
+  color: #127cca;
+
+  &:disabled {
+    color: #ccc;
   }
-  
+}
+
+.select {
+  min-width: 20px;
+  margin-right: 16px;
+}
+
+.ellipsis {
+  font-size: 14px;
+  color: #999;
+  padding: 0 8px;
+}

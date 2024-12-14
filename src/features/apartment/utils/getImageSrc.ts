@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 import defaultImage from '../../../img/featured.png'
 
 export const getImageSrc = (img_adress: string[]): string => {

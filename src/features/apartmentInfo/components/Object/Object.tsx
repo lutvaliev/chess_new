@@ -9,12 +9,13 @@ import PrimaryButton from '../../../../core/components/buttons/PrimaryButton/Pri
 import styles from './Object.module.scss'
 import ModalForm from '../ModalForm/ModalForm'
 
-const Object = ({ info, setAnalogues, type }: any) => {
+const Object = ({ info, setAnalogues, type, layout_value }: any) => {
+  console.log(layout_value)
   const {
     formReturn: { watch }
   } = useApartmentViewContext()
   const [district, building] = watch(['district', 'building'])
-  const layout = info?.id_Layout
+  const layout = type !== 'plan' ? info?.id_Layout : layout_value
   const { data } = useApartmentsQuery(district, building, layout)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [currentFormType, setCurrentFormType] = useState('')
@@ -71,9 +72,9 @@ const Object = ({ info, setAnalogues, type }: any) => {
               {info?.description || info?.Description}
             </AccordionDetails>
           </Accordion>
-          {info?.tour_3d && (
+          {(info?.tour_3d || info?.PlanoplanLink) && (
             <div className={styles.flatModel}>
-              <a href={info?.tour_3d} target="_blank" rel="noreferrer">
+              <a href={info?.tour_3d || info?.PlanoplanLink} target="_blank" rel="noreferrer">
                 3D-модель квартиры
               </a>
             </div>
@@ -133,14 +134,20 @@ const Object = ({ info, setAnalogues, type }: any) => {
             </AccordionDetails>
           </Accordion>
         </div>
-        {type !== 'plan' ? (
+        {type !== 'PLAN' ? (
           <>
-            <div className={styles.stats}>
-              <Row title="Еще квартир такого типа" value={data?.length} />
-              <button type="button" className={styles.analogues} onClick={() => setAnalogues(true)}>
-                Квартиры аналоги
-              </button>
-            </div>
+            {setAnalogues && (
+              <div className={styles.stats}>
+                <Row title="Еще квартир такого типа" value={data?.length} />
+                <button
+                  type="button"
+                  className={styles.analogues}
+                  onClick={() => setAnalogues(true)}
+                >
+                  Квартиры аналоги
+                </button>
+              </div>
+            )}
             <div className={styles.chooseFlat}>
               <div className={styles.buttonsWrapper}>
                 <PrimaryButton

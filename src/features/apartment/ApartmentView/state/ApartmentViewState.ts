@@ -144,6 +144,7 @@ const ApartmentViewState = () => {
     preparedApartmentData,
     apartmentFilterData,
     filteredData,
+    layoutData,
     layoutFilterData
   }
 }

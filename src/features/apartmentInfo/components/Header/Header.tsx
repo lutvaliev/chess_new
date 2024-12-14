@@ -12,7 +12,7 @@ import { getImageSrc } from '../../../apartment/utils/getImageSrc'
 
 type TProp = {
   info: any
-  img: string
+  img?: string
   label?: string
   drawerClose: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void
 }
@@ -143,7 +143,7 @@ const Header: FC<TProp> = ({ info, drawerClose, img, label }) => {
             <div className={styles.title}>{`${info.name ?? label}`}</div>
           </div>
           <div className={styles.status}>
-            {info.MinimalPrice && (
+            {info.mortgage && (
               <div className={styles.subtitle}>
                 В ипотеку - от {` ${info.MinimalPrice ?? ''} ₽/мес`}
               </div>

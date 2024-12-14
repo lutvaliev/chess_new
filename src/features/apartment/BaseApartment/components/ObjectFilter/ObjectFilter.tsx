@@ -20,7 +20,8 @@ declare global {
 const ObjectFilter = () => {
   const [show, setShow] = useState(true)
   const {
-    formReturn: { control, setValue, getValues }
+    formReturn: { control, setValue, getValues },
+    layoutData
   } = useApartmentViewContext()
 
   const handleChessClick = (view: TView) => {
@@ -201,14 +202,16 @@ const ObjectFilter = () => {
             <img src={Spisok} alt="" />
           </Button>
         </CustomTooltip>
-        <CustomTooltip title="Планировки">
-          <Button
-            onClick={() => handleChessClick('PLAN')}
-            style={getValues('view') === 'PLAN' ? { backgroundColor: '#d9edfc' } : {}}
-          >
-            <img src={Planirovka} alt="" />
-          </Button>
-        </CustomTooltip>
+        {Array.isArray(layoutData) && layoutData.length !== 0 && (
+          <CustomTooltip title="Планировки">
+            <Button
+              onClick={() => handleChessClick('PLAN')}
+              style={getValues('view') === 'PLAN' ? { backgroundColor: '#d9edfc' } : {}}
+            >
+              <img src={Planirovka} alt="" />
+            </Button>
+          </CustomTooltip>
+        )}
       </div>
     </div>
   )

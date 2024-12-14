@@ -164,7 +164,8 @@ export type TApartments = {
   Apart: {
     id: string,
     ApartName: string,
-    Description: string
+    Description: string,
+    floor_planes: string[]
   }
 }
 
