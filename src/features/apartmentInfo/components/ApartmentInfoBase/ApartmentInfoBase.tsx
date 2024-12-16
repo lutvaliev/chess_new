@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { OpenInFullOutlined } from '@mui/icons-material'
 import { Modal } from '@mui/material'
 import { useApartmentsQuery } from '../../../apartment/BaseApartment/querries'
@@ -50,6 +50,15 @@ const ApartmentInfo: FC<TProp> = ({ info, drawerClose, img, bgColor }) => {
   const handleClose = () => {
     setOpen(false)
   }
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden'
+
+    return () => {
+      document.body.style.overflow = 'auto'
+    }
+  }, [])
+
   return (
     <>
       <div
@@ -63,19 +72,21 @@ const ApartmentInfo: FC<TProp> = ({ info, drawerClose, img, bgColor }) => {
         className={`${styles.wrapper} apartmentinfo ${styles.wrapper_info}`}
         onClick={handleClickInside}
       >
-        <Header drawerClose={drawerClose} info={info} img={img} />
+        <div className={styles.overflow}>
+          <Header drawerClose={drawerClose} info={info} img={img} />
 
-        <div className={styles.btns}>
-          <LikeButton />
-          <StatisticsButton />
-          <DownloadButton />
-          <ShareButton />
+          <div className={styles.btns}>
+            <LikeButton />
+            <StatisticsButton />
+            <DownloadButton />
+            <ShareButton />
+          </div>
+          <div
+            className={styles.statusLine}
+            style={{ backgroundColor: bgColor === '#fff' ? '#127cca' : bgColor }}
+          />
+          <ObjectTabs info={info} setAnalogues={setAnalogues} />
         </div>
-        <div
-          className={styles.statusLine}
-          style={{ backgroundColor: bgColor === '#fff' ? '#127cca' : bgColor }}
-        />
-        <ObjectTabs info={info} setAnalogues={setAnalogues} />
       </div>
       <div
         role="button"

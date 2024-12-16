@@ -218,3 +218,30 @@
     background-color: #127cca;
   }
 }
+
+.visible {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}
+
+.price {
+  height: 100%;
+  align-items: flex-end;
+  display: flex;
+  gap: 20px;
+}
+
+.black {
+  margin-top: auto;
+  color: var(--, #1b272f);
+  text-align: center;
+  @include fontFamily(Ubuntu);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.21px;
+}

@@ -33,7 +33,7 @@ export const useOptions = () => {
 
 const BuildingSelect: FC<TBaseSelectProps> = ({ control }) => {
   const {
-    objectQuery: { data }
+    objectQuery: { data, isFetching }
   } = useApartmentViewContext()
   const options = useOptions()
   return (
@@ -43,7 +43,7 @@ const BuildingSelect: FC<TBaseSelectProps> = ({ control }) => {
       name="building"
       placeholder="Выбор ГП"
       options={options}
-      disabled={!data}
+      disabled={!data || isFetching}
       handleError={(error: any) => error?.building}
       selectClassName={styles.wrapper}
     />

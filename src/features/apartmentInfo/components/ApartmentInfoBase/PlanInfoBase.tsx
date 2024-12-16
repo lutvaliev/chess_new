@@ -51,6 +51,12 @@ const PlanInfo: FC<TProp> = ({ layout, info, drawerClose, img, label }) => {
     setOpen(false)
   }
 
+  const infoWithLayout = {
+    ...info,
+    floor_planes: layout.floor_planes,
+    object_planes: layout.object_planes
+  }
+
   return (
     <>
       <div
@@ -64,19 +70,21 @@ const PlanInfo: FC<TProp> = ({ layout, info, drawerClose, img, label }) => {
         className={`${styles.wrapper} apartmentinfo`}
         onClick={handleClickInside}
       >
-        <Header drawerClose={drawerClose} info={info} img={img} label={label} />
+        <div className={styles.overflow}>
+          <Header drawerClose={drawerClose} info={infoWithLayout} img={img} label={label} />
 
-        <div className={styles.btns}>
-          <LikeButton />
-          <StatisticsButton />
-          <DownloadButton />
-          <ShareButton />
+          <div className={styles.btns}>
+            <LikeButton />
+            <StatisticsButton />
+            <DownloadButton />
+            <ShareButton />
+          </div>
+          <div
+            className={styles.statusLine}
+            style={{ backgroundColor: '#127cca' }}
+          />
+          <ObjectTabs info={info} setAnalogues={setAnalogues} type="plan" layout_value={layout?.value} />
         </div>
-        <div
-          className={styles.statusLine}
-          style={{ backgroundColor: '#127cca' }}
-        />
-        <ObjectTabs info={info} setAnalogues={setAnalogues} type="plan" layout_value={layout?.value} />
       </div>
       {' '}
       <div

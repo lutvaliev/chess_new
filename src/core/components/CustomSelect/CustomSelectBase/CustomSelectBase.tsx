@@ -3,6 +3,7 @@ import FormControl from '@mui/material/FormControl'
 import { Select } from '@mui/material'
 import { useEffect, useState } from 'react'
 import classNames from 'classnames'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import ChevronBottomIcon from '../../icons/SvgIcons/ChevromBottonIcon'
 import styles from './CustomSelectBase.module.scss'
 import { useApartmentViewContext } from '../../../../features/apartment/ApartmentView/state/ApartmentViewState'
@@ -67,24 +68,7 @@ const CustomSelectBase = ({
           const label = options.find((elem: any) => elem.value === selected)?.label
           return label || defaultPlaceholder
         }}
-        open={isOpen}
-        onOpen={() => setIsOpen(true)}
-        onClose={() => {
-          setIsOpen(false)
-        }}
-        IconComponent={(props) => (
-          <button
-            {...props}
-            type="button"
-            className={classNames(styles.iconWrapper, {
-              [styles.cursorDefault]: disabled,
-              [styles.toggle]: isOpen
-            })}
-            onClick={!disabled ? () => setIsOpen(true) : undefined}
-          >
-            <ChevronBottomIcon />
-          </button>
-        )}
+        IconComponent={ExpandMoreIcon}
         {...rest}
       >
         {options.map(({ value, label, disabledOption }: any) => (

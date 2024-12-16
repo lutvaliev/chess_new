@@ -32,7 +32,7 @@ function useOptions() {
 const SectionSelect: FC<TBaseSelectProps> = ({ control }: any) => {
   const {
     formReturn: { watch },
-    objectQuery: { data }
+    objectQuery: { data, isFetching }
   } = useApartmentViewContext()
   const options = useOptions()
   const tempOptions = [
@@ -51,7 +51,7 @@ const SectionSelect: FC<TBaseSelectProps> = ({ control }: any) => {
       name="section"
       placeholder="Выбор Подъезда"
       options={tempOptions}
-      disabled={!data}
+      disabled={!data || isFetching}
       handleError={(error: any) => error?.section}
       selectClassName={styles.wrapper}
     />

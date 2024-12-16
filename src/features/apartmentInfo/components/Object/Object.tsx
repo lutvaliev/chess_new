@@ -92,13 +92,18 @@ const Object = ({ info, setAnalogues, type, layout_value }: any) => {
             </AccordionSummary>
             <AccordionDetails sx={{ padding: 0 }}>
               <div className={styles.pricesInfo}>
-                {info?.prices?.map((price: any) => (
+                {info?.prices ? info?.prices?.map((price: any) => (
                   <div key={price.id} className={styles.row}>
                     <Row title="Вид цены" value={price.price_name} />
                     <Row title="Текущая цена, м²" value={`${price.price.toLocaleString()} ₽`} />
                     <Row title="Текущая стоимость" value={`${price.cost.toLocaleString()} ₽`} />
                   </div>
-                ))}
+                )) : (
+                  <div className={styles.row}>
+                    <Row title="Минимальная цена" value={`${info.MinimalPrice.toLocaleString()} ₽`} />
+                    <Row title="Максимальная цена" value={`${info.MaximalPrice.toLocaleString()} ₽`} />
+                  </div>
+                )}
                 {/* <Row title="Вид цены" value="Субсидированная" />
               <Row title="Текущая цена, м2²" value="80 000" />
               <Row title="Текущая стоимость" value="6 184 200" /> */}

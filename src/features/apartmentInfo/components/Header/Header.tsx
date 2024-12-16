@@ -17,6 +17,14 @@ type TProp = {
   drawerClose: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void
 }
 
+function normalizeNumber(number: any) {
+  const formatter = new Intl.NumberFormat('ru-RU', {
+    style: 'decimal',
+    maximumFractionDigits: 1
+  })
+  return formatter.format(number / 1000000)
+}
+
 const Header: FC<TProp> = ({ info, drawerClose, img, label }) => {
   const [open, setOpen] = useState(false)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
@@ -79,7 +87,14 @@ const Header: FC<TProp> = ({ info, drawerClose, img, label }) => {
         aria-describedby="modal-modal-description"
       >
         <div className={styles.fullscreenImageContainer}>
-          <img className={styles.modalImage} src={hasOneImage ? activeImage : images[currentImageIndex]} alt="Full screen" />
+          {images.map((image, index) => (
+            <img
+              key={index}
+              className={`${styles.modalImage} ${index === currentImageIndex ? styles.visible : styles.hidden}`}
+              src={image}
+              alt={`Full screen ${index}`}
+            />
+          ))}
           {!hasOneImage && (
             <div className={styles.fullscreenNavigation}>
               <button
@@ -109,7 +124,16 @@ const Header: FC<TProp> = ({ info, drawerClose, img, label }) => {
               className={styles.buttonImg}
               onClick={handleOpen}
             >
-              <img className={styles.mainImage_img} src={hasOneImage ? activeImage : images[currentImageIndex]} alt="" />
+              <div className={styles.imageWrapper}>
+                {images.map((image, index) => (
+                  <img
+                    key={index}
+                    className={`${styles.mainImage_img} ${index === currentImageIndex ? styles.visible : styles.hidden}`}
+                    src={image}
+                    alt=""
+                  />
+                ))}
+              </div>
               {!hasOneImage && (
                 <div className={styles.carusel}>
                   <span className={currentImageIndex === 0 ? styles.selected : ''} />
@@ -148,7 +172,13 @@ const Header: FC<TProp> = ({ info, drawerClose, img, label }) => {
                 В ипотеку - от {` ${info.MinimalPrice ?? ''} ₽/мес`}
               </div>
             )}
-            {info.deadline && <div className={styles.subtitle}>{` Срок сдачи - ${info.deadline ?? ''}`}</div>}
+            {info.deadline && <div className={styles.subtitle}>{`Срок сдачи - ${info.deadline ?? ''}`}</div>}
+            {info.MinimalPrice && (
+              <div className={styles.price}>
+                {info.MinimalPrice && <div className={styles.black}>{`от ${normalizeNumber(info.MinimalPrice) ?? ''} млн ₽`}</div>}
+                {info.MinimalPrice && <div className={styles.black}>{info.MinimalFloor !== info.MaximalFloor ? `${info.MinimalFloor} - ${info.MaximalFloor} этаж` : `${info.MinimalFloor} этаж`}</div>}
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -17,7 +17,7 @@ function useOptions() {
 }
 
 const DistrictSelect: FC<TBaseSelectProps> = ({ control }) => {
-  const { objectQuery: { data } } = useApartmentViewContext()
+  const { objectQuery: { data, isFetching } } = useApartmentViewContext()
   const options = useOptions()
 
   return (
@@ -27,7 +27,7 @@ const DistrictSelect: FC<TBaseSelectProps> = ({ control }) => {
       name="district"
       placeholder="Выбор ЖК"
       options={options}
-      disabled={!data}
+      disabled={!data || isFetching}
       handleError={(error: any) => error?.district}
       selectClassName={styles.wrapper}
     />

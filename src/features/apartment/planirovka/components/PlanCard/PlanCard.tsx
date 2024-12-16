@@ -45,7 +45,7 @@ const PlanCard: FC<TProps> = ({ layout, handleOpen }) => {
           <PlanInfo
             drawerClose={handleClose}
             info={layout.parameters}
-            img={layout.img_adress}
+            img={layout.object_planes}
             label={layout.label}
             layout={layout}
           />
@@ -67,26 +67,37 @@ const PlanCard: FC<TProps> = ({ layout, handleOpen }) => {
               </p>
               <div className={styles.circle}>{layout.count_aparts}</div>
             </div>
-            <div className={styles.row} style={{ justifyContent: 'flex-end' }}>
-              {/* <p>Заселение до 1 мар. 2025</p> */}
+            <div className={styles.row} style={!layout.parameters.deadline_completion ? { justifyContent: 'flex-end' } : {}}>
+              {layout.parameters.deadline_completion && (
+                <p>
+                  Заселение до
+                  {layout.parameters.deadline_completion}
+                </p>
+              )}
               <p>Квартиры в наличии</p>
             </div>
           </div>
-          <div className={styles.img} onClick={() => handleOpen(layout.img_adress.find((plane: any) => plane.endsWith('.png')))}>
+          <div className={styles.img} onClick={() => handleOpen(layout.object_planes.find((plane: any) => plane.endsWith('.png')))}>
             <img
-              src={layout.img_adress.find((plane: any) => plane.endsWith('.png')) || defaultImage}
+              src={layout.object_planes.find((plane: any) => plane.endsWith('.png')) || layout.floor_planes.find((plane: any) => plane.endsWith('.png')) || defaultImage}
               alt="apart"
             />
           </div>
           <div className={styles.footer}>
             <div className={styles.footer_title}>
               {layout.parameters.layot}
-              {' '}
-              до
-              {' '}
-              {layout.parameters.area}
-              {' '}
-              м²
+
+              {layout.parameters.area !== 0
+              && (
+                <span>
+                  {' '}
+                  до
+                  {' '}
+                  {layout.parameters.area}
+                  {' '}
+                  м²
+                </span>
+              )}
             </div>
             {/* <div className={styles.footer_subtitle}>В ипотеку - от 11 605 ₽/мес.</div> */}
             <div className={styles.footer_row}>
@@ -98,7 +109,9 @@ const PlanCard: FC<TProps> = ({ layout, handleOpen }) => {
                   {' '}
                   млн ₽
                 </p>
-                {/* <p>3 - 17 этаж</p> */}
+                <p>
+                  {layout.parameters.MinimalFloor !== layout.parameters.MaximalFloor ? `${layout.parameters.MinimalFloor} - ${layout.parameters.MaximalFloor} этаж` : `${layout.parameters.MinimalFloor} этаж`}
+                </p>
               </div>
               <div onClick={() => setIsDrawerOpen(true)} className={styles.link}>
                 Подробнее

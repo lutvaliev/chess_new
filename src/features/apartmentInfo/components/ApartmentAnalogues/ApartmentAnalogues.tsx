@@ -76,21 +76,23 @@ const ApartmentAnalogues: FC<any> = ({ id, drawerClose, handleClickInside, onClo
             className={`${styles.wrapper} apartmentinfo ${styles.wrapper_info}`}
             onClick={handleClickInside}
           >
-            <div className={styles.left_margin}>
-              <Header drawerClose={drawerClose} info={data[0]} />
-            </div>
+            <div className={styles.overflow}>
+              <div className={styles.left_margin}>
+                <Header drawerClose={drawerClose} info={data[0]} />
+              </div>
 
-            <div className={styles.btns}>
-              <LikeButton />
-              <StatisticsButton />
-              <DownloadButton />
-              <ShareButton />
+              <div className={styles.btns}>
+                <LikeButton />
+                <StatisticsButton />
+                <DownloadButton />
+                <ShareButton />
+              </div>
+              <div
+                className={styles.statusLine}
+                style={{ backgroundColor: bgColor === '#fff' ? '#127cca' : bgColor }}
+              />
+              <ObjectTabs info={data[0]} setAnalogues={null} />
             </div>
-            <div
-              className={styles.statusLine}
-              style={{ backgroundColor: bgColor === '#fff' ? '#127cca' : bgColor }}
-            />
-            <ObjectTabs info={data[0]} setAnalogues={null} />
           </div>
         )
       )}
