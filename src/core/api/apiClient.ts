@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const getTokenFromQuery = (): string => {
   const urlParams = new URLSearchParams(window.location.search)
-  return urlParams.get('token') || 'd0962240-70a6-4037-b0f1-562d9eb519b6'
+  return urlParams.get('apiToken') || 'd0962240-70a6-4037-b0f1-562d9eb519b6'
 }
 
 export const apiClient = axios.create({
