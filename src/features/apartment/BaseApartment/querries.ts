@@ -22,8 +22,7 @@ const QueryKeys = {
 
 const getApiUrlFromQuery = (): string => {
   const urlParams = new URLSearchParams(window.location.search)
-  return urlParams.get('apiUrl') || 'https://elefer.4dev.app/api'
-  // return urlParams.get('apiUrl') || 'https://gds.4dev.app/api'
+  return urlParams.get('apiUrl') || 'https://gds.4dev.app/api'
 }
 
 async function getDistrict(): Promise<TDistrict[]> {

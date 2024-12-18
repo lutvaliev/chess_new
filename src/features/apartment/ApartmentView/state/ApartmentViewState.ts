@@ -52,7 +52,7 @@ function useResetForm({ setValue }: UseFormReturn<TBaseForm>) {
     buildingData?.[0]?.id,
     layoutsData?.[0]?.value
   )
-  console.log('test')
+
   useEffect(() => {
     if (!districtData || !districtData.length) {
       return
