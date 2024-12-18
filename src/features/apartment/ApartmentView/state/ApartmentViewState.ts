@@ -41,32 +41,51 @@ const useFormInit = () => {
 function useResetForm({ setValue }: UseFormReturn<TBaseForm>) {
   const formReturn = useFormInit()
   const { data: districtData } = useDistrictQuery()
-  const { data: buildingData } = useBuildingQuery(districtData?.[1]?.id)
+
+  const [currentDistrictIndex, setCurrentDistrictIndex] = useState(0)
+
+  const { data: buildingData } = useBuildingQuery(districtData?.[currentDistrictIndex]?.id)
   const { data: sectionData } = useSectionQuery('building', buildingData?.[0]?.id)
-  const { data: layoutsData } = useLayoutsQuery(buildingData?.[0]?.id, sectionData?.[0].id)
-  // eslint-disable-next-line max-len
+  const { data: layoutsData } = useLayoutsQuery(buildingData?.[0]?.id, sectionData?.[0]?.id)
   const { data: apartmentsData } = useApartmentsQuery(
-    districtData?.[1]?.id,
+    districtData?.[currentDistrictIndex]?.id,
     buildingData?.[0]?.id,
     layoutsData?.[0]?.value
   )
-
+  console.log('test')
   useEffect(() => {
-    if (!districtData || !buildingData || !sectionData || !layoutsData || !apartmentsData) {
+    if (!districtData || !districtData.length) {
       return
     }
 
-    if (formReturn.getValues('initDistrict')) {
-      formReturn.setValue('initDistrict', false)
+    if (buildingData?.length === 0 && currentDistrictIndex < districtData.length - 1) {
+      setCurrentDistrictIndex((prevIndex) => prevIndex + 1)
       return
     }
 
-    setValue('district', districtData[1].id)
-    setValue('building', buildingData[0].id)
-    setValue('section', sectionData[0].id)
-    setValue('layouts', layoutsData[0].value)
-    setValue('apartments', apartmentsData[0])
-  }, [districtData, buildingData, sectionData, layoutsData, apartmentsData])
+    if (buildingData && sectionData) {
+      if (formReturn.getValues('initDistrict')) {
+        formReturn.setValue('initDistrict', false)
+        return
+      }
+
+      setValue('district', districtData[currentDistrictIndex].id)
+      setValue('building', buildingData[0].id)
+      setValue('section', 'ALL_SECTIONS')
+
+      if (layoutsData && apartmentsData) {
+        setValue('layouts', layoutsData[0].value)
+        setValue('apartments', apartmentsData[0])
+      }
+    }
+  }, [
+    districtData,
+    buildingData,
+    sectionData,
+    layoutsData,
+    apartmentsData,
+    currentDistrictIndex
+  ])
 }
 
 function useApartmentFilter(data?: TObject[]) {
