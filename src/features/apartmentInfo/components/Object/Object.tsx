@@ -11,7 +11,6 @@ import styles from './Object.module.scss'
 import ModalForm from '../ModalForm/ModalForm'
 
 const Object = ({ info, setAnalogues, type, layout_value }: any) => {
-  console.log(layout_value)
   const {
     formReturn: { watch }
   } = useApartmentViewContext()
@@ -94,7 +93,7 @@ const Object = ({ info, setAnalogues, type, layout_value }: any) => {
             <AccordionDetails sx={{ padding: 0 }}>
               <div className={styles.pricesInfo}>
                 {info?.prices ? info?.prices?.map((price: any) => (
-                  <div key={price.id} className={styles.row}>
+                  <div key={price.price_type_id} className={styles.row}>
                     <Row title="Вид цены" value={price.price_name} />
                     <Row title="Текущая цена, м²" value={`${price.price.toLocaleString()} ₽`} />
                     <Row title="Текущая стоимость" value={`${price.cost.toLocaleString()} ₽`} />

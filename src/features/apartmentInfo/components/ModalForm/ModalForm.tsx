@@ -42,7 +42,7 @@ const ModalForm: React.FC<ModalFormProps> = ({ flatId, isOpen, onClose, formType
     }
 
     const requestBody = {
-      requestType: 'webchess',
+      requestType: 'call',
       typeform:
         formType === 'Забронировать'
           ? 'booking'
@@ -54,6 +54,7 @@ const ModalForm: React.FC<ModalFormProps> = ({ flatId, isOpen, onClose, formType
         phone: formData.phone,
         name: formData.name
       },
+      city: '',
       data: {
         flatId,
         flatIdC: '',
@@ -126,7 +127,6 @@ const ModalForm: React.FC<ModalFormProps> = ({ flatId, isOpen, onClose, formType
                 required
                 multiline
                 rows={4}
-                maxRows={4}
               />
             </div>
           )}
@@ -141,7 +141,6 @@ const ModalForm: React.FC<ModalFormProps> = ({ flatId, isOpen, onClose, formType
                 required
                 multiline
                 rows={4}
-                maxRows={4}
               />
             </div>
           )}
