@@ -73,12 +73,12 @@ const PlanInfo: FC<TProp> = ({ layout, info, drawerClose, img, label }) => {
         <div className={styles.overflow}>
           <Header drawerClose={drawerClose} info={infoWithLayout} img={img} label={label} />
 
-          <div className={styles.btns}>
+          {/* <div className={styles.btns}>
             <LikeButton />
             <StatisticsButton />
             <DownloadButton />
             <ShareButton />
-          </div>
+          </div> */}
           <div
             className={styles.statusLine}
             style={{ backgroundColor: '#127cca' }}

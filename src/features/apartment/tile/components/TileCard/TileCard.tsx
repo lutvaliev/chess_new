@@ -85,7 +85,7 @@ const TileCard: FC<TProp> = ({
         {/* eslint-disable-next-line */}
         <div
           ref={drawerRef}
-          className={styles.card}
+          className={`${styles.card} ${isDrawerOpen ? styles.active : ''}`}
           onClick={() => {
             if (!isLock) {
               setIsDrawerOpen(true)

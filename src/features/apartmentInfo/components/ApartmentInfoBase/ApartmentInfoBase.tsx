@@ -75,12 +75,12 @@ const ApartmentInfo: FC<TProp> = ({ info, drawerClose, img, bgColor }) => {
         <div className={styles.overflow}>
           <Header drawerClose={drawerClose} info={info} img={img} />
 
-          <div className={styles.btns}>
+          {/* <div className={styles.btns}>
             <LikeButton />
             <StatisticsButton />
             <DownloadButton />
             <ShareButton />
-          </div>
+          </div> */}
           <div
             className={styles.statusLine}
             style={{ backgroundColor: bgColor === '#fff' ? '#127cca' : bgColor }}

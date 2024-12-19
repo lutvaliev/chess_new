@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import classNames from 'classnames'
 import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
@@ -195,7 +196,7 @@ const Object = ({ info, setAnalogues, type, layout_value }: any) => {
             </div>
           </div>
         )}
-        <ModalForm isOpen={isModalOpen} onClose={closeModal} formType={currentFormType} />
+        <ModalForm isOpen={isModalOpen} onClose={closeModal} formType={currentFormType} flatId={info.id} />
       </div>
     </div>
   )
